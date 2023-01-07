@@ -1,0 +1,14 @@
+{
+  "exclude": [
+    "node_modules/*",
+    "dist"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es2017",
+    "importsNotUsedAsValues": "error",
+    "preserveValueImports": true,
+    "sourceMap": true,
+    "esModuleInterop": true
+  }
+}

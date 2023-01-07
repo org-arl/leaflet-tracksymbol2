@@ -1,0 +1,16 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src/index.ts"],
+  "plugin": [
+    "typedoc-plugin-missing-exports"
+  ],
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeNotDocumented": false,
+  "out": "docs",
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": true
+  }
+}

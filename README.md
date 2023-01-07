@@ -1,2 +1,10 @@
 # leaflet-tracksymbol2
-Leaflet plugin for showing tracks with heading, course and speed.
+
+Symbol for showing tracks with heading, course and speed.
+
+Updated version of [leaflet-tracksymbol](https://www.npmjs.com/package/leaflet-tracksymbol).
+
+* [Documentation]() [TODO GitHub pages]
+* [Demo/storybook]() [TODO GitHub pages]
+
+![Screenshot](screenshot.png)

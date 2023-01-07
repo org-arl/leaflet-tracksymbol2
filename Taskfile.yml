@@ -1,0 +1,30 @@
+version: 3
+
+tasks:
+  clean:
+    desc: Clean
+    cmds:
+      - rm -rf dist
+
+  install:
+    cmds:
+      - pnpm install
+      - pnpm prune
+
+  build:
+    desc: Build
+    deps: [ install ]
+    cmds:
+      - pnpm build
+
+  story-build:
+    desc: Story - Build
+    deps: [ install ]
+    cmds:
+      - pnpm run story:build
+
+  story-dev:
+    desc: Story - Dev
+    deps: [ install ]
+    cmds:
+      - pnpm run story:dev
