@@ -3,6 +3,7 @@ import {HstSvelte} from '@histoire/plugin-svelte'
 
 export default defineConfig({
     outDir: 'build/histoire',
+    routerMode: 'hash',
     setupFile: 'src/stories/setup.ts',
     plugins: [
         HstSvelte(),
