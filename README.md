@@ -1,4 +1,4 @@
-<a href="https://www.npmjs.com/package/@arl/leaflet-tracksymbol2">![npm](https://img.shields.io/npm/v/@arl/leaflet-tracksymbol2)</a>
+<a href="https://www.npmjs.com/package/@arl/leaflet-tracksymbol2" target="_blank">![npm](https://img.shields.io/npm/v/@arl/leaflet-tracksymbol2)</a>
 ![GitHub last commit](https://img.shields.io/github/last-commit/org-arl/leaflet-tracksymbol2)
 
 # leaflet-tracksymbol2
