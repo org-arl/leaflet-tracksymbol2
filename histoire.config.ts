@@ -15,6 +15,10 @@ export default defineConfig({
                 title: '',
             },
             {
+                id: 'usage',
+                title: '',
+            },
+            {
                 id: 'layers',
                 title: 'Layers',
             }

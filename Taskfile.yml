@@ -79,6 +79,7 @@ tasks:
       - mkdir -p build/site
       - cp -r build/histoire/* build/site/
       - cp -r build/typedoc build/site/
+      - cp -r examples build/site/
     generates:
       - build/site/*
 
