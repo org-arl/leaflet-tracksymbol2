@@ -1,16 +1,16 @@
+import L from 'leaflet';
+import type {LatLngExpression} from 'leaflet';
 import {TrackSymbol} from './trackSymbol';
-import type {ShapeSetEntry, ShapeOptions, TrackSymbolOptions} from './options';
-import type {Points, Shape, ShapeSet, Units} from './types';
+import type {TrackSymbolOptions} from './options';
 
 export {
-    Points,
-    Shape,
-    ShapeOptions,
-    ShapeSet,
-    ShapeSetEntry,
     TrackSymbol,
-    TrackSymbolOptions,
-    Units,
+    //TrackSymbolOptions,
 };
+
+L['trackSymbol'] = function(latLng: LatLngExpression, options?: TrackSymbolOptions): TrackSymbol {
+    return new TrackSymbol(latLng, options);
+}
+L['TrackSymbol'] = TrackSymbol;
 
 export default TrackSymbol;
