@@ -5,7 +5,6 @@ import type {TrackSymbolOptions} from './options';
 
 export {
     TrackSymbol,
-    //TrackSymbolOptions,
 };
 
 L['trackSymbol'] = function(latLng: LatLngExpression, options?: TrackSymbolOptions): TrackSymbol {
