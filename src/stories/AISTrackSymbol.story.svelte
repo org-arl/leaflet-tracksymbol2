@@ -100,20 +100,6 @@
         ts2
             .addTo(map);
     });
-
-    function toRadians(degs: number | null | undefined): number | undefined {
-        if ((degs === null) || (degs === undefined)) {
-            return undefined;
-        }
-        return degs * Math.PI / 180;
-    }
-
-    function normalize(value: number | null | undefined): number | undefined {
-        if ((value === null) || (value === undefined)) {
-            return undefined;
-        }
-        return value;
-    }
 </script>
 
 <style global>
@@ -130,7 +116,7 @@
     }
 </style>
 
-<Hst.Story>
+<Hst.Story group="layers">
     <div bind:this={mapElement} id="map">
     </div>
 
