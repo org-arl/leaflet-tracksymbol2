@@ -1,3 +1,4 @@
 .histoire/
-docs/
+.task/
+build/
 node_modules/

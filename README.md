@@ -7,4 +7,4 @@ Updated version of [leaflet-tracksymbol](https://www.npmjs.com/package/leaflet-t
 * [Documentation]() [TODO GitHub pages]
 * [Demo/storybook]() [TODO GitHub pages]
 
-![Screenshot](screenshot.png)
+![Screenshot](./screenshot.png)

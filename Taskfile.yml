@@ -4,27 +4,61 @@ tasks:
   clean:
     desc: Clean
     cmds:
-      - rm -rf dist
+      - rm -rf build dist
 
   install:
     cmds:
       - pnpm install
       - pnpm prune
+    sources:
+      - package.json
 
   build:
     desc: Build
     deps: [ install ]
     cmds:
       - pnpm build
-
-  story-build:
-    desc: Story - Build
-    deps: [ install ]
-    cmds:
-      - pnpm run story:build
+    sources:
+      - .eslintrc.js
+      - package.json
+      - pnpm-lock.yaml
+      - tsconfig.json
+      - vite.config.ts
+      - src/*
 
   story-dev:
     desc: Story - Dev
     deps: [ install ]
     cmds:
       - pnpm run story:dev
+
+  story-build:
+    desc: Story - Build
+    deps: [ install ]
+    cmds:
+      - rm -rf build/histoire
+      - pnpm run story:build
+    sources:
+      - .eslintrc.js
+      - histoire.config.ts
+      - package.json
+      - pnpm-lock.yaml
+      - tsconfig.json
+      - vite.config.ts
+      - src/*
+      - src/stories/*
+
+  typedoc:
+    desc: Generate typedoc
+    deps: [ install ]
+    cmds:
+      - rm -rf build/typedoc
+      - pnpm run typedoc
+    sources:
+      - package.json
+      - pnpm-lock.yaml
+      - README.md
+      - screenshot.png
+      - tsconfig.json
+      - typedoc.json
+      - src/*

@@ -16,13 +16,14 @@
     "check": "tsc --noEmit",
     "build": "run-s check compile",
     "lint": "eslint -f unix \"src/**/*.{ts,tsx}\"",
-    "docs": "typedoc",
+    "typedoc": "typedoc",
     "story:dev": "histoire dev",
     "story:build": "histoire build",
     "story:preview": "histoire preview"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
+    "@droppedcode/typedoc-plugin-copy-assets": "^1.0.6",
     "@histoire/plugin-svelte": "^0.12.4",
     "@sveltejs/vite-plugin-svelte": "^1.4.0",
     "@types/estree": "^1.0.0",
@@ -36,7 +37,7 @@
     "npm-run-all": "^4.1.5",
     "svelte": "^3.55.0",
     "svelte-preprocess": "^4.10.7",
-    "typedoc": "^0.23.23",
+    "typedoc": "^0.23.24",
     "typedoc-plugin-missing-exports": "^1.0.0",
     "typescript": "^4.9.4",
     "vite": "^4.0.4"

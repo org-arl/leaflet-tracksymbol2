@@ -2,12 +2,13 @@
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": ["./src/index.ts"],
   "plugin": [
-    "typedoc-plugin-missing-exports"
+    "typedoc-plugin-missing-exports",
+    "@droppedcode/typedoc-plugin-copy-assets"
   ],
   "excludePrivate": true,
   "excludeProtected": false,
   "excludeNotDocumented": false,
-  "out": "docs",
+  "out": "build/typedoc",
   "validation": {
     "notExported": true,
     "invalidLink": true,
