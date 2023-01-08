@@ -21,13 +21,6 @@
 <body>
 <div id="map"></div>
 <script>
-    function toRadians(degs) {
-        if ((degs === null) || (degs === undefined)) {
-            return undefined;
-        }
-        return degs * Math.PI / 180;
-    }
-
     var map = L.map('map', {
         center: [1.251, 103.826],
         zoom: 13,
