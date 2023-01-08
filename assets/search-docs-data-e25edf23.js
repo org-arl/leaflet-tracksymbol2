@@ -1,0 +1,10 @@
+import { ao as markRaw } from "./vendor-0c70ceb7.js";
+let searchData$1 = { "index": { "reg": '{"0":1,"1":1,"2":1,"3":1}', "text.cfg": '{"doc":0,"opt":1}', "text.map": '[{"t":[0,1,3],"te":[0,1],"tep":[0,1],"tepe":[0,1],"tepet":[0,1],"tepeto":[0,1],"tepetok":[0,1],"l":[2],"le":[2],"lea":[2],"leaf":[2],"leafl":[2],"leafle":[2],"leaflet":[2],"tm":[3],"tml":[3]},{"t":[2],"tr":[2],"tra":[2],"trak":[2],"traks":[2],"trakse":[2],"traksem":[2],"traksemp":[2],"traksempo":[2],"traksempol":[2],"traksempol2":[2],"o":[3],"os":[3],"osa":[3],"osak":[3],"osake":[3]},{"p":[2],"pl":[2],"plo":[2],"plok":[2],"ploke":[2],"plokem":[2],"s":[2],"se":[2],"sem":[2],"semp":[2],"sempo":[2],"sempol":[2],"f":[2],"fo":[2],"for":[2],"tr":[3],"tra":[3],"trak":[3],"traks":[3],"trakse":[3],"traksem":[3],"traksemp":[3],"traksempo":[3],"traksempol":[3]},{"so":[2],"sof":[2],"sofe":[2],"sofem":[2],"sofemk":[2],"fe":[2],"fet":[2],"e":[3],"es":[3],"esa":[3],"esam":[3],"esamp":[3],"esampl":[3],"esample":[3]},{"e":[2],"ea":[2],"eat":[2],"eate":[2],"eatem":[2],"eatemk":[2],"k":[2],"ko":[2],"kor":[2],"kors":[2],"korse":[2],"a":[2],"am":[2],"amt":[2],"s":[3],"so":[3],"sor":[3],"sork":[3],"sorke":[3]},{"sp":[2],"spe":[2],"spet":[2],"o":[2],"op":[2],"opt":[2],"opta":[2],"optat":[2],"optate":[2],"optatet":[2],"fer":[2],"fers":[2],"ferse":[2],"ferseo":[2],"ferseom":[2],"a":[3],"as":[3],"ast":[3],"astr":[3],"astra":[3],"astrak":[3],"astraks":[3],"astrakse":[3],"astraksem":[3],"astraksemp":[3],"astraksempo":[3],"astraksempol":[3]},{"of":[2]},{"as":[2]},{"ke":[2],"ket":[2],"keto":[2],"ketop":[2],"te":[2],"tep":[2],"tepe":[2],"tepet":[2],"tepeto":[2],"tepetok":[2]}]', "text.ctx": "[{}]" }, "idMap": { "0": { "id": "src-stories-aistracksymbol-story-svelte", "kind": "story" }, "1": { "id": "src-stories-tracksymbol-story-svelte", "kind": "story" }, "2": { "id": "src-stories-introduction-story-js", "kind": "story" }, "3": { "id": "src-stories-htmlusage-story-js", "kind": "story" } } };
+const searchData = markRaw(searchData$1);
+function onUpdate(cb) {
+}
+export {
+  onUpdate,
+  searchData
+};
+//# sourceMappingURL=search-docs-data-e25edf23.js.map
