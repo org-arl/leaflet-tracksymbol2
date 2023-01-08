@@ -1,6 +1,6 @@
 import { ar as parseQuery, k as ref, U as createApp, V as createPinia, f as watch, i as computed, g as onMounted, as as h, at as applyState } from "./vendor-0c70ceb7.js";
-import { m as mapFile, f as files, b as _sfc_main, h as histoireConfig, i as isDark } from "./GenericMountStory.vue2-b8fa45e8.js";
-import { S as STATE_SYNC, P as PREVIEW_SETTINGS_SYNC, a as applyPreviewSettings, b as SANDBOX_READY, _ as _sfc_main$1, t as toRawDeep } from "./state-e727c9b5.js";
+import { m as mapFile, f as files, b as _sfc_main, h as histoireConfig, i as isDark } from "./GenericMountStory.vue2-67ed271f.js";
+import { S as STATE_SYNC, P as PREVIEW_SETTINGS_SYNC, a as applyPreviewSettings, b as SANDBOX_READY, _ as _sfc_main$1, t as toRawDeep } from "./state-e3053c67.js";
 const sandbox = "";
 const query = parseQuery(window.location.search);
 const file = ref(mapFile(files.find((f) => f.id === query.storyId)));
@@ -78,4 +78,4 @@ watch(isDark, (value) => {
 }, {
   immediate: true
 });
-//# sourceMappingURL=bundle-sandbox-e50d3a44.js.map
+//# sourceMappingURL=bundle-sandbox-e9ba4551.js.map
