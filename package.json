@@ -1,9 +1,13 @@
 {
-  "name": "leaflet-tracksymbol2",
-  "private": true,
+  "name": "@arl/leaflet-tracksymbol2",
   "version": "0.1.0",
   "description": "Leaflet track symbol",
+  "homepage": "https://org-arl.github.io/leaflet-tracksymbol2/",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/org-arl/leaflet-tracksymbol2.git"
+  },
   "exports": {
     "import": "./dist/leaflet-tracksymbol2.es.js",
     "require": "./dist/leaflet-tracksymbol2.umd.js"
@@ -48,5 +52,9 @@
   },
   "peerDependencies": {
     "leaflet": "^1.9.3"
-  }
+  },
+  "keywords": [
+    "leaflet",
+    "leaflet-plugin"
+  ]
 }
