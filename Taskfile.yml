@@ -87,4 +87,4 @@ tasks:
     desc: Site - Serve
     deps: [ site-build ]
     cmds:
-      - pnpm dlx sirv-cli build/site
+      - pnpm dlx sirv-cli@0.4.6 --cors --port 8080 build/site
