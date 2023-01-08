@@ -95,3 +95,9 @@ tasks:
     deps: [ site-build ]
     cmds:
       - gh-pages --dotfiles --dist build/site/leaflet-tracksymbol2
+
+  npm-publish:
+    desc: NPM - Publish
+    deps: [ build ]
+    cmds:
+      - pnpm publish --access public
