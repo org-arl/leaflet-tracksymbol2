@@ -1,4 +1,3 @@
 nodejs 18.13.0 # (constraint ^18)
 pnpm 7.23.0
 task 3.19.1
-caddy 2.6.2

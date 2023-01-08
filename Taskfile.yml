@@ -70,3 +70,20 @@ tasks:
       - src/*
     generates:
       - build/typedoc/*
+
+  site-build:
+    desc: Site - Build
+    deps: [ story-build, typedoc ]
+    cmds:
+      - rm -rf build/site
+      - mkdir -p build/site
+      - cp -r build/histoire/* build/site/
+      - cp -r build/typedoc build/site/
+    generates:
+      - build/site/*
+
+  site-serve:
+    desc: Site - Serve
+    deps: [ site-build ]
+    cmds:
+      - pnpm dlx sirv-cli build/site

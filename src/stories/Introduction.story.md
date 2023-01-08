@@ -9,3 +9,5 @@ icon: carbon:bookmark
 Symbol for showing tracks with heading, course and speed.
 
 Updated version of [leaflet-tracksymbol](https://www.npmjs.com/package/leaflet-tracksymbol).
+
+<a href="/typedoc/" target="_blank">TypeDoc</a>
