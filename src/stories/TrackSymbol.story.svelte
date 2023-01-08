@@ -125,7 +125,7 @@
     }
 </style>
 
-<Hst.Story>
+<Hst.Story group="layers">
     <div bind:this={mapElement} id="map">
     </div>
 
