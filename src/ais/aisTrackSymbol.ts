@@ -238,14 +238,14 @@ export class AISTrackSymbol
             content += createTableRow("Call sign", shipStaticData.callSign);
             content += createTableRow("Name", shipStaticData.name);
         }
-        content += createTableRow("Location", `${this.getLatLng().lat}, ${this.getLatLng().lng}`)
-        content += createTableRow("SOG", !isNullOrUndefined(this.getSpeed())
-            ? (this.getSpeed() * KNOTS_PER_METER_PER_SECOND).toFixed(2) : undefined, "knots");
-        content += createTableRow("COG", !isNullOrUndefined(this.getSpeed())
-            ? toDegrees(this.getCourse()).toFixed(1) : undefined, "°");
-        content += createTableRow("Heading", !isNullOrUndefined(this.getSpeed())
-            ? toDegrees(this.getHeading()).toFixed(1) : undefined, "°");
         if (!isNullOrUndefined(positionReport)) {
+            content += createTableRow("Location", `${positionReport.latitude}, ${positionReport.longitude}`)
+            content += createTableRow("SOG", !isNullOrUndefined(positionReport.sog)
+                ? positionReport.sog.toFixed(2) : undefined, "knots");
+            content += createTableRow("COG", !isNullOrUndefined(positionReport.cog)
+                ? positionReport.cog.toFixed(1) : undefined, "°");
+            content += createTableRow("Heading", !isNullOrUndefined(positionReport.trueHeading)
+                ? positionReport.trueHeading.toFixed(1) : undefined, "°");
             content += createTableRow("Navigation status",
                 toNavigationStatusString(positionReport.navigationalStatus));
         }
