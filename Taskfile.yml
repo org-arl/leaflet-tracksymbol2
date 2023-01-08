@@ -76,10 +76,11 @@ tasks:
     deps: [ story-build, typedoc ]
     cmds:
       - rm -rf build/site
-      - mkdir -p build/site
-      - cp -r build/histoire/* build/site/
-      - cp -r build/typedoc build/site/
-      - cp -r examples build/site/
+      - mkdir -p build/site/leaflet-tracksymbol2
+      - cp -r build/histoire/* build/site/leaflet-tracksymbol2/
+      - cp -r build/typedoc build/site/leaflet-tracksymbol2/
+      - cp -r examples build/site/leaflet-tracksymbol2/
+      - touch build/site/leaflet-tracksymbol2/.nojekyll
     generates:
       - build/site/*
 
@@ -88,3 +89,9 @@ tasks:
     deps: [ site-build ]
     cmds:
       - pnpm dlx sirv-cli@0.4.6 --cors --port 8080 build/site
+
+  site-publish:
+    desc: Site - Publish
+    deps: [ site-build ]
+    cmds:
+      - gh-pages --dotfiles --dist build/site/leaflet-tracksymbol2
