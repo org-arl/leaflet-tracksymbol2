@@ -7,6 +7,6 @@ Updated version of:
 * [leaflet-tracksymbol](https://www.npmjs.com/package/leaflet-tracksymbol)
 * [leaflet-ais-tracksymbol](https://github.com/PowerPan/leaflet-ais-tracksymbol)
 
-[Documentation]() [TODO GitHub pages]
+[Documentation](https://org-arl.github.io/leaflet-tracksymbol2/)
 
 ![Screenshot](./screenshot.png)

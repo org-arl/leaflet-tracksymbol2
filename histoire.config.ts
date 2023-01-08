@@ -8,6 +8,9 @@ export default defineConfig({
     plugins: [
         HstSvelte(),
     ],
+    theme: {
+        title: 'leaflet-tracksymbol2',
+    },
     tree: {
         groups: [
             {
@@ -25,6 +28,6 @@ export default defineConfig({
         ],
     },
     vite: {
-        base: process.env.HISTOIRE_BASE || '/',
+        base: '/leaflet-tracksymbol2/',
     },
 });

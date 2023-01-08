@@ -14,4 +14,4 @@ Updated version of:
 
 [GitHub](https://github.com/org-arl/leaflet-tracksymbol2)
 
-<a href="/typedoc/" target="_blank">TypeDoc</a>
+<a href="/leaflet-tracksymbol2/typedoc/" target="_blank">TypeDoc</a>
