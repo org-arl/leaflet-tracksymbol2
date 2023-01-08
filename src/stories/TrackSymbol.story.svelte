@@ -2,7 +2,7 @@
     import type {Hst} from '@histoire/plugin-svelte';
     import {onMount} from 'svelte';
     import L, {Map as LeafletMap} from 'leaflet';
-    import TrackSymbol from '../';
+    import TrackSymbol from '@arl/leaflet-tracksymbol2';
 
     export let Hst: Hst;
 

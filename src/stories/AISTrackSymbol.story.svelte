@@ -2,8 +2,8 @@
     import type {Hst} from '@histoire/plugin-svelte';
     import {onMount} from 'svelte';
     import L, {Map as LeafletMap} from 'leaflet';
-    import {AISTrackSymbol} from '../';
-    import type {PositionReport} from "../";
+    import {AISTrackSymbol} from '@arl/leaflet-tracksymbol2';
+    import type {PositionReport} from '@arl/leaflet-tracksymbol2';
 
     export let Hst: Hst;
 
