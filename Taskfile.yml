@@ -12,6 +12,8 @@ tasks:
       - pnpm prune
     sources:
       - package.json
+    generates:
+      - pnpm-lock.yaml
 
   build:
     desc: Build
@@ -25,6 +27,8 @@ tasks:
       - tsconfig.json
       - vite.config.ts
       - src/*
+    generates:
+      - dist/*
 
   story-dev:
     desc: Story - Dev
@@ -47,6 +51,8 @@ tasks:
       - vite.config.ts
       - src/*
       - src/stories/*
+    generates:
+      - build/histoire/*
 
   typedoc:
     desc: Generate typedoc
@@ -62,3 +68,5 @@ tasks:
       - tsconfig.json
       - typedoc.json
       - src/*
+    generates:
+      - build/typedoc/*
