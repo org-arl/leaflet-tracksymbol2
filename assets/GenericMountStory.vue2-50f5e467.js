@@ -643,7 +643,7 @@ function create_default_slot$1(ctx) {
     c: function create() {
       div = element("div");
       attr_dev(div, "id", "map");
-      add_location(div, file$1, 108, 4, 2347);
+      add_location(div, file$1, 108, 4, 2369);
     },
     m: function mount(target, anchor) {
       insert_dev(target, div, anchor);
@@ -773,12 +773,12 @@ function create_controls_slot$1(ctx) {
       t11 = space();
       button1 = element("button");
       button1.textContent = "Locate";
-      add_location(h30, file$1, 112, 8, 2443);
+      add_location(h30, file$1, 112, 8, 2465);
       attr_dev(button0, "class", "htw-p-2");
-      add_location(button0, file$1, 116, 8, 2712);
-      add_location(h31, file$1, 118, 8, 2790);
+      add_location(button0, file$1, 116, 8, 2734);
+      add_location(h31, file$1, 118, 8, 2812);
       attr_dev(button1, "class", "htw-p-2");
-      add_location(button1, file$1, 122, 8, 3059);
+      add_location(button1, file$1, 122, 8, 3081);
     },
     m: function mount(target, anchor) {
       insert_dev(target, h30, anchor);
@@ -1202,7 +1202,7 @@ function create_default_slot(ctx) {
     c: function create() {
       div = element("div");
       attr_dev(div, "id", "map");
-      add_location(div, file, 117, 4, 2972);
+      add_location(div, file, 117, 4, 2994);
     },
     m: function mount(target, anchor) {
       insert_dev(target, div, anchor);
@@ -1332,12 +1332,12 @@ function create_controls_slot(ctx) {
       t11 = space();
       button1 = element("button");
       button1.textContent = "Locate";
-      add_location(h30, file, 121, 8, 3068);
+      add_location(h30, file, 121, 8, 3090);
       attr_dev(button0, "class", "htw-p-2");
-      add_location(button0, file, 125, 8, 3293);
-      add_location(h31, file, 127, 8, 3371);
+      add_location(button0, file, 125, 8, 3315);
+      add_location(h31, file, 127, 8, 3393);
       attr_dev(button1, "class", "htw-p-2");
-      add_location(button1, file, 131, 8, 3596);
+      add_location(button1, file, 131, 8, 3618);
     },
     m: function mount(target, anchor) {
       insert_dev(target, h30, anchor);
@@ -1786,13 +1786,13 @@ class TrackSymbol_story extends SvelteComponentDev {
 const Comp2 = { "title": "HTML usage", "icon": "carbon:bookmark", "group": "usage", "docsOnly": true, "variants": [] };
 const Comp3 = { "title": "Introduction", "icon": "carbon:bookmark", "group": "top", "docsOnly": true, "variants": [] };
 let files = [
-  { "id": "src-stories-aistracksymbol-story-svelte", "path": ["AISTrackSymbol"], "filePath": "src/stories/AISTrackSymbol.story.svelte", "story": { "id": "src-stories-aistracksymbol-story-svelte", "title": "AISTrackSymbol", "group": "layers", "layout": { "type": "single", "iframe": true }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "supportPluginId": "svelte3", "index": 0, component: AISTrackSymbol_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-aistracksymbol-story-svelte-1e04fcb7.js"), true ? [] : void 0) },
-  { "id": "src-stories-tracksymbol-story-svelte", "path": ["TrackSymbol"], "filePath": "src/stories/TrackSymbol.story.svelte", "story": { "id": "src-stories-tracksymbol-story-svelte", "title": "TrackSymbol", "group": "layers", "layout": { "type": "single", "iframe": true }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "supportPluginId": "svelte3", "index": 1, component: TrackSymbol_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-tracksymbol-story-svelte-d9c0dc45.js"), true ? [] : void 0) },
+  { "id": "src-stories-aistracksymbol-story-svelte", "path": ["AISTrackSymbol"], "filePath": "src/stories/AISTrackSymbol.story.svelte", "story": { "id": "src-stories-aistracksymbol-story-svelte", "title": "AISTrackSymbol", "group": "layers", "layout": { "type": "single", "iframe": true }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "supportPluginId": "svelte3", "index": 0, component: AISTrackSymbol_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-aistracksymbol-story-svelte-219a906b.js"), true ? [] : void 0) },
+  { "id": "src-stories-tracksymbol-story-svelte", "path": ["TrackSymbol"], "filePath": "src/stories/TrackSymbol.story.svelte", "story": { "id": "src-stories-tracksymbol-story-svelte", "title": "TrackSymbol", "group": "layers", "layout": { "type": "single", "iframe": true }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "supportPluginId": "svelte3", "index": 1, component: TrackSymbol_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-tracksymbol-story-svelte-e53e7244.js"), true ? [] : void 0) },
   { "id": "src-stories-htmlusage-story-js", "path": ["HTML usage"], "filePath": "src/stories/HtmlUsage.story.js", "story": { "id": "src-stories-htmlusage-story-js", "title": "HTML usage", "group": "usage", "layout": { "type": "single", "iframe": true }, "icon": "carbon:bookmark", "docsOnly": true, "variants": [] }, "supportPluginId": "vanilla", "index": 2, component: Comp2, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-htmlusage-story-js-f43d4315.js"), true ? [] : void 0) },
   { "id": "src-stories-introduction-story-js", "path": ["Introduction"], "filePath": "src/stories/Introduction.story.js", "story": { "id": "src-stories-introduction-story-js", "title": "Introduction", "group": "top", "layout": { "type": "single", "iframe": true }, "icon": "carbon:bookmark", "docsOnly": true, "variants": [] }, "supportPluginId": "vanilla", "index": 3, component: Comp3, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-introduction-story-js-310c24de.js"), true ? [] : void 0) }
 ];
 let tree = [{ "group": true, "id": "top", "title": "", "children": [{ "title": "Introduction", "index": 3 }] }, { "group": true, "id": "usage", "title": "", "children": [{ "title": "HTML usage", "index": 2 }] }, { "group": true, "id": "layers", "title": "Layers", "children": [{ "title": "AISTrackSymbol", "index": 0 }, { "title": "TrackSymbol", "index": 1 }] }];
-const config = { "plugins": [{ "name": "builtin:tailwind-tokens" }, { "name": "builtin:vanilla-support", "supportPlugin": { "id": "vanilla", "moduleName": "/home/nick/Code/org-arl/leaflet-tracksymbol2/node_modules/.pnpm/histoire@0.12.4_vite@4.0.4/node_modules/histoire/dist/node/builtin-plugins/vanilla-support", "setupFn": "setupVanilla" } }, { "name": "@histoire/plugin-svelte", "supportPlugin": { "id": "svelte3", "moduleName": "@histoire/plugin-svelte", "setupFn": "setupSvelte3" } }], "outDir": "/home/nick/Code/org-arl/leaflet-tracksymbol2/build/histoire", "storyMatch": ["**/*.story.vue", "**/*.story.svelte"], "storyIgnored": ["**/node_modules/**", "**/dist/**"], "supportMatch": [{ "id": "vanilla", "patterns": ["**/*.js"], "pluginIds": ["vanilla"] }, { "id": "svelte", "patterns": ["**/*.svelte"], "pluginIds": ["svelte3"] }], "tree": { "file": "title", "order": "asc", "groups": [{ "id": "top", "title": "" }, { "id": "usage", "title": "" }, { "id": "layers", "title": "Layers" }] }, "theme": { "title": "leaflet-tracksymbol2", "colors": { "primary": { "50": "#fff7ed", "100": "#ffedd5", "200": "#fed7aa", "300": "#fdba74", "400": "#fb923c", "500": "#f97316", "600": "#ea580c", "700": "#c2410c", "800": "#9a3412", "900": "#7c2d12" }, "gray": { "50": "#fafafa", "100": "#f4f4f5", "200": "#e4e4e7", "300": "#d4d4d8", "400": "#a1a1aa", "500": "#71717a", "600": "#52525b", "700": "#3f3f46", "750": "#323238", "800": "#27272a", "850": "#1f1f21", "900": "#18181b", "950": "#101012" } }, "logo": { "square": "@histoire/plugin-svelte/assets/histoire-svelte.svg", "light": "@histoire/plugin-svelte/assets/histoire-svelte-text.svg", "dark": "@histoire/plugin-svelte/assets/histoire-svelte-text.svg" } }, "responsivePresets": [{ "label": "Mobile (Small)", "width": 320, "height": 560 }, { "label": "Mobile (Medium)", "width": 360, "height": 640 }, { "label": "Mobile (Large)", "width": 414, "height": 896 }, { "label": "Tablet", "width": 768, "height": 1024 }, { "label": "Laptop (Small)", "width": 1024, "height": null }, { "label": "Laptop (Large)", "width": 1366, "height": null }, { "label": "Desktop", "width": 1920, "height": null }, { "label": "4K", "width": 3840, "height": null }], "backgroundPresets": [{ "label": "Transparent", "color": "transparent", "contrastColor": "#333" }, { "label": "White", "color": "#fff", "contrastColor": "#333" }, { "label": "Light gray", "color": "#aaa", "contrastColor": "#000" }, { "label": "Dark gray", "color": "#333", "contrastColor": "#fff" }, { "label": "Black", "color": "#000", "contrastColor": "#eee" }], "sandboxDarkClass": "dark", "routerMode": "hash", "vite": { "base": "/leaflet-tracksymbol2/" }, "viteIgnorePlugins": ["vite-plugin-sveltekit-compile"], "setupFile": "src/stories/setup.ts" };
+const config = { "plugins": [{ "name": "builtin:tailwind-tokens" }, { "name": "builtin:vanilla-support", "supportPlugin": { "id": "vanilla", "moduleName": "/home/nick/Code/org-arl/leaflet-tracksymbol2/node_modules/.pnpm/histoire@0.12.4_vite@4.0.4/node_modules/histoire/dist/node/builtin-plugins/vanilla-support", "setupFn": "setupVanilla" } }, { "name": "@histoire/plugin-svelte", "supportPlugin": { "id": "svelte3", "moduleName": "@histoire/plugin-svelte", "setupFn": "setupSvelte3" } }], "outDir": "/home/nick/Code/org-arl/leaflet-tracksymbol2/build/histoire", "storyMatch": ["**/*.story.vue", "**/*.story.svelte"], "storyIgnored": ["**/node_modules/**", "**/dist/**"], "supportMatch": [{ "id": "vanilla", "patterns": ["**/*.js"], "pluginIds": ["vanilla"] }, { "id": "svelte", "patterns": ["**/*.svelte"], "pluginIds": ["svelte3"] }], "tree": { "file": "title", "order": "asc", "groups": [{ "id": "top", "title": "" }, { "id": "usage", "title": "" }, { "id": "layers", "title": "Layers" }] }, "theme": { "title": "leaflet-tracksymbol2", "colors": { "primary": { "50": "#fff7ed", "100": "#ffedd5", "200": "#fed7aa", "300": "#fdba74", "400": "#fb923c", "500": "#f97316", "600": "#ea580c", "700": "#c2410c", "800": "#9a3412", "900": "#7c2d12" }, "gray": { "50": "#fafafa", "100": "#f4f4f5", "200": "#e4e4e7", "300": "#d4d4d8", "400": "#a1a1aa", "500": "#71717a", "600": "#52525b", "700": "#3f3f46", "750": "#323238", "800": "#27272a", "850": "#1f1f21", "900": "#18181b", "950": "#101012" } }, "logo": { "square": "@histoire/plugin-svelte/assets/histoire-svelte.svg", "light": "@histoire/plugin-svelte/assets/histoire-svelte-text.svg", "dark": "@histoire/plugin-svelte/assets/histoire-svelte-text.svg" } }, "responsivePresets": [{ "label": "Mobile (Small)", "width": 320, "height": 560 }, { "label": "Mobile (Medium)", "width": 360, "height": 640 }, { "label": "Mobile (Large)", "width": 414, "height": 896 }, { "label": "Tablet", "width": 768, "height": 1024 }, { "label": "Laptop (Small)", "width": 1024, "height": null }, { "label": "Laptop (Large)", "width": 1366, "height": null }, { "label": "Desktop", "width": 1920, "height": null }, { "label": "4K", "width": 3840, "height": null }], "backgroundPresets": [{ "label": "Transparent", "color": "transparent", "contrastColor": "#333" }, { "label": "White", "color": "#fff", "contrastColor": "#333" }, { "label": "Light gray", "color": "#aaa", "contrastColor": "#000" }, { "label": "Dark gray", "color": "#333", "contrastColor": "#fff" }, { "label": "Black", "color": "#000", "contrastColor": "#eee" }], "sandboxDarkClass": "dark", "routerMode": "hash", "vite": { "base": "/leaflet-tracksymbol2/", "resolve": { "alias": { "@arl/leaflet-tracksymbol2": "/src" } } }, "viteIgnorePlugins": ["vite-plugin-sveltekit-compile"], "setupFile": "src/stories/setup.ts" };
 const logos = { square: Logo_square, light: Logo_dark, dark: Logo_dark };
 const histoireConfig = config;
 const customLogos = logos;
@@ -1920,4 +1920,4 @@ export {
   mapFile as m,
   toggleDark as t
 };
-//# sourceMappingURL=GenericMountStory.vue2-67ed271f.js.map
+//# sourceMappingURL=GenericMountStory.vue2-50f5e467.js.map

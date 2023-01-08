@@ -2,7 +2,7 @@ const __resolved__virtual_storySource_srcStoriesTracksymbolStorySvelte = `<scrip
     import type {Hst} from '@histoire/plugin-svelte';
     import {onMount} from 'svelte';
     import L, {Map as LeafletMap} from 'leaflet';
-    import TrackSymbol from '../';
+    import TrackSymbol from '@arl/leaflet-tracksymbol2';
 
     export let Hst: Hst;
 
@@ -147,4 +147,4 @@ const __resolved__virtual_storySource_srcStoriesTracksymbolStorySvelte = `<scrip
 export {
   __resolved__virtual_storySource_srcStoriesTracksymbolStorySvelte as default
 };
-//# sourceMappingURL=__resolved__virtual_story-source_src-stories-tracksymbol-story-svelte-d9c0dc45.js.map
+//# sourceMappingURL=__resolved__virtual_story-source_src-stories-tracksymbol-story-svelte-e53e7244.js.map

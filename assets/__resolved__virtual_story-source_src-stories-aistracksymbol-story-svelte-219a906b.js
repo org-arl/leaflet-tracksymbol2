@@ -2,8 +2,8 @@ const __resolved__virtual_storySource_srcStoriesAistracksymbolStorySvelte = `<sc
     import type {Hst} from '@histoire/plugin-svelte';
     import {onMount} from 'svelte';
     import L, {Map as LeafletMap} from 'leaflet';
-    import {AISTrackSymbol} from '../';
-    import type {PositionReport} from "../";
+    import {AISTrackSymbol} from '@arl/leaflet-tracksymbol2';
+    import type {PositionReport} from '@arl/leaflet-tracksymbol2';
 
     export let Hst: Hst;
 
@@ -138,4 +138,4 @@ const __resolved__virtual_storySource_srcStoriesAistracksymbolStorySvelte = `<sc
 export {
   __resolved__virtual_storySource_srcStoriesAistracksymbolStorySvelte as default
 };
-//# sourceMappingURL=__resolved__virtual_story-source_src-stories-aistracksymbol-story-svelte-1e04fcb7.js.map
+//# sourceMappingURL=__resolved__virtual_story-source_src-stories-aistracksymbol-story-svelte-219a906b.js.map
