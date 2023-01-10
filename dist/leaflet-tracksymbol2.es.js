@@ -3427,7 +3427,7 @@ const gi = 24, _i = 14, mi = 60, xi = 1.944, Qe = "#000000", We = "#d3d3d3", O =
   }
   _getPopupContent(r, t) {
     let e = "<table>";
-    w(t) || (e += P("User ID", t.userId), e += P("IMO Number", t.imoNumber), e += P("Call sign", t.callSign), e += P("Name", t.name)), w(r) || (e += P("Location", `${r.latitude}, ${r.longitude}`), e += P("SOG", w(r.sog) ? void 0 : r.sog.toFixed(2), "knots"), e += P("COG", w(r.cog) ? void 0 : r.cog.toFixed(1), "°"), e += P("Heading", w(r.trueHeading) ? void 0 : r.trueHeading.toFixed(1), "°"), e += P(
+    w(t) || (e += P("User ID", t.userId), e += P("IMO Number", t.imoNumber), e += P("Call sign", t.callSign), e += P("Name", t.name)), w(r) || (e += P("Location", `${r.latitude.toFixed(5)}, ${r.longitude.toFixed(5)}`), e += P("SOG", w(r.sog) ? void 0 : r.sog.toFixed(2), "knots"), e += P("COG", w(r.cog) ? void 0 : r.cog.toFixed(1), "°"), e += P("Heading", w(r.trueHeading) ? void 0 : r.trueHeading.toFixed(1), "°"), e += P(
       "Navigation status",
       Ii(r.navigationalStatus)
     )), w(t) || (e += P("Type", vi(t.type)), !w(t.dimension) && Pe(t.dimension) && (e += P(
