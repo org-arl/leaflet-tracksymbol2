@@ -389,13 +389,6 @@ function createTableRow(name: string, value: any, unit?: string): string {
     return `<tr><td>${name}</td><td>${value} ${isNullOrUndefined(unit) ? "" : unit}</td></tr>`;
 }
 
-function toDegrees(rads: number | null | undefined): number | undefined {
-    if ((rads === null) || (rads === undefined)) {
-        return undefined;
-    }
-    return rads * 180 / Math.PI;
-}
-
 function newShipType(name: string, color: string, fillColor): ShipType {
     return {
         name: name,
