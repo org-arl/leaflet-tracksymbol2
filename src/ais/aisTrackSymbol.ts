@@ -239,7 +239,7 @@ export class AISTrackSymbol
             content += createTableRow("Name", shipStaticData.name);
         }
         if (!isNullOrUndefined(positionReport)) {
-            content += createTableRow("Location", `${positionReport.latitude}, ${positionReport.longitude}`)
+            content += createTableRow("Location", `${positionReport.latitude.toFixed(5)}, ${positionReport.longitude.toFixed(5)}`);
             content += createTableRow("SOG", !isNullOrUndefined(positionReport.sog)
                 ? positionReport.sog.toFixed(2) : undefined, "knots");
             content += createTableRow("COG", !isNullOrUndefined(positionReport.cog)
