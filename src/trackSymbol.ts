@@ -127,7 +127,7 @@ export class TrackSymbol
     /**
      * Set shape options.
      *
-     * @param shapeOptions Shape options.
+     * @param shapeOptions - Shape options.
      */
     private _setShapeOptions(shapeOptions: ShapeOptions | undefined) {
         this._shapeOptions = shapeOptions || {
@@ -285,7 +285,7 @@ export class TrackSymbol
     /**
      * Get latitude size of y-distance.
      *
-     * @param value Y distance (m).
+     * @param value - Y distance (m).
      * @returns dLat
      */
     private _getLatSizeOf(value): number {
@@ -295,7 +295,7 @@ export class TrackSymbol
     /**
      * Get longitude size of x-distance.
      *
-     * @param value X distance (m).
+     * @param value - X distance (m).
      * @returns dLng
      */
     private _getLngSizeOf(value): number {
@@ -305,7 +305,7 @@ export class TrackSymbol
     /**
      * Get view angle from model.
      *
-     * @param modelAngle Model angle (radians).
+     * @param modelAngle - Model angle (radians).
      * @returns View angle from model (radians).
      */
     private _getViewAngleFromModel(modelAngle: number): number {
@@ -330,10 +330,10 @@ export class TrackSymbol
     /**
      * Calculate relative lat/lng.
      *
-     * @param latLng LatLng.
-     * @param distance Distance (meters).
-     * @param angle Angle (radians).
-     * @private Calculated LatLng.
+     * @param latLng - LatLng.
+     * @param distance - Distance (meters).
+     * @param angle - Angle (radians).
+     * @returns Calculated LatLng.
      */
     private _calcRelativeLatLng(latLng: LatLng, distance: number, angle: number): LatLng {
         return new LatLng(
@@ -345,7 +345,7 @@ export class TrackSymbol
     /**
      * Convert LatLngs to map layer points.
      *
-     * @param latLngs LatLngs.
+     * @param latLngs - LatLngs.
      * @returns Points.
      */
     private _latLngsToLayerPoints(...latLngs: LatLng[]): Point[] {
@@ -435,9 +435,9 @@ export class TrackSymbol
     /**
      * Converts points to an SVG path string.
      *
-     * @param points Points.
-     * @param close Close path.
-     * @private SVG path string.
+     * @param points - Points.
+     * @param close - Close path.
+     * @returns SVG path string.
      */
     private static _toSVGPath(points: Point[], close: boolean): string {
         let result = '';

@@ -43,7 +43,7 @@ export interface PositionReport
     longitude: number;
     /** Latitude. */
     latitude: number;
-    /** Course over ground (degrees, 360 = not available, > 360 not used). */
+    /** Course over ground (degrees, 360 = not available, \> 360 not used). */
     cog?: number;
     /** True heading (degrees, 511 = not available) */
     trueHeading?: number;

@@ -35,7 +35,7 @@ const TANKER_FILL_COLOR = "#ff0000";
 const OTHER_COLOR = "#008b8b";
 const OTHER_FILL_COLOR = "#00ffff";
 
-const TYPES = {
+const TYPES: { [key: number]: ShipType } = {
     0: newShipType('Not available', WIG_COLOR, WIG_FILL_COLOR),
     20: newShipType('Wing in ground (WIG), all ships of this type', WIG_COLOR, WIG_FILL_COLOR),
     21: newShipType('Wing in ground (WIG), Hazardous category A', WIG_COLOR, WIG_FILL_COLOR),
@@ -373,7 +373,7 @@ function toRadians(degs: number | null | undefined): number | undefined {
     return degs * Math.PI / 180;
 }
 
-function isNullOrUndefined(v: any): boolean {
+function isNullOrUndefined(v): boolean {
     return (v === null) || (v === undefined);
 }
 
@@ -382,7 +382,7 @@ function isDimensionValid(dimension?: Dimension): boolean {
         && (dimension.A > 0) && (dimension.B > 0) && (dimension.C > 0) && (dimension.D > 0);
 }
 
-function createTableRow(name: string, value: any, unit?: string): string {
+function createTableRow(name: string, value, unit?: string): string {
     if (isNullOrUndefined(value)) {
         return '';
     }
@@ -394,7 +394,7 @@ function newShipType(name: string, color: string, fillColor): ShipType {
         name: name,
         color: color,
         fillColor: fillColor,
-    }
+    };
 }
 
 function getShipType(type: number): ShipType {
