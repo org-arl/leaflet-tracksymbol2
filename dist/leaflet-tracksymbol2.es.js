@@ -3540,7 +3540,10 @@ function Pe(r) {
   return !w(r) && r.A > 0 && r.B > 0 && r.C > 0 && r.D > 0;
 }
 function P(r, t, e) {
-  return w(t) ? "" : `<tr><td>${r}</td><td>${t} ${w(e) ? "" : e}</td></tr>`;
+  if (w(t))
+    return "";
+  const n = String(t);
+  return `<tr><td>${r}</td><td>${n} ${w(e) ? "" : e}</td></tr>`;
 }
 function c(r, t, e) {
   return {
