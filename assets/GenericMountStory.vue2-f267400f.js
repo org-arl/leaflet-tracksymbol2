@@ -461,7 +461,7 @@ const _AISTrackSymbol = class extends TrackSymbol {
       content += createTableRow("Name", shipStaticData.name);
     }
     if (!isNullOrUndefined(positionReport)) {
-      content += createTableRow("Location", `${positionReport.latitude}, ${positionReport.longitude}`);
+      content += createTableRow("Location", `${positionReport.latitude.toFixed(5)}, ${positionReport.longitude.toFixed(5)}`);
       content += createTableRow("SOG", !isNullOrUndefined(positionReport.sog) ? positionReport.sog.toFixed(2) : void 0, "knots");
       content += createTableRow("COG", !isNullOrUndefined(positionReport.cog) ? positionReport.cog.toFixed(1) : void 0, "°");
       content += createTableRow("Heading", !isNullOrUndefined(positionReport.trueHeading) ? positionReport.trueHeading.toFixed(1) : void 0, "°");
@@ -608,7 +608,8 @@ function createTableRow(name, value, unit) {
   if (isNullOrUndefined(value)) {
     return "";
   }
-  return `<tr><td>${name}</td><td>${value} ${isNullOrUndefined(unit) ? "" : unit}</td></tr>`;
+  const sValue = String(value);
+  return `<tr><td>${name}</td><td>${sValue} ${isNullOrUndefined(unit) ? "" : unit}</td></tr>`;
 }
 function newShipType(name, color, fillColor) {
   return {
@@ -1920,4 +1921,4 @@ export {
   mapFile as m,
   toggleDark as t
 };
-//# sourceMappingURL=GenericMountStory.vue2-50f5e467.js.map
+//# sourceMappingURL=GenericMountStory.vue2-f267400f.js.map
