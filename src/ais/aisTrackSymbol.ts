@@ -386,7 +386,8 @@ function createTableRow(name: string, value, unit?: string): string {
     if (isNullOrUndefined(value)) {
         return '';
     }
-    return `<tr><td>${name}</td><td>${value} ${isNullOrUndefined(unit) ? "" : unit}</td></tr>`;
+    const sValue = String(value);
+    return `<tr><td>${name}</td><td>${sValue} ${isNullOrUndefined(unit) ? "" : unit}</td></tr>`;
 }
 
 function newShipType(name: string, color: string, fillColor: string): ShipType {
