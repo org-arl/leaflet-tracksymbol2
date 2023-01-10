@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v/@arl/leaflet-tracksymbol2)
+[![npm](https://img.shields.io/npm/v/@arl/leaflet-tracksymbol2)](https://www.npmjs.com/package/@arl/leaflet-tracksymbol2)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/org-arl/leaflet-tracksymbol2/CI.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/org-arl/leaflet-tracksymbol2)
 
