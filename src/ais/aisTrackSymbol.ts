@@ -389,7 +389,7 @@ function createTableRow(name: string, value, unit?: string): string {
     return `<tr><td>${name}</td><td>${value} ${isNullOrUndefined(unit) ? "" : unit}</td></tr>`;
 }
 
-function newShipType(name: string, color: string, fillColor): ShipType {
+function newShipType(name: string, color: string, fillColor: string): ShipType {
     return {
         name: name,
         color: color,
