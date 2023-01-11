@@ -176,6 +176,7 @@ export class AISTrackSymbol
         } else {
             this.setSpeed(undefined);
         }
+        this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData));
         return this.redraw();
     }
 
@@ -195,7 +196,7 @@ export class AISTrackSymbol
             fillOpacity: 1.0,
             fillColor: shipType.fillColor,
         });
-        this.bindPopup(this._getPopupContent(this._positionReport, shipStaticData));
+        this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData));
         return this.setShapeOptions(AISTrackSymbol._getShapeOptions(this._leaderTime, this._minZoomLevel, this._size,
             shipStaticData));
     }
