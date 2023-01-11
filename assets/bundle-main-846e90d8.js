@@ -1,5 +1,5 @@
 import { d as defineComponent, r as resolveComponent, o as openBlock, c as createBlock, w as withCtx, a as createBaseVNode, n as normalizeClass, b as withKeys, e as renderSlot, m as mergeProps, f as watch, s as scrollIntoView, g as onMounted, u as useCssVars, h as unref, i as computed, j as useRoute, k as ref, l as createElementBlock, p as createVNode, I as Icon, t as toDisplayString, q as createCommentVNode, v as createRouter, x as createWebHistory, y as createWebHashHistory, z as defineStore, A as useStorage, F as Fragment, B as renderList, C as onUnmounted, D as withModifiers, E as normalizeStyle, G as useEventListener, H as isRef, J as resolveDirective, K as withDirectives, L as useMediaQuery, T as Transition, M as createTextVNode, N as pushScopeId, O as popScopeId, P as defineAsyncComponent, Q as vShow, R as reactive, S as useTitle, U as createApp, V as createPinia, W as plugin } from "./vendor-8ce242f6.js";
-import { _ as __vitePreload, h as histoireConfig, i as isDark, c as customLogos, t as toggleDark, f as files, m as mapFile, a as tree, b as _sfc_main$e } from "./GenericMountStory.vue2-6fe714cb.js";
+import { _ as __vitePreload, h as histoireConfig, i as isDark, c as customLogos, t as toggleDark, f as files, m as mapFile, a as tree, b as _sfc_main$e } from "./GenericMountStory.vue2-c2058ebe.js";
 const style$1 = "";
 const style = "";
 const __resolved__virtual_$histoireTheme = "";
@@ -159,12 +159,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-8b94a342.js"), true ? ["assets/HomeView.vue-8b94a342.js","assets/GenericMountStory.vue2-6fe714cb.js","assets/vendor-8ce242f6.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-d073d211.js"), true ? ["assets/HomeView.vue-d073d211.js","assets/GenericMountStory.vue2-c2058ebe.js","assets/vendor-8ce242f6.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-fc858b8b.js"), true ? ["assets/StoryView.vue-fc858b8b.js","assets/vendor-8ce242f6.js","assets/BaseEmpty.vue-abef7ebe.js","assets/state-6daa6384.js","assets/GenericMountStory.vue2-6fe714cb.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-13c3d592.js"), true ? ["assets/StoryView.vue-13c3d592.js","assets/vendor-8ce242f6.js","assets/BaseEmpty.vue-0e20c0ac.js","assets/state-9fdba388.js","assets/GenericMountStory.vue2-c2058ebe.js"] : void 0)
     }
   ]
 });
@@ -940,7 +940,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   },
   setup(__props, { emit }) {
     const SearchPane = defineAsyncComponent({
-      loader: () => __vitePreload(() => import("./SearchPane.vue-330cc0a1.js"), true ? ["assets/SearchPane.vue-330cc0a1.js","assets/GenericMountStory.vue2-6fe714cb.js","assets/vendor-8ce242f6.js","assets/BaseEmpty.vue-abef7ebe.js"] : void 0),
+      loader: () => __vitePreload(() => import("./SearchPane.vue-076ea89b.js"), true ? ["assets/SearchPane.vue-076ea89b.js","assets/GenericMountStory.vue2-c2058ebe.js","assets/vendor-8ce242f6.js","assets/BaseEmpty.vue-0e20c0ac.js"] : void 0),
       loadingComponent: _sfc_main$3,
       delay: 0
     });
@@ -1155,4 +1155,4 @@ export {
   onKeyboardShortcut as o,
   useScrollOnActive as u
 };
-//# sourceMappingURL=bundle-main-94cf3311.js.map
+//# sourceMappingURL=bundle-main-846e90d8.js.map

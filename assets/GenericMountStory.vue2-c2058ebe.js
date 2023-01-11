@@ -407,6 +407,7 @@ const _AISTrackSymbol = class extends TrackSymbol {
     } else {
       this.setSpeed(void 0);
     }
+    this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData));
     return this.redraw();
   }
   setShipStaticData(shipStaticData) {
@@ -418,7 +419,7 @@ const _AISTrackSymbol = class extends TrackSymbol {
       fillOpacity: 1,
       fillColor: shipType.fillColor
     });
-    this.bindPopup(this._getPopupContent(this._positionReport, shipStaticData));
+    this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData));
     return this.setShapeOptions(_AISTrackSymbol._getShapeOptions(
       this._leaderTime,
       this._minZoomLevel,
@@ -1936,4 +1937,4 @@ export {
   mapFile as m,
   toggleDark as t
 };
-//# sourceMappingURL=GenericMountStory.vue2-6fe714cb.js.map
+//# sourceMappingURL=GenericMountStory.vue2-c2058ebe.js.map
