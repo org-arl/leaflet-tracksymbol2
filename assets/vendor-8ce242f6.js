@@ -11332,13 +11332,22 @@ function add_flush_callback(fn2) {
 const seen_callbacks = /* @__PURE__ */ new Set();
 let flushidx = 0;
 function flush() {
+  if (flushidx !== 0) {
+    return;
+  }
   const saved_component = current_component;
   do {
-    while (flushidx < dirty_components.length) {
-      const component = dirty_components[flushidx];
-      flushidx++;
-      set_current_component(component);
-      update(component.$$);
+    try {
+      while (flushidx < dirty_components.length) {
+        const component = dirty_components[flushidx];
+        flushidx++;
+        set_current_component(component);
+        update(component.$$);
+      }
+    } catch (e2) {
+      dirty_components.length = 0;
+      flushidx = 0;
+      throw e2;
     }
     set_current_component(null);
     dirty_components.length = 0;
@@ -11445,13 +11454,11 @@ function get_spread_update(levels, updates) {
 function get_spread_object(spread_props) {
   return typeof spread_props === "object" && spread_props !== null ? spread_props : {};
 }
-function bind(component, name, callback, value) {
+function bind(component, name, callback) {
   const index2 = component.$$.props[name];
   if (index2 !== void 0) {
     component.$$.bound[index2] = callback;
-    if (value === void 0) {
-      callback(component.$$.ctx[index2]);
-    }
+    callback(component.$$.ctx[index2]);
   }
 }
 function create_component(block) {
@@ -11568,7 +11575,7 @@ class SvelteComponent {
   }
 }
 function dispatch_dev(type, detail) {
-  document.dispatchEvent(custom_event(type, Object.assign({ version: "3.55.0" }, detail), { bubbles: true }));
+  document.dispatchEvent(custom_event(type, Object.assign({ version: "3.55.1" }, detail), { bubbles: true }));
 }
 function insert_dev(target, node, anchor) {
   dispatch_dev("SvelteDOMInsert", { target, node, anchor });
@@ -48289,4 +48296,4 @@ export {
   createWebHashHistory as y,
   defineStore as z
 };
-//# sourceMappingURL=vendor-0c70ceb7.js.map
+//# sourceMappingURL=vendor-8ce242f6.js.map

@@ -1,4 +1,4 @@
-import { X as Flatten, Y as leafletSrcExports, Z as SvelteComponentDev, _ as init, $ as dispatch_dev, a0 as safe_not_equal, a1 as binding_callbacks, a2 as bind, a3 as create_component, a4 as mount_component, a5 as transition_in, a6 as transition_out, a7 as destroy_component, a8 as validate_slots, a9 as onMount, aa as element, ab as attr_dev, ac as add_location, ad as insert_dev, ae as noop, af as detach_dev, ag as space, ah as listen_dev, ai as add_flush_callback, aj as run_all, ak as Logo_square, al as Logo_dark, am as useDark, an as useToggle, f as watch, ao as markRaw, R as reactive, d as defineComponent, k as ref, ap as watchEffect, o as openBlock, c as createBlock, m as mergeProps, aq as resolveDynamicComponent, q as createCommentVNode } from "./vendor-0c70ceb7.js";
+import { X as Flatten, Y as leafletSrcExports, Z as SvelteComponentDev, _ as init, $ as dispatch_dev, a0 as safe_not_equal, a1 as binding_callbacks, a2 as bind, a3 as create_component, a4 as mount_component, a5 as transition_in, a6 as transition_out, a7 as destroy_component, a8 as validate_slots, a9 as onMount, aa as element, ab as attr_dev, ac as add_location, ad as insert_dev, ae as noop, af as detach_dev, ag as space, ah as listen_dev, ai as add_flush_callback, aj as run_all, ak as Logo_square, al as Logo_dark, am as useDark, an as useToggle, f as watch, ao as markRaw, R as reactive, d as defineComponent, k as ref, ap as watchEffect, o as openBlock, c as createBlock, m as mergeProps, aq as resolveDynamicComponent, q as createCommentVNode } from "./vendor-8ce242f6.js";
 const scriptRel = "modulepreload";
 const assetsURL = function(dep) {
   return "/leaflet-tracksymbol2/" + dep;
@@ -274,6 +274,9 @@ const DEFAULT_SIZE = 24;
 const DEFAULT_MIN_ZOOM_LEVEL = 14;
 const DEFAULT_LEADER_TIME = 60;
 const KNOTS_PER_METER_PER_SECOND = 1.944;
+const MAX_SOG_EXCLUSIVE = 102.3;
+const MAX_COG_EXCLUSIVE = 360;
+const MAX_HEADING_EXCLUSIVE = 360;
 const RESERVED_COLOR = "#000000";
 const RESERVED_FILL_COLOR = "#d3d3d3";
 const WIG_COLOR = "#000000";
@@ -389,17 +392,17 @@ const _AISTrackSymbol = class extends TrackSymbol {
   setPositionReport(positionReport) {
     this._positionReport = positionReport;
     this.setLatLng([positionReport.latitude, positionReport.longitude]);
-    if (!isNullOrUndefined(positionReport.trueHeading) && positionReport.trueHeading != 511) {
+    if (!isNullOrUndefined(positionReport.trueHeading) && positionReport.trueHeading < MAX_HEADING_EXCLUSIVE) {
       this.setHeading(toRadians$1(positionReport.trueHeading));
     } else {
       this.setHeading(void 0);
     }
-    if (!isNullOrUndefined(positionReport.cog) && positionReport.cog < 360) {
+    if (!isNullOrUndefined(positionReport.cog) && positionReport.cog < MAX_COG_EXCLUSIVE) {
       this.setCourse(toRadians$1(positionReport.cog));
     } else {
       this.setCourse(void 0);
     }
-    if (!isNullOrUndefined(positionReport.sog) && positionReport.sog < 102.3) {
+    if (!isNullOrUndefined(positionReport.sog) && positionReport.sog < MAX_SOG_EXCLUSIVE) {
       this.setSpeed(positionReport.sog / KNOTS_PER_METER_PER_SECOND);
     } else {
       this.setSpeed(void 0);
@@ -462,9 +465,21 @@ const _AISTrackSymbol = class extends TrackSymbol {
     }
     if (!isNullOrUndefined(positionReport)) {
       content += createTableRow("Location", `${positionReport.latitude.toFixed(5)}, ${positionReport.longitude.toFixed(5)}`);
-      content += createTableRow("SOG", !isNullOrUndefined(positionReport.sog) ? positionReport.sog.toFixed(2) : void 0, "knots");
-      content += createTableRow("COG", !isNullOrUndefined(positionReport.cog) ? positionReport.cog.toFixed(1) : void 0, "°");
-      content += createTableRow("Heading", !isNullOrUndefined(positionReport.trueHeading) ? positionReport.trueHeading.toFixed(1) : void 0, "°");
+      content += createTableRow(
+        "SOG",
+        !isNullOrUndefined(positionReport.sog) && positionReport.sog < MAX_SOG_EXCLUSIVE ? positionReport.sog.toFixed(2) : void 0,
+        "knots"
+      );
+      content += createTableRow(
+        "COG",
+        !isNullOrUndefined(positionReport.cog) && positionReport.cog < MAX_COG_EXCLUSIVE ? positionReport.cog.toFixed(1) : void 0,
+        "°"
+      );
+      content += createTableRow(
+        "Heading",
+        !isNullOrUndefined(positionReport.trueHeading) && positionReport.trueHeading < MAX_HEADING_EXCLUSIVE ? positionReport.trueHeading.toFixed(1) : void 0,
+        "°"
+      );
       content += createTableRow(
         "Navigation status",
         toNavigationStatusString(positionReport.navigationalStatus)
@@ -703,7 +718,7 @@ function create_controls_slot$1(ctx) {
     hst_number0_props.value = ctx[2].trueHeading;
   }
   hst_number0 = new ctx[0].Number({ props: hst_number0_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number0, "value", hst_number0_value_binding, ctx[2].trueHeading));
+  binding_callbacks.push(() => bind(hst_number0, "value", hst_number0_value_binding));
   function hst_number1_value_binding(value) {
     ctx[11](value);
   }
@@ -712,7 +727,7 @@ function create_controls_slot$1(ctx) {
     hst_number1_props.value = ctx[2].cog;
   }
   hst_number1 = new ctx[0].Number({ props: hst_number1_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number1, "value", hst_number1_value_binding, ctx[2].cog));
+  binding_callbacks.push(() => bind(hst_number1, "value", hst_number1_value_binding));
   function hst_number2_value_binding(value) {
     ctx[12](value);
   }
@@ -721,7 +736,7 @@ function create_controls_slot$1(ctx) {
     hst_number2_props.value = ctx[2].sog;
   }
   hst_number2 = new ctx[0].Number({ props: hst_number2_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number2, "value", hst_number2_value_binding, ctx[2].sog));
+  binding_callbacks.push(() => bind(hst_number2, "value", hst_number2_value_binding));
   function hst_number3_value_binding(value) {
     ctx[14](value);
   }
@@ -730,7 +745,7 @@ function create_controls_slot$1(ctx) {
     hst_number3_props.value = ctx[3].trueHeading;
   }
   hst_number3 = new ctx[0].Number({ props: hst_number3_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number3, "value", hst_number3_value_binding, ctx[3].trueHeading));
+  binding_callbacks.push(() => bind(hst_number3, "value", hst_number3_value_binding));
   function hst_number4_value_binding(value) {
     ctx[15](value);
   }
@@ -739,7 +754,7 @@ function create_controls_slot$1(ctx) {
     hst_number4_props.value = ctx[3].cog;
   }
   hst_number4 = new ctx[0].Number({ props: hst_number4_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number4, "value", hst_number4_value_binding, ctx[3].cog));
+  binding_callbacks.push(() => bind(hst_number4, "value", hst_number4_value_binding));
   function hst_number5_value_binding(value) {
     ctx[16](value);
   }
@@ -748,7 +763,7 @@ function create_controls_slot$1(ctx) {
     hst_number5_props.value = ctx[3].sog;
   }
   hst_number5 = new ctx[0].Number({ props: hst_number5_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number5, "value", hst_number5_value_binding, ctx[3].sog));
+  binding_callbacks.push(() => bind(hst_number5, "value", hst_number5_value_binding));
   const block = {
     c: function create() {
       h30 = element("h3");
@@ -1262,7 +1277,7 @@ function create_controls_slot(ctx) {
     hst_number0_props.value = ctx[2];
   }
   hst_number0 = new ctx[0].Number({ props: hst_number0_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number0, "value", hst_number0_value_binding, ctx[2]));
+  binding_callbacks.push(() => bind(hst_number0, "value", hst_number0_value_binding));
   function hst_number1_value_binding(value) {
     ctx[15](value);
   }
@@ -1271,7 +1286,7 @@ function create_controls_slot(ctx) {
     hst_number1_props.value = ctx[3];
   }
   hst_number1 = new ctx[0].Number({ props: hst_number1_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number1, "value", hst_number1_value_binding, ctx[3]));
+  binding_callbacks.push(() => bind(hst_number1, "value", hst_number1_value_binding));
   function hst_number2_value_binding(value) {
     ctx[16](value);
   }
@@ -1280,7 +1295,7 @@ function create_controls_slot(ctx) {
     hst_number2_props.value = ctx[4];
   }
   hst_number2 = new ctx[0].Number({ props: hst_number2_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number2, "value", hst_number2_value_binding, ctx[4]));
+  binding_callbacks.push(() => bind(hst_number2, "value", hst_number2_value_binding));
   function hst_number3_value_binding(value) {
     ctx[18](value);
   }
@@ -1289,7 +1304,7 @@ function create_controls_slot(ctx) {
     hst_number3_props.value = ctx[5];
   }
   hst_number3 = new ctx[0].Number({ props: hst_number3_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number3, "value", hst_number3_value_binding, ctx[5]));
+  binding_callbacks.push(() => bind(hst_number3, "value", hst_number3_value_binding));
   function hst_number4_value_binding(value) {
     ctx[19](value);
   }
@@ -1298,7 +1313,7 @@ function create_controls_slot(ctx) {
     hst_number4_props.value = ctx[6];
   }
   hst_number4 = new ctx[0].Number({ props: hst_number4_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number4, "value", hst_number4_value_binding, ctx[6]));
+  binding_callbacks.push(() => bind(hst_number4, "value", hst_number4_value_binding));
   function hst_number5_value_binding(value) {
     ctx[20](value);
   }
@@ -1307,7 +1322,7 @@ function create_controls_slot(ctx) {
     hst_number5_props.value = ctx[7];
   }
   hst_number5 = new ctx[0].Number({ props: hst_number5_props, $$inline: true });
-  binding_callbacks.push(() => bind(hst_number5, "value", hst_number5_value_binding, ctx[7]));
+  binding_callbacks.push(() => bind(hst_number5, "value", hst_number5_value_binding));
   const block = {
     c: function create() {
       h30 = element("h3");
@@ -1877,8 +1892,8 @@ function mapVariant(variant, existingVariant) {
   return result;
 }
 const clientSupportPlugins = {
-  "vanilla": () => __vitePreload(() => import("./vendor-0c70ceb7.js").then((n) => n.aT), true ? [] : void 0),
-  "svelte3": () => __vitePreload(() => import("./vendor-0c70ceb7.js").then((n) => n.aU), true ? [] : void 0)
+  "vanilla": () => __vitePreload(() => import("./vendor-8ce242f6.js").then((n) => n.aT), true ? [] : void 0),
+  "svelte3": () => __vitePreload(() => import("./vendor-8ce242f6.js").then((n) => n.aU), true ? [] : void 0)
 };
 const __default__ = {
   inheritAttrs: false
@@ -1921,4 +1936,4 @@ export {
   mapFile as m,
   toggleDark as t
 };
-//# sourceMappingURL=GenericMountStory.vue2-f267400f.js.map
+//# sourceMappingURL=GenericMountStory.vue2-6fe714cb.js.map
