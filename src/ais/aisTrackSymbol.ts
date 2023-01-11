@@ -9,6 +9,9 @@ const DEFAULT_SIZE = 24;
 const DEFAULT_MIN_ZOOM_LEVEL = 14;
 const DEFAULT_LEADER_TIME = 60;
 const KNOTS_PER_METER_PER_SECOND = 1.944;
+const MAX_SOG_EXCLUSIVE = 102.3;
+const MAX_COG_EXCLUSIVE = 360;
+const MAX_HEADING_EXCLUSIVE = 360;
 
 interface ShipType {
     name: string;
@@ -158,17 +161,17 @@ export class AISTrackSymbol
     public setPositionReport(positionReport: PositionReport): this {
         this._positionReport = positionReport;
         this.setLatLng([positionReport.latitude, positionReport.longitude]);
-        if (!isNullOrUndefined(positionReport.trueHeading) && (positionReport.trueHeading != 511)) {
+        if (!isNullOrUndefined(positionReport.trueHeading) && (positionReport.trueHeading < MAX_HEADING_EXCLUSIVE)) {
             this.setHeading(toRadians(positionReport.trueHeading));
         } else {
             this.setHeading(undefined);
         }
-        if (!isNullOrUndefined(positionReport.cog) && (positionReport.cog < 360)) {
+        if (!isNullOrUndefined(positionReport.cog) && (positionReport.cog < MAX_COG_EXCLUSIVE)) {
             this.setCourse(toRadians(positionReport.cog));
         } else {
             this.setCourse(undefined);
         }
-        if (!isNullOrUndefined(positionReport.sog) && (positionReport.sog < 102.3)) {
+        if (!isNullOrUndefined(positionReport.sog) && (positionReport.sog < MAX_SOG_EXCLUSIVE)) {
             this.setSpeed(positionReport.sog / KNOTS_PER_METER_PER_SECOND);
         } else {
             this.setSpeed(undefined);
@@ -240,12 +243,15 @@ export class AISTrackSymbol
         }
         if (!isNullOrUndefined(positionReport)) {
             content += createTableRow("Location", `${positionReport.latitude.toFixed(5)}, ${positionReport.longitude.toFixed(5)}`);
-            content += createTableRow("SOG", !isNullOrUndefined(positionReport.sog)
-                ? positionReport.sog.toFixed(2) : undefined, "knots");
-            content += createTableRow("COG", !isNullOrUndefined(positionReport.cog)
-                ? positionReport.cog.toFixed(1) : undefined, "°");
-            content += createTableRow("Heading", !isNullOrUndefined(positionReport.trueHeading)
-                ? positionReport.trueHeading.toFixed(1) : undefined, "°");
+            content += createTableRow("SOG",
+                !isNullOrUndefined(positionReport.sog) && (positionReport.sog < MAX_SOG_EXCLUSIVE)
+                    ? positionReport.sog.toFixed(2) : undefined, "knots");
+            content += createTableRow("COG",
+                !isNullOrUndefined(positionReport.cog) && (positionReport.cog < MAX_COG_EXCLUSIVE)
+                    ? positionReport.cog.toFixed(1) : undefined, "°");
+            content += createTableRow("Heading",
+                !isNullOrUndefined(positionReport.trueHeading) && (positionReport.trueHeading < MAX_HEADING_EXCLUSIVE)
+                    ? positionReport.trueHeading.toFixed(1) : undefined, "°");
             content += createTableRow("Navigation status",
                 toNavigationStatusString(positionReport.navigationalStatus));
         }
