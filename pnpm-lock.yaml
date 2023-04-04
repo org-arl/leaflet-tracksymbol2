@@ -7,7 +7,7 @@ specifiers:
   '@histoire/plugin-svelte': ^0.12.4
   '@sveltejs/vite-plugin-svelte': ^1.4.0
   '@types/estree': ^1.0.0
-  '@types/leaflet': ^1.9.0
+  '@types/leaflet': ^1.9.3
   '@typescript-eslint/eslint-plugin': ^5.48.1
   '@typescript-eslint/parser': ^5.48.1
   eslint: ^8.31.0
@@ -32,7 +32,7 @@ devDependencies:
   '@histoire/plugin-svelte': 0.12.4_76dbu7m65vjnozzv4fj7qep6aq
   '@sveltejs/vite-plugin-svelte': 1.4.0_svelte@3.55.1+vite@4.0.4
   '@types/estree': 1.0.0
-  '@types/leaflet': 1.9.0
+  '@types/leaflet': 1.9.3
   '@typescript-eslint/eslint-plugin': 5.48.1_3jon24igvnqaqexgwtxk6nkpse
   '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe
   eslint: 8.31.0
@@ -765,8 +765,8 @@ packages:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
 
-  /@types/leaflet/1.9.0:
-    resolution: {integrity: sha512-7LeOSj7EloC5UcyOMo+1kc3S1UT3MjJxwqsMT1d2PTyvQz53w0Y0oSSk9nwZnOZubCmBvpSNGceucxiq+ZPEUw==}
+  /@types/leaflet/1.9.3:
+    resolution: {integrity: sha512-Caa1lYOgKVqDkDZVWkto2Z5JtVo09spEaUt2S69LiugbBpoqQu92HYFMGUbYezZbnBkyOxMNPXHSgRrRY5UyIA==}
     dependencies:
       '@types/geojson': 7946.0.10
     dev: true
