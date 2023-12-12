@@ -1,59 +1,92 @@
-import ut, { Path as tn, Util as Ne, Bounds as en, LatLngBounds as nn, LatLng as pe, Point as rn, DomUtil as sn } from "leaflet";
-const on = !0, ln = !1, an = { CCW: -1, CW: 1, NOT_ORIENTABLE: 0 }, fn = 2 * Math.PI, xt = 1, Ce = 0, z = 2, hn = 3, un = 4, cn = 1, dn = 2, ne = 0, kt = 1, ht = 2;
-var Ut = /* @__PURE__ */ Object.freeze({
-  CCW: on,
-  CW: ln,
-  ORIENTATION: an,
-  PIx2: fn,
-  INSIDE: xt,
-  OUTSIDE: Ce,
+import mt, { Path as _n, Util as Me, Bounds as mn, LatLngBounds as xn, LatLng as me, Point as En, DomUtil as wn } from "leaflet";
+const Be = !0, vn = !1, qt = { CCW: -1, CW: 1, NOT_ORIENTABLE: 0 }, Tn = 2 * Math.PI, bt = 1, Fe = 0, z = 2, Sn = 3, yn = 4, In = 1, bn = 2, fe = 0, Dt = 1, pt = 2;
+var zt = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
   BOUNDARY: z,
-  CONTAINS: hn,
-  INTERLACE: un,
-  OVERLAP_SAME: cn,
-  OVERLAP_OPPOSITE: dn,
-  NOT_VERTEX: ne,
-  START_VERTEX: kt,
-  END_VERTEX: ht
+  CCW: Be,
+  CONTAINS: Sn,
+  CW: vn,
+  END_VERTEX: pt,
+  INSIDE: bt,
+  INTERLACE: yn,
+  NOT_VERTEX: fe,
+  ORIENTATION: qt,
+  OUTSIDE: Fe,
+  OVERLAP_OPPOSITE: bn,
+  OVERLAP_SAME: In,
+  PIx2: Tn,
+  START_VERTEX: Dt
 });
 let Y = 1e-6;
-function Re(r) {
-  Y = r;
+function Ve(s) {
+  Y = s;
 }
-function ke() {
+function He() {
   return Y;
 }
-const pn = 3;
-function Qt(r) {
-  return r < Y && r > -Y;
+const Pn = 3;
+function te(s) {
+  return s < Y && s > -Y;
 }
-function nt(r, t) {
-  return r - t < Y && r - t > -Y;
+function st(s, t) {
+  return s - t < Y && s - t > -Y;
 }
-function Ue(r, t) {
-  return r - t > Y;
+function $e(s, t) {
+  return s - t > Y;
 }
-function gn(r, t) {
-  return r - t > -Y;
+function An(s, t) {
+  return s - t > -Y;
 }
-function Me(r, t) {
-  return r - t < -Y;
+function qe(s, t) {
+  return s - t < -Y;
 }
-function _n(r, t) {
-  return r - t < Y;
+function Ln(s, t) {
+  return s - t < Y;
 }
-var mn = /* @__PURE__ */ Object.freeze({
-  setTolerance: Re,
-  getTolerance: ke,
-  DECIMALS: pn,
-  EQ_0: Qt,
-  EQ: nt,
-  GT: Ue,
-  GE: gn,
-  LT: Me,
-  LE: _n
+var On = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  DECIMALS: Pn,
+  EQ: st,
+  EQ_0: te,
+  GE: An,
+  GT: $e,
+  LE: Ln,
+  LT: qe,
+  getTolerance: He,
+  setTolerance: Ve
 });
-class Wt {
+let i = {
+  Utils: On,
+  Errors: void 0,
+  Matrix: void 0,
+  Planar_set: void 0,
+  Point: void 0,
+  Vector: void 0,
+  Line: void 0,
+  Circle: void 0,
+  Segment: void 0,
+  Arc: void 0,
+  Box: void 0,
+  Edge: void 0,
+  Face: void 0,
+  Ray: void 0,
+  Ray_shooting: void 0,
+  Multiline: void 0,
+  Polygon: void 0,
+  Distance: void 0,
+  Inversion: void 0
+};
+for (let s in zt)
+  i[s] = zt[s];
+Object.defineProperty(i, "DP_TOL", {
+  get: function() {
+    return He();
+  },
+  set: function(s) {
+    Ve(s);
+  }
+});
+class w {
   /**
    * Throw error ILLEGAL_PARAMETERS when cannot instantiate from given parameter
    * @returns {ReferenceError}
@@ -83,54 +116,26 @@ class Wt {
   static get INFINITE_LOOP() {
     return new Error("Infinite loop");
   }
-}
-let i = {
-  Utils: mn,
-  Errors: Wt,
-  Matrix: void 0,
-  Planar_set: void 0,
-  Point: void 0,
-  Vector: void 0,
-  Line: void 0,
-  Circle: void 0,
-  Segment: void 0,
-  Arc: void 0,
-  Box: void 0,
-  Edge: void 0,
-  Face: void 0,
-  Ray: void 0,
-  Ray_shooting: void 0,
-  Multiline: void 0,
-  Polygon: void 0,
-  Distance: void 0,
-  Inversion: void 0
-};
-for (let r in Ut)
-  i[r] = Ut[r];
-Object.defineProperty(i, "DP_TOL", {
-  get: function() {
-    return ke();
-  },
-  set: function(r) {
-    Re(r);
+  static get CANNOT_COMPLETE_BOOLEAN_OPERATION() {
+    return new Error("Cannot complete boolean operation");
   }
-});
-class ie {
+  static get CANNOT_INVOKE_ABSTRACT_METHOD() {
+    return new Error("Abstract method cannot be invoked");
+  }
+  static get OPERATION_IS_NOT_SUPPORTED() {
+    return new Error("Operation is not supported");
+  }
+}
+i.Errors = w;
+class ue {
   constructor(t, e) {
     this.first = t, this.last = e || this.first;
   }
-  /**
-   * Throw an error if circular loop detected in the linked list
-   * @param {LinkedListElement} first element to start iteration
-   * @throws {Flatten.Errors.INFINITE_LOOP}
-   */
-  static testInfiniteLoop(t) {
-    let e = t, n = t;
-    do {
-      if (e != t && e === n)
-        throw i.Errors.INFINITE_LOOP;
-      e = e.next, n = n.next.next;
-    } while (e != t);
+  [Symbol.iterator]() {
+    let t;
+    return {
+      next: () => (t = t ? t.next : this.first, { value: t, done: t === void 0 })
+    };
   }
   /**
    * Return number of elements in the list
@@ -148,7 +153,7 @@ class ie {
    * @returns {Array}
    */
   toArray(t = void 0, e = void 0) {
-    let n = [], s = t || this.first, l = e || this.last, o = s;
+    let n = [], r = t || this.first, l = e || this.last, o = r;
     if (o === void 0)
       return n;
     do
@@ -196,376 +201,388 @@ class ie {
   isEmpty() {
     return this.first === void 0;
   }
-  [Symbol.iterator]() {
-    let t;
-    return {
-      next: () => (t = t ? t.next : this.first, { value: t, done: t === void 0 })
-    };
+  /**
+   * Throw an error if circular loop detected in the linked list
+   * @param {LinkedListElement} first element to start iteration
+   * @throws {Errors.INFINITE_LOOP}
+   */
+  static testInfiniteLoop(t) {
+    let e = t, n = t;
+    do {
+      if (e != t && e === n)
+        throw w.INFINITE_LOOP;
+      e = e.next, n = n.next.next;
+    } while (e != t);
   }
 }
-function ct(r, t, e) {
-  let n = e.length, s = r.shape.split(t);
-  if (s.length === 0)
+function xt(s, t, e) {
+  let n = e.length, r = s.shape.split(t);
+  if (r.length === 0)
     return;
   let l = 0;
-  s[0] === null ? l = 0 : s[1] === null ? l = r.shape.length : l = s[0].length;
-  let o = ne;
-  nt(l, 0) && (o |= kt), nt(l, r.shape.length) && (o |= ht);
-  let a = o & ht && r.next.arc_length === 0 ? 0 : r.arc_length + l;
+  r[0] === null ? l = 0 : r[1] === null ? l = s.shape.length : l = r[0].length;
+  let o = fe;
+  st(l, 0) && (o |= Dt), st(l, s.shape.length) && (o |= pt);
+  let a = o & pt && s.next.arc_length === 0 ? 0 : s.arc_length + l;
   e.push({
     id: n,
     pt: t,
     arc_length: a,
-    edge_before: r,
+    edge_before: s,
     edge_after: void 0,
-    face: r.face,
+    face: s.face,
     is_vertex: o
   });
 }
-function St(r) {
-  r.int_points1_sorted = Et(r.int_points1), r.int_points2_sorted = Et(r.int_points2);
+function Nt(s) {
+  s.int_points1_sorted = Pt(s.int_points1), s.int_points2_sorted = Pt(s.int_points2);
 }
-function Et(r) {
+function Pt(s) {
   let t = /* @__PURE__ */ new Map(), e = 0;
-  for (let s of r)
-    t.has(s.face) || (t.set(s.face, e), e++);
-  for (let s of r)
-    s.faceId = t.get(s.face);
-  return r.slice().sort(xn);
+  for (let r of s)
+    t.has(r.face) || (t.set(r.face, e), e++);
+  for (let r of s)
+    r.faceId = t.get(r.face);
+  return s.slice().sort(Cn);
 }
-function xn(r, t) {
-  return r.faceId < t.faceId ? -1 : r.faceId > t.faceId ? 1 : r.arc_length < t.arc_length ? -1 : r.arc_length > t.arc_length ? 1 : 0;
+function Cn(s, t) {
+  return s.faceId < t.faceId ? -1 : s.faceId > t.faceId ? 1 : s.arc_length < t.arc_length ? -1 : s.arc_length > t.arc_length ? 1 : 0;
 }
-function Gt(r, t) {
-  return t.slice().sort((e, n) => r.coord(e.pt) < r.coord(n.pt) ? -1 : r.coord(e.pt) > r.coord(n.pt) ? 1 : 0);
+function Xt(s, t) {
+  return t.slice().sort((e, n) => s.coord(e.pt) < s.coord(n.pt) ? -1 : s.coord(e.pt) > s.coord(n.pt) ? 1 : 0);
 }
-function re(r) {
-  if (r.int_points1.length < 2)
+function he(s) {
+  if (s.int_points1.length < 2)
     return;
-  let t = !1, e, n, s, l;
-  for (let o = 0; o < r.int_points1_sorted.length; o++)
-    if (r.int_points1_sorted[o].id !== -1) {
-      e = r.int_points1_sorted[o], n = r.int_points2[e.id];
-      for (let a = o + 1; a < r.int_points1_sorted.length && (s = r.int_points1_sorted[a], !!nt(s.arc_length, e.arc_length)); a++)
-        s.id !== -1 && (l = r.int_points2[s.id], l.id !== -1 && s.edge_before === e.edge_before && s.edge_after === e.edge_after && l.edge_before === n.edge_before && l.edge_after === n.edge_after && (s.id = -1, l.id = -1, t = !0));
+  let t = !1, e, n, r, l;
+  for (let o = 0; o < s.int_points1_sorted.length; o++)
+    if (s.int_points1_sorted[o].id !== -1) {
+      e = s.int_points1_sorted[o], n = s.int_points2[e.id];
+      for (let a = o + 1; a < s.int_points1_sorted.length && (r = s.int_points1_sorted[a], !!st(r.arc_length, e.arc_length)); a++)
+        r.id !== -1 && (l = s.int_points2[r.id], l.id !== -1 && r.edge_before === e.edge_before && r.edge_after === e.edge_after && l.edge_before === n.edge_before && l.edge_after === n.edge_after && (r.id = -1, l.id = -1, t = !0));
     }
-  n = r.int_points2_sorted[0], e = r.int_points1[n.id];
-  for (let o = 1; o < r.int_points2_sorted.length; o++) {
-    let a = r.int_points2_sorted[o];
+  n = s.int_points2_sorted[0], e = s.int_points1[n.id];
+  for (let o = 1; o < s.int_points2_sorted.length; o++) {
+    let a = s.int_points2_sorted[o];
     if (a.id == -1)
       continue;
     if (n.id == -1 || /* can't be reference if already deleted */
-    !nt(a.arc_length, n.arc_length)) {
-      n = a, e = r.int_points1[n.id];
+    !st(a.arc_length, n.arc_length)) {
+      n = a, e = s.int_points1[n.id];
       continue;
     }
-    let h = r.int_points1[a.id];
+    let h = s.int_points1[a.id];
     h.edge_before === e.edge_before && h.edge_after === e.edge_after && a.edge_before === n.edge_before && a.edge_after === n.edge_after && (h.id = -1, a.id = -1, t = !0);
   }
-  t && (r.int_points1 = r.int_points1.filter((o) => o.id >= 0), r.int_points2 = r.int_points2.filter((o) => o.id >= 0), r.int_points1.forEach((o, a) => o.id = a), r.int_points2.forEach((o, a) => o.id = a));
+  t && (s.int_points1 = s.int_points1.filter((o) => o.id >= 0), s.int_points2 = s.int_points2.filter((o) => o.id >= 0), s.int_points1.forEach((o, a) => o.id = a), s.int_points2.forEach((o, a) => o.id = a));
 }
-function Yt(r) {
-  for (let t of r)
+function ee(s) {
+  for (let t of s)
     t.edge_before.bvStart = void 0, t.edge_before.bvEnd = void 0, t.edge_before.bv = void 0, t.edge_before.overlap = void 0, t.edge_after.bvStart = void 0, t.edge_after.bvEnd = void 0, t.edge_after.bv = void 0, t.edge_after.overlap = void 0;
-  for (let t of r)
+  for (let t of s)
     t.edge_before.bvEnd = z, t.edge_after.bvStart = z;
 }
-function jt(r, t) {
-  for (let e of r)
+function ne(s, t) {
+  for (let e of s)
     e.edge_before.setInclusion(t), e.edge_after.setInclusion(t);
 }
-function En(r) {
-  let t, e, n, s = r.int_points1.length;
-  for (let l = 0; l < s; l++) {
-    let o = r.int_points1_sorted[l];
+function Nn(s) {
+  let t, e, n, r = s.int_points1.length;
+  for (let l = 0; l < r; l++) {
+    let o = s.int_points1_sorted[l];
     o.face !== t && (e = l, t = o.face);
-    let a = l, h = dt(r.int_points1_sorted, l, t), f;
-    a + h < s && r.int_points1_sorted[a + h].face === t ? f = a + h : f = e;
-    let u = dt(r.int_points1_sorted, f, t);
+    let a = l, h = Et(s.int_points1_sorted, l, t), f;
+    a + h < r && s.int_points1_sorted[a + h].face === t ? f = a + h : f = e;
+    let u = Et(s.int_points1_sorted, f, t);
     n = null;
-    for (let x = f; x < f + u; x++) {
-      let S = r.int_points1_sorted[x];
-      if (S.face === t && r.int_points2[S.id].face === r.int_points2[o.id].face) {
-        n = S;
+    for (let m = f; m < f + u; m++) {
+      let y = s.int_points1_sorted[m];
+      if (y.face === t && s.int_points2[y.id].face === s.int_points2[o.id].face) {
+        n = y;
         break;
       }
     }
     if (n === null)
       continue;
-    let p = o.edge_after, _ = n.edge_before;
-    if (!(p.bv === z && _.bv === z) || p !== _)
+    let g = o.edge_after, x = n.edge_before;
+    if (!(g.bv === z && x.bv === z) || g !== x)
       continue;
-    let I = r.int_points2[o.id], v = r.int_points2[n.id], E = I.edge_after, y = v.edge_before;
-    E.bv === z && y.bv === z && E === y || (I = r.int_points2[n.id], v = r.int_points2[o.id], E = I.edge_after, y = v.edge_before), E.bv === z && y.bv === z && E === y && p.setOverlap(E);
+    let I = s.int_points2[o.id], T = s.int_points2[n.id], E = I.edge_after, S = T.edge_before;
+    E.bv === z && S.bv === z && E === S || (I = s.int_points2[n.id], T = s.int_points2[o.id], E = I.edge_after, S = T.edge_before), E.bv === z && S.bv === z && E === S && g.setOverlap(E);
   }
 }
-function dt(r, t, e) {
-  let n, s, l = 1;
-  if (r.length == 1)
+function Et(s, t, e) {
+  let n, r, l = 1;
+  if (s.length == 1)
     return 1;
-  n = r[t];
-  for (let o = t + 1; o < r.length && !(n.face != e || (s = r[o], !(s.pt.equalTo(n.pt) && s.edge_before === n.edge_before && s.edge_after === n.edge_after))); o++)
+  n = s[t];
+  for (let o = t + 1; o < s.length && !(n.face != e || (r = s[o], !(r.pt.equalTo(n.pt) && r.edge_before === n.edge_before && r.edge_after === n.edge_after))); o++)
     l++;
   return l;
 }
-function pt(r, t) {
+function wt(s, t) {
   if (t) {
     for (let e of t) {
       let n = e.edge_before;
-      if (e.is_vertex = ne, n.shape.start && n.shape.start.equalTo(e.pt) && (e.is_vertex |= kt), n.shape.end && n.shape.end.equalTo(e.pt) && (e.is_vertex |= ht), e.is_vertex & kt) {
-        e.edge_before = n.prev, e.is_vertex = ht;
+      if (e.is_vertex = fe, n.shape.start && n.shape.start.equalTo(e.pt) && (e.is_vertex |= Dt), n.shape.end && n.shape.end.equalTo(e.pt) && (e.is_vertex |= pt), e.is_vertex & Dt) {
+        e.edge_before = n.prev, e.is_vertex = pt;
         continue;
       }
-      if (e.is_vertex & ht)
+      if (e.is_vertex & pt)
         continue;
-      let s = r.addVertex(e.pt, n);
-      e.edge_before = s;
+      let r = s.addVertex(e.pt, n);
+      e.edge_before = r;
     }
     for (let e of t)
       e.edge_after = e.edge_before.next;
   }
 }
-function ge(r, t, e) {
-  let n = r.edge_before, s = t.edge_after;
-  n.next = e, e.prev = n, e.next = s, s.prev = e;
+function xe(s, t, e) {
+  let n = s.edge_before, r = t.edge_after;
+  n.next = e, e.prev = n, e.next = r, r.prev = e;
 }
-const { INSIDE: Q, OUTSIDE: W, BOUNDARY: T, OVERLAP_SAME: wn, OVERLAP_OPPOSITE: vn } = Ut, { NOT_VERTEX: Oi, START_VERTEX: _e, END_VERTEX: me } = Ut, $t = 1, bt = 2, it = 3;
-function yn(r, t) {
-  let [e, n] = Pt(r, t, $t, !0);
+const { INSIDE: Q, OUTSIDE: W, BOUNDARY: b, OVERLAP_SAME: Rn, OVERLAP_OPPOSITE: Un } = zt, { NOT_VERTEX: Wi, START_VERTEX: Ee, END_VERTEX: we } = zt, Wt = 1, Ut = 2, ot = 3;
+function kn(s, t) {
+  let [e, n] = kt(s, t, Wt, !0);
   return e;
 }
-function Xt(r, t) {
-  let n = t.clone().reverse(), [s, l] = Pt(r, n, it, !0);
-  return s;
+function ie(s, t) {
+  let n = t.clone().reverse(), [r, l] = kt(s, n, ot, !0);
+  return r;
 }
-function $e(r, t) {
-  let [e, n] = Pt(r, t, bt, !0);
+function Ge(s, t) {
+  let [e, n] = kt(s, t, Ut, !0);
   return e;
 }
-function Be(r, t) {
-  let [e, n] = Pt(r, t, bt, !1), s = [];
+function De(s, t) {
+  let [e, n] = kt(s, t, Ut, !1), r = [];
   for (let o of e.faces)
-    s = [...s, ...[...o.edges].map((a) => a.shape)];
+    r = [...r, ...[...o.edges].map((a) => a.shape)];
   let l = [];
   for (let o of n.faces)
     l = [...l, ...[...o.edges].map((a) => a.shape)];
-  return [s, l];
+  return [r, l];
 }
-function Zt(r, t) {
-  let [e, n] = Pt(r, t, it, !1), s = [];
+function re(s, t) {
+  let [e, n] = kt(s, t, ot, !1), r = [];
   for (let l of e.faces)
-    s = [...s, ...[...l.edges].map((o) => o.shape)];
-  return s;
+    r = [...r, ...[...l.edges].map((o) => o.shape)];
+  return r;
 }
-function Fe(r, t) {
-  let e = r.clone(), n = t.clone(), s = Ve(e, n);
-  St(s), pt(e, s.int_points1_sorted), pt(n, s.int_points2_sorted), re(s), St(s);
-  let l = s.int_points1_sorted.map((a) => a.pt), o = s.int_points2_sorted.map((a) => a.pt);
+function ze(s, t) {
+  let e = s.clone(), n = t.clone(), r = Qe(e, n);
+  Nt(r), wt(e, r.int_points1_sorted), wt(n, r.int_points2_sorted), he(r), Nt(r);
+  let l = r.int_points1_sorted.map((a) => a.pt), o = r.int_points2_sorted.map((a) => a.pt);
   return [l, o];
 }
-function Sn(r, t, e, n) {
-  let s = xe(r, e.int_points1), l = xe(t, e.int_points2);
-  for (Ee(s, t), Ee(l, r), Yt(e.int_points1), Yt(e.int_points2), jt(e.int_points1, t), jt(e.int_points2, r); Tn(r, t, e.int_points1, e.int_points1_sorted, e.int_points2, e); )
+function Mn(s, t, e, n) {
+  let r = ve(s, e.int_points1), l = ve(t, e.int_points2);
+  for (Te(r, t), Te(l, s), ee(e.int_points1), ee(e.int_points2), ne(e.int_points1, t), ne(e.int_points2, s); Fn(s, t, e.int_points1, e.int_points1_sorted, e.int_points2, e); )
     ;
-  En(e), Jt(r, n, e.int_points1_sorted, !0), Jt(t, n, e.int_points2_sorted, !1), we(r, s, n, !0), we(t, l, n, !1);
+  Nn(e), se(s, n, e.int_points1_sorted, !0), se(t, n, e.int_points2_sorted, !1), Se(s, r, n, !0), Se(t, l, n, !1);
 }
-function In(r, t, e, n) {
-  bn(r, t, n, e.int_points2), Pn(r, t, e), Kt(r, e.int_points1), Kt(t, e.int_points2), te(r, e.int_points1, e.int_points2), te(r, e.int_points2, e.int_points1);
+function Bn(s, t, e, n) {
+  Vn(s, t, n, e.int_points2), Hn(s, t, e), oe(s, e.int_points1), oe(t, e.int_points2), le(s, e.int_points1, e.int_points2), le(s, e.int_points2, e.int_points1);
 }
-function Pt(r, t, e, n) {
-  let s = r.clone(), l = t.clone(), o = Ve(s, l);
-  return St(o), pt(s, o.int_points1_sorted), pt(l, o.int_points2_sorted), re(o), St(o), Sn(s, l, o, e), n && In(s, l, o, e), [s, l];
+function kt(s, t, e, n) {
+  let r = s.clone(), l = t.clone(), o = Qe(r, l);
+  return Nt(o), wt(r, o.int_points1_sorted), wt(l, o.int_points2_sorted), he(o), Nt(o), Mn(r, l, o, e), n && Bn(r, l, o, e), [r, l];
 }
-function Ve(r, t) {
+function Qe(s, t) {
   let e = {
     int_points1: [],
     int_points2: []
   };
-  for (let n of r.edges) {
-    let s = t.edges.search(n.box);
-    for (let l of s) {
+  for (let n of s.edges) {
+    let r = t.edges.search(n.box);
+    for (let l of r) {
       let o = n.shape.intersect(l.shape);
       for (let a of o)
-        ct(n, a, e.int_points1), ct(l, a, e.int_points2);
+        xt(n, a, e.int_points1), xt(l, a, e.int_points2);
     }
   }
   return e;
 }
-function xe(r, t) {
+function ve(s, t) {
   let e = [];
-  for (let n of r.faces)
-    t.find((s) => s.face === n) || e.push(n);
+  for (let n of s.faces)
+    t.find((r) => r.face === n) || e.push(n);
   return e;
 }
-function Ee(r, t) {
-  for (let e of r)
+function Te(s, t) {
+  for (let e of s)
     e.first.bv = e.first.bvStart = e.first.bvEnd = void 0, e.first.setInclusion(t);
 }
-function Tn(r, t, e, n, s, l) {
+function Fn(s, t, e, n, r, l) {
   let o, a, h, f = n.length, u = !1;
-  for (let p = 0; p < f; p++) {
-    let _ = n[p];
-    _.face !== o && (a = p, o = _.face);
-    let I = p, v = dt(n, p, o), E;
-    I + v < f && n[I + v].face === o ? E = I + v : E = a;
-    let y = dt(n, E, o);
+  for (let g = 0; g < f; g++) {
+    let x = n[g];
+    x.face !== o && (a = g, o = x.face);
+    let I = g, T = Et(n, g, o), E;
+    I + T < f && n[I + T].face === o ? E = I + T : E = a;
+    let S = Et(n, E, o);
     h = null;
-    for (let g = E; g < E + y; g++) {
-      let A = n[g];
-      if (A.face === o && s[A.id].face === s[_.id].face) {
-        h = A;
+    for (let p = E; p < E + S; p++) {
+      let L = n[p];
+      if (L.face === o && r[L.id].face === r[x.id].face) {
+        h = L;
         break;
       }
     }
     if (h === null)
       continue;
-    let x = _.edge_after, S = h.edge_before;
-    if (x.bv === T && S.bv != T) {
-      x.bv = S.bv;
+    let m = x.edge_after, y = h.edge_before;
+    if (m.bv === b && y.bv != b) {
+      m.bv = y.bv;
       continue;
     }
-    if (x.bv != T && S.bv === T) {
-      S.bv = x.bv;
+    if (m.bv != b && y.bv === b) {
+      y.bv = m.bv;
       continue;
     }
-    if (x.bv === T && S.bv === T && x != S || x.bv === Q && S.bv === W || x.bv === W && S.bv === Q) {
-      let g = x.next;
-      for (; g != S; )
-        g.bvStart = void 0, g.bvEnd = void 0, g.bv = void 0, g.setInclusion(t), g = g.next;
+    if (m.bv === b && y.bv === b && m != y || m.bv === Q && y.bv === W || m.bv === W && y.bv === Q) {
+      let p = m.next;
+      for (; p != y; )
+        p.bvStart = void 0, p.bvEnd = void 0, p.bv = void 0, p.setInclusion(t), p = p.next;
     }
-    if (x.bv === T && S.bv === T && x != S) {
-      let g = x.next, A;
-      for (; g != S; ) {
-        if (g.bv != T) {
-          if (A === void 0)
-            A = g.bv;
-          else if (g.bv != A)
-            throw Wt.UNRESOLVED_BOUNDARY_CONFLICT;
+    if (m.bv === b && y.bv === b && m != y) {
+      let p = m.next, L;
+      for (; p != y; ) {
+        if (p.bv != b) {
+          if (L === void 0)
+            L = p.bv;
+          else if (p.bv != L)
+            throw w.UNRESOLVED_BOUNDARY_CONFLICT;
         }
-        g = g.next;
+        p = p.next;
       }
-      A != null && (x.bv = A, S.bv = A);
+      L != null && (m.bv = L, y.bv = L);
       continue;
     }
-    if (x.bv === Q && S.bv === W || x.bv === W && S.bv === Q) {
-      let g = x;
-      for (; g != S; ) {
-        if (g.bvStart === x.bv && g.bvEnd === S.bv) {
-          let [A, qt] = g.shape.distanceTo(t);
-          if (A < 10 * i.DP_TOL) {
-            ct(g, qt.ps, e);
-            let J = e[e.length - 1];
-            if (J.is_vertex & _e)
-              J.edge_after = g, J.edge_before = g.prev, g.bvStart = T, g.bv = void 0, g.setInclusion(t);
-            else if (J.is_vertex & me)
-              J.edge_after = g.next, g.bvEnd = T, g.bv = void 0, g.setInclusion(t);
+    if (m.bv === Q && y.bv === W || m.bv === W && y.bv === Q) {
+      let p = m;
+      for (; p != y; ) {
+        if (p.bvStart === m.bv && p.bvEnd === y.bv) {
+          let [L, Zt] = p.shape.distanceTo(t);
+          if (L < 10 * i.DP_TOL) {
+            xt(p, Zt.ps, e);
+            let K = e[e.length - 1];
+            if (K.is_vertex & Ee)
+              K.edge_after = p, K.edge_before = p.prev, p.bvStart = b, p.bv = void 0, p.setInclusion(t);
+            else if (K.is_vertex & we)
+              K.edge_after = p.next, p.bvEnd = b, p.bv = void 0, p.setInclusion(t);
             else {
-              let k = t.addVertex(J.pt, g);
-              J.edge_before = k, J.edge_after = k.next, k.setInclusion(t), k.next.bvStart = T, k.next.bvEnd = void 0, k.next.bv = void 0, k.next.setInclusion(t);
+              let U = t.addVertex(K.pt, p);
+              K.edge_before = U, K.edge_after = U.next, U.setInclusion(t), U.next.bvStart = b, U.next.bvEnd = void 0, U.next.bv = void 0, U.next.setInclusion(t);
             }
-            let st = t.findEdgeByPoint(qt.pe);
-            ct(st, qt.pe, s);
-            let K = s[s.length - 1];
-            if (K.is_vertex & _e)
-              K.edge_after = st, K.edge_before = st.prev;
-            else if (K.is_vertex & me)
-              K.edge_after = st.next;
+            let ut = t.findEdgeByPoint(Zt.pe);
+            xt(ut, Zt.pe, r);
+            let J = r[r.length - 1];
+            if (J.is_vertex & Ee)
+              J.edge_after = ut, J.edge_before = ut.prev;
+            else if (J.is_vertex & we)
+              J.edge_after = ut.next;
             else {
-              let k = s.find((Ke) => Ke.edge_after === st), L = t.addVertex(K.pt, st);
-              K.edge_before = L, K.edge_after = L.next, k && (k.edge_after = L), L.bvStart = void 0, L.bvEnd = T, L.bv = void 0, L.setInclusion(r), L.next.bvStart = T, L.next.bvEnd = void 0, L.next.bv = void 0, L.next.setInclusion(r);
+              let U = r.find((pn) => pn.edge_after === ut), O = t.addVertex(J.pt, ut);
+              J.edge_before = O, J.edge_after = O.next, U && (U.edge_after = O), O.bvStart = void 0, O.bvEnd = b, O.bv = void 0, O.setInclusion(s), O.next.bvStart = b, O.next.bvEnd = void 0, O.next.bv = void 0, O.next.setInclusion(s);
             }
-            St(l), u = !0;
+            Nt(l), u = !0;
             break;
           }
         }
-        g = g.next;
+        p = p.next;
       }
       if (u)
         break;
-      throw Wt.UNRESOLVED_BOUNDARY_CONFLICT;
+      throw w.UNRESOLVED_BOUNDARY_CONFLICT;
     }
   }
   return u;
 }
-function Jt(r, t, e, n) {
+function se(s, t, e, n) {
   if (!e)
     return;
-  let s, l, o, a;
+  let r, l, o, a;
   for (let h = 0; h < e.length; h++) {
-    if (o = e[h], o.face !== s && (l = h, s = o.face), s.isEmpty())
+    if (o = e[h], o.face !== r && (l = h, r = o.face), r.isEmpty())
       continue;
-    let f = h, u = dt(e, h, s), p;
-    f + u < e.length && e[f + u].face === o.face ? p = f + u : p = l, a = e[p];
-    let _ = p, I = dt(e, _, s), v = o.edge_after, E = a.edge_before;
-    if (v.bv === Q && E.bv === Q && t === $t || v.bv === W && E.bv === W && t === bt || (v.bv === W || E.bv === W) && t === it && !n || (v.bv === Q || E.bv === Q) && t === it && n || v.bv === T && E.bv === T && v.overlap & wn && n || v.bv === T && E.bv === T && v.overlap & vn) {
-      r.removeChain(s, v, E);
-      for (let y = f; y < f + u; y++)
-        e[y].edge_after = void 0;
-      for (let y = _; y < _ + I; y++)
-        e[y].edge_before = void 0;
+    let f = h, u = Et(e, h, r), g;
+    f + u < e.length && e[f + u].face === o.face ? g = f + u : g = l, a = e[g];
+    let x = g, I = Et(e, x, r), T = o.edge_after, E = a.edge_before;
+    if (T.bv === Q && E.bv === Q && t === Wt || T.bv === W && E.bv === W && t === Ut || (T.bv === W || E.bv === W) && t === ot && !n || (T.bv === Q || E.bv === Q) && t === ot && n || T.bv === b && E.bv === b && T.overlap & Rn && n || T.bv === b && E.bv === b && T.overlap & Un) {
+      s.removeChain(r, T, E);
+      for (let S = f; S < f + u; S++)
+        e[S].edge_after = void 0;
+      for (let S = x; S < x + I; S++)
+        e[S].edge_before = void 0;
     }
     h += u - 1;
   }
 }
-function bn(r, t, e, n) {
-  for (let s of t.faces) {
-    for (let l of s)
-      r.edges.add(l);
+function Vn(s, t, e, n) {
+  for (let r of t.faces) {
+    for (let l of r)
+      s.edges.add(l);
     /*(op === BOOLEAN_UNION || op == BOOLEAN_SUBTRACT) &&*/
-    n.find((l) => l.face === s) === void 0 && r.addFace(s.first, s.last);
+    n.find((l) => l.face === r) === void 0 && s.addFace(r.first, r.last);
   }
 }
-function Pn(r, t, e) {
+function Hn(s, t, e) {
   if (e.int_points1.length !== 0)
     for (let n = 0; n < e.int_points1.length; n++) {
-      let s = e.int_points1[n], l = e.int_points2[n];
-      if (s.edge_before !== void 0 && s.edge_after === void 0 && l.edge_before === void 0 && l.edge_after !== void 0 && (s.edge_before.next = l.edge_after, l.edge_after.prev = s.edge_before, s.edge_after = l.edge_after, l.edge_before = s.edge_before), l.edge_before !== void 0 && l.edge_after === void 0 && s.edge_before === void 0 && s.edge_after !== void 0 && (l.edge_before.next = s.edge_after, s.edge_after.prev = l.edge_before, l.edge_after = s.edge_after, s.edge_before = l.edge_before), s.edge_before !== void 0 && s.edge_after === void 0)
+      let r = e.int_points1[n], l = e.int_points2[n];
+      if (r.edge_before !== void 0 && r.edge_after === void 0 && l.edge_before === void 0 && l.edge_after !== void 0 && (r.edge_before.next = l.edge_after, l.edge_after.prev = r.edge_before, r.edge_after = l.edge_after, l.edge_before = r.edge_before), l.edge_before !== void 0 && l.edge_after === void 0 && r.edge_before === void 0 && r.edge_after !== void 0 && (l.edge_before.next = r.edge_after, r.edge_after.prev = l.edge_before, l.edge_after = r.edge_after, r.edge_before = l.edge_before), r.edge_before !== void 0 && r.edge_after === void 0)
         for (let o of e.int_points1_sorted)
-          o !== s && o.edge_before === void 0 && o.edge_after !== void 0 && o.pt.equalTo(s.pt) && (s.edge_before.next = o.edge_after, o.edge_after.prev = s.edge_before, s.edge_after = o.edge_after, o.edge_before = s.edge_before);
+          o !== r && o.edge_before === void 0 && o.edge_after !== void 0 && o.pt.equalTo(r.pt) && (r.edge_before.next = o.edge_after, o.edge_after.prev = r.edge_before, r.edge_after = o.edge_after, o.edge_before = r.edge_before);
       if (l.edge_before !== void 0 && l.edge_after === void 0)
         for (let o of e.int_points2_sorted)
           o !== l && o.edge_before === void 0 && o.edge_after !== void 0 && o.pt.equalTo(l.pt) && (l.edge_before.next = o.edge_after, o.edge_after.prev = l.edge_before, l.edge_after = o.edge_after, o.edge_before = l.edge_before);
     }
 }
-function Kt(r, t) {
+function oe(s, t) {
   for (let e of t)
-    r.faces.delete(e.face), e.face = void 0, e.edge_before && (e.edge_before.face = void 0), e.edge_after && (e.edge_after.face = void 0);
+    s.faces.delete(e.face), e.face = void 0, e.edge_before && (e.edge_before.face = void 0), e.edge_after && (e.edge_after.face = void 0);
 }
-function te(r, t, e) {
+function le(s, t, e) {
   for (let n of t) {
     if (n.edge_before === void 0 || n.edge_after === void 0 || n.face || n.edge_after.face || n.edge_before.face)
       continue;
-    let s = n.edge_after, l = n.edge_before;
-    ie.testInfiniteLoop(s);
-    let o = r.addFace(s, l);
+    let r = n.edge_after, l = n.edge_before;
+    try {
+      ue.testInfiniteLoop(r);
+    } catch {
+      throw w.CANNOT_COMPLETE_BOOLEAN_OPERATION;
+    }
+    let o = s.addFace(r, l);
     for (let a of t)
       a.edge_before && a.edge_after && a.edge_before.face === o && a.edge_after.face === o && (a.face = o);
     for (let a of e)
       a.edge_before && a.edge_after && a.edge_before.face === o && a.edge_after.face === o && (a.face = o);
   }
 }
-function we(r, t, e, n) {
-  for (let s of t) {
-    let l = s.first.bv;
-    (e === $t && l === Q || e === it && l === Q && n || e === it && l === W && !n || e === bt && l === W) && r.deleteFace(s);
+function Se(s, t, e, n) {
+  for (let r of t) {
+    let l = r.first.bv;
+    (e === Wt && l === Q || e === ot && l === Q && n || e === ot && l === W && !n || e === Ut && l === W) && s.deleteFace(r);
   }
 }
-var An = /* @__PURE__ */ Object.freeze({
-  BOOLEAN_UNION: $t,
-  BOOLEAN_INTERSECT: bt,
-  BOOLEAN_SUBTRACT: it,
-  unify: yn,
-  subtract: Xt,
-  intersect: $e,
-  innerClip: Be,
-  outerClip: Zt,
-  calculateIntersections: Fe,
-  removeNotRelevantChains: Jt,
-  removeOldFaces: Kt,
-  restoreFaces: te
+var $n = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  BOOLEAN_INTERSECT: Ut,
+  BOOLEAN_SUBTRACT: ot,
+  BOOLEAN_UNION: Wt,
+  calculateIntersections: ze,
+  innerClip: De,
+  intersect: Ge,
+  outerClip: re,
+  removeNotRelevantChains: se,
+  removeOldFaces: oe,
+  restoreFaces: le,
+  subtract: ie,
+  unify: kn
 });
-const Ln = RegExp("T.F..FFF.|T.F...F.."), On = RegExp("T........|.T.......|...T.....|....T...."), Nn = RegExp("FT.......|F..T.....|F...T...."), Cn = RegExp("T.F..F..."), Rn = RegExp("T.F..F...|.TF..F...|..FT.F...|..F.TF...");
-class gt {
+const qn = RegExp("T.F..FFF.|T.F...F.."), Gn = RegExp("T........|.T.......|...T.....|....T...."), Dn = RegExp("FT.......|F..T.....|F...T...."), zn = RegExp("T.F..F..."), Qn = RegExp("T.F..F...|.TF..F...|..FT.F...|..F.TF...");
+class Tt {
   /**
    * Create new instance of DE9IM matrix
    */
@@ -710,249 +727,303 @@ class gt {
     return this.m.map((t) => t instanceof Array && t.length > 0 ? "T" : t instanceof Array && t.length === 0 ? "F" : "*").join("");
   }
   equal() {
-    return Ln.test(this.toString());
+    return qn.test(this.toString());
   }
   intersect() {
-    return On.test(this.toString());
+    return Gn.test(this.toString());
   }
   touch() {
-    return Nn.test(this.toString());
+    return Dn.test(this.toString());
   }
   inside() {
-    return Cn.test(this.toString());
+    return zn.test(this.toString());
   }
   covered() {
-    return Rn.test(this.toString());
+    return Qn.test(this.toString());
   }
 }
-function Bt(r, t) {
-  let e = [], [n, s, l] = r.standard, [o, a, h] = t.standard, f = n * a - s * o, u = l * a - s * h, p = n * h - l * o;
+function St(s, t) {
+  let e = [], [n, r, l] = s.standard, [o, a, h] = t.standard, f = n * a - r * o, u = l * a - r * h, g = n * h - l * o;
   if (!i.Utils.EQ_0(f)) {
-    let _, I;
-    s === 0 ? (_ = l / n, I = p / f) : a === 0 ? (_ = h / o, I = p / f) : n === 0 ? (_ = u / f, I = l / s) : o === 0 ? (_ = u / f, I = h / a) : (_ = u / f, I = p / f), e.push(new i.Point(_, I));
+    let x, I;
+    r === 0 ? (x = l / n, I = g / f) : a === 0 ? (x = h / o, I = g / f) : n === 0 ? (x = u / f, I = l / r) : o === 0 ? (x = u / f, I = h / a) : (x = u / f, I = g / f), e.push(new i.Point(x, I));
   }
   return e;
 }
-function _t(r, t) {
-  let e = [], n = t.pc.projectionOn(r), s = t.pc.distanceTo(n)[0];
-  if (i.Utils.EQ(s, t.r))
+function at(s, t) {
+  let e = [], n = t.pc.projectionOn(s), r = t.pc.distanceTo(n)[0];
+  if (i.Utils.EQ(r, t.r))
     e.push(n);
-  else if (i.Utils.LT(s, t.r)) {
-    let l = Math.sqrt(t.r * t.r - s * s), o, a;
-    o = r.norm.rotate90CCW().multiply(l), a = n.translate(o), e.push(a), o = r.norm.rotate90CW().multiply(l), a = n.translate(o), e.push(a);
+  else if (i.Utils.LT(r, t.r)) {
+    let l = Math.sqrt(t.r * t.r - r * r), o, a;
+    o = s.norm.rotate90CCW().multiply(l), a = n.translate(o), e.push(a), o = s.norm.rotate90CW().multiply(l), a = n.translate(o), e.push(a);
   }
   return e;
 }
-function It(r, t) {
+function vt(s, t) {
   let e = [];
   for (let n of t.toSegments()) {
-    let s = Ft(n, r);
-    for (let l of s)
-      De(l, e) || e.push(l);
+    let r = Mt(n, s);
+    for (let l of r)
+      Ze(l, e) || e.push(l);
   }
   return e;
 }
-function se(r, t) {
+function Yt(s, t) {
   let e = [];
-  if (It(r, t.box).length === 0)
+  if (vt(s, t.box).length === 0)
     return e;
-  let n = new i.Circle(t.pc, t.r), s = _t(r, n);
-  for (let l of s)
+  let n = new i.Circle(t.pc, t.r), r = at(s, n);
+  for (let l of r)
     l.on(t) && e.push(l);
   return e;
 }
-function Ft(r, t) {
+function Mt(s, t) {
   let e = [];
-  if (r.ps.on(t) && e.push(r.ps), r.pe.on(t) && !r.isZeroLength() && e.push(r.pe), e.length > 0 || r.isZeroLength() || r.ps.leftTo(t) && r.pe.leftTo(t) || !r.ps.leftTo(t) && !r.pe.leftTo(t))
+  if (s.ps.on(t) && e.push(s.ps), s.pe.on(t) && !s.isZeroLength() && e.push(s.pe), e.length > 0 || s.isZeroLength() || s.ps.leftTo(t) && s.pe.leftTo(t) || !s.ps.leftTo(t) && !s.pe.leftTo(t))
     return e;
-  let n = new i.Line(r.ps, r.pe);
-  return Bt(n, t);
+  let n = new i.Line(s.ps, s.pe);
+  return St(n, t);
 }
-function At(r, t) {
+function Bt(s, t) {
   let e = [];
-  if (r.box.not_intersect(t.box))
+  if (s.box.not_intersect(t.box))
     return e;
-  if (r.isZeroLength())
-    return r.ps.on(t) && e.push(r.ps), e;
+  if (s.isZeroLength())
+    return s.ps.on(t) && e.push(s.ps), e;
   if (t.isZeroLength())
-    return t.ps.on(r) && e.push(t.ps), e;
-  let n = new i.Line(r.ps, r.pe), s = new i.Line(t.ps, t.pe);
-  if (n.incidentTo(s))
-    r.ps.on(t) && e.push(r.ps), r.pe.on(t) && e.push(r.pe), t.ps.on(r) && !t.ps.equalTo(r.ps) && !t.ps.equalTo(r.pe) && e.push(t.ps), t.pe.on(r) && !t.pe.equalTo(r.ps) && !t.pe.equalTo(r.pe) && e.push(t.pe);
+    return t.ps.on(s) && e.push(t.ps), e;
+  let n = new i.Line(s.ps, s.pe), r = new i.Line(t.ps, t.pe);
+  if (n.incidentTo(r))
+    s.ps.on(t) && e.push(s.ps), s.pe.on(t) && e.push(s.pe), t.ps.on(s) && !t.ps.equalTo(s.ps) && !t.ps.equalTo(s.pe) && e.push(t.ps), t.pe.on(s) && !t.pe.equalTo(s.ps) && !t.pe.equalTo(s.pe) && e.push(t.pe);
   else {
-    let l = Bt(n, s);
-    l.length > 0 && l[0].on(r) && l[0].on(t) && e.push(l[0]);
+    let l = St(n, r);
+    l.length > 0 && ye(l[0], s) && ye(l[0], t) && e.push(l[0]);
   }
   return e;
 }
-function Vt(r, t) {
+function ye(s, t) {
+  const e = t.box;
+  return i.Utils.LE(s.x, e.xmax) && i.Utils.GE(s.x, e.xmin) && i.Utils.LE(s.y, e.ymax) && i.Utils.GE(s.y, e.ymin);
+}
+function jt(s, t) {
   let e = [];
-  if (r.box.not_intersect(t.box))
+  if (s.box.not_intersect(t.box))
     return e;
-  if (r.isZeroLength()) {
-    let [l, o] = r.ps.distanceTo(t.pc);
-    return i.Utils.EQ(l, t.r) && e.push(r.ps), e;
+  if (s.isZeroLength()) {
+    let [l, o] = s.ps.distanceTo(t.pc);
+    return i.Utils.EQ(l, t.r) && e.push(s.ps), e;
   }
-  let n = new i.Line(r.ps, r.pe), s = _t(n, t);
-  for (let l of s)
-    l.on(r) && e.push(l);
+  let n = new i.Line(s.ps, s.pe), r = at(n, t);
+  for (let l of r)
+    l.on(s) && e.push(l);
   return e;
 }
-function rt(r, t) {
+function lt(s, t) {
   let e = [];
-  if (r.box.not_intersect(t.box))
+  if (s.box.not_intersect(t.box))
     return e;
-  if (r.isZeroLength())
-    return r.ps.on(t) && e.push(r.ps), e;
-  let n = new i.Line(r.ps, r.pe), s = new i.Circle(t.pc, t.r), l = _t(n, s);
+  if (s.isZeroLength())
+    return s.ps.on(t) && e.push(s.ps), e;
+  let n = new i.Line(s.ps, s.pe), r = new i.Circle(t.pc, t.r), l = at(n, r);
   for (let o of l)
-    o.on(r) && o.on(t) && e.push(o);
+    o.on(s) && o.on(t) && e.push(o);
   return e;
 }
-function kn(r, t) {
+function Wn(s, t) {
   let e = [];
   for (let n of t.toSegments()) {
-    let s = At(n, r);
-    for (let l of s)
+    let r = Bt(n, s);
+    for (let l of r)
       e.push(l);
   }
   return e;
 }
-function He(r, t) {
+function We(s, t) {
   let e = [];
-  if (r.box.not_intersect(t.box))
+  if (s.box.not_intersect(t.box))
     return e;
-  let n = new i.Vector(r.pc, t.pc), s = r.r, l = t.r;
-  if (i.Utils.EQ_0(s) || i.Utils.EQ_0(l))
+  let n = new i.Vector(s.pc, t.pc), r = s.r, l = t.r;
+  if (i.Utils.EQ_0(r) || i.Utils.EQ_0(l))
     return e;
-  if (i.Utils.EQ_0(n.x) && i.Utils.EQ_0(n.y) && i.Utils.EQ(s, l))
-    return e.push(r.pc.translate(-s, 0)), e;
-  let o = r.pc.distanceTo(t.pc)[0];
-  if (i.Utils.GT(o, s + l) || i.Utils.LT(o, Math.abs(s - l)))
+  if (i.Utils.EQ_0(n.x) && i.Utils.EQ_0(n.y) && i.Utils.EQ(r, l))
+    return e.push(s.pc.translate(-r, 0)), e;
+  let o = s.pc.distanceTo(t.pc)[0];
+  if (i.Utils.GT(o, r + l) || i.Utils.LT(o, Math.abs(r - l)))
     return e;
   n.x /= o, n.y /= o;
   let a;
-  if (i.Utils.EQ(o, s + l) || i.Utils.EQ(o, Math.abs(s - l)))
-    return a = r.pc.translate(s * n.x, s * n.y), e.push(a), e;
-  let h = s * s / (2 * o) - l * l / (2 * o) + o / 2, f = r.pc.translate(h * n.x, h * n.y), u = Math.sqrt(s * s - h * h);
+  if (i.Utils.EQ(o, r + l) || i.Utils.EQ(o, Math.abs(r - l)))
+    return a = s.pc.translate(r * n.x, r * n.y), e.push(a), e;
+  let h = r * r / (2 * o) - l * l / (2 * o) + o / 2, f = s.pc.translate(h * n.x, h * n.y), u = Math.sqrt(r * r - h * h);
   return a = f.translate(n.rotate90CCW().multiply(u)), e.push(a), a = f.translate(n.rotate90CW().multiply(u)), e.push(a), e;
 }
-function Un(r, t) {
+function Yn(s, t) {
   let e = [];
   for (let n of t.toSegments()) {
-    let s = Vt(n, r);
-    for (let l of s)
+    let r = jt(n, s);
+    for (let l of r)
       e.push(l);
   }
   return e;
 }
-function oe(r, t) {
-  var e = [];
-  if (r.box.not_intersect(t.box))
+function ce(s, t) {
+  let e = [];
+  if (s.box.not_intersect(t.box))
     return e;
-  if (r.pc.equalTo(t.pc) && i.Utils.EQ(r.r, t.r)) {
+  if (s.pc.equalTo(t.pc) && i.Utils.EQ(s.r, t.r)) {
     let o;
-    return o = r.start, o.on(t) && e.push(o), o = r.end, o.on(t) && e.push(o), o = t.start, o.on(r) && e.push(o), o = t.end, o.on(r) && e.push(o), e;
+    return o = s.start, o.on(t) && e.push(o), o = s.end, o.on(t) && e.push(o), o = t.start, o.on(s) && e.push(o), o = t.end, o.on(s) && e.push(o), e;
   }
-  let n = new i.Circle(r.pc, r.r), s = new i.Circle(t.pc, t.r), l = n.intersect(s);
+  let n = new i.Circle(s.pc, s.r), r = new i.Circle(t.pc, t.r), l = n.intersect(r);
   for (let o of l)
-    o.on(r) && o.on(t) && e.push(o);
+    o.on(s) && o.on(t) && e.push(o);
   return e;
 }
-function le(r, t) {
+function de(s, t) {
   let e = [];
-  if (r.box.not_intersect(t.box))
+  if (s.box.not_intersect(t.box))
     return e;
-  if (t.pc.equalTo(r.pc) && i.Utils.EQ(t.r, r.r))
-    return e.push(r.start), e.push(r.end), e;
-  let n = t, s = new i.Circle(r.pc, r.r), l = He(n, s);
+  if (t.pc.equalTo(s.pc) && i.Utils.EQ(t.r, s.r))
+    return e.push(s.start), e.push(s.end), e;
+  let n = t, r = new i.Circle(s.pc, s.r), l = We(n, r);
   for (let o of l)
-    o.on(r) && e.push(o);
+    o.on(s) && e.push(o);
   return e;
 }
-function Mn(r, t) {
+function jn(s, t) {
   let e = [];
   for (let n of t.toSegments()) {
-    let s = rt(n, r);
-    for (let l of s)
+    let r = lt(n, s);
+    for (let l of r)
       e.push(l);
   }
   return e;
 }
-function $n(r, t) {
-  return r.isSegment() ? At(r.shape, t) : rt(t, r.shape);
+function Zn(s, t) {
+  return s.isSegment() ? Bt(s.shape, t) : lt(t, s.shape);
 }
-function Bn(r, t) {
-  return r.isSegment() ? rt(r.shape, t) : oe(r.shape, t);
+function Xn(s, t) {
+  return s.isSegment() ? lt(s.shape, t) : ce(s.shape, t);
 }
-function qe(r, t) {
-  return r.isSegment() ? Ft(r.shape, t) : se(t, r.shape);
+function Ye(s, t) {
+  return s.isSegment() ? Mt(s.shape, t) : Yt(t, s.shape);
 }
-function Fn(r, t) {
-  return r.isSegment() ? Vt(r.shape, t) : le(r.shape, t);
+function Kn(s, t) {
+  return s.isSegment() ? jt(s.shape, t) : de(s.shape, t);
 }
-function ae(r, t) {
+function ge(s, t) {
   let e = [];
   for (let n of t.edges)
-    for (let s of $n(n, r))
-      e.push(s);
+    for (let r of Zn(n, s))
+      e.push(r);
   return e;
 }
-function fe(r, t) {
+function pe(s, t) {
   let e = [];
   for (let n of t.edges)
-    for (let s of Bn(n, r))
-      e.push(s);
+    for (let r of Xn(n, s))
+      e.push(r);
   return e;
 }
-function Ht(r, t) {
+function Ft(s, t) {
   let e = [];
   if (t.isEmpty())
     return e;
   for (let n of t.edges)
-    for (let s of qe(n, r))
-      De(s, e) || e.push(s);
-  return r.sortPoints(e);
+    for (let r of Ye(n, s))
+      Ze(r, e) || e.push(r);
+  return s.sortPoints(e);
 }
-function Ge(r, t) {
+function je(s, t) {
   let e = [];
   if (t.isEmpty())
     return e;
   for (let n of t.edges)
-    for (let s of Fn(n, r))
-      e.push(s);
+    for (let r of Kn(n, s))
+      e.push(r);
   return e;
 }
-function Vn(r, t) {
-  const e = r.shape, n = t.shape;
-  return r.isSegment() ? t.isSegment() ? At(e, n) : rt(e, n) : t.isSegment() ? rt(n, e) : oe(e, n);
+function Jn(s, t) {
+  const e = s.shape, n = t.shape;
+  return s.isSegment() ? t.isSegment() ? Bt(e, n) : lt(e, n) : t.isSegment() ? lt(n, e) : ce(e, n);
 }
-function Hn(r, t) {
+function ti(s, t) {
   let e = [];
-  if (t.isEmpty() || r.shape.box.not_intersect(t.box))
+  if (t.isEmpty() || s.shape.box.not_intersect(t.box))
     return e;
-  let n = t.edges.search(r.shape.box);
-  for (let s of n)
-    for (let l of Vn(r, s))
+  let n = t.edges.search(s.shape.box);
+  for (let r of n)
+    for (let l of Jn(s, r))
       e.push(l);
   return e;
 }
-function qn(r, t) {
+function ei(s, t) {
   let e = [];
-  if (r.isEmpty() || t.isEmpty() || r.box.not_intersect(t.box))
+  if (s.isEmpty() || t.isEmpty() || s.box.not_intersect(t.box))
     return e;
-  for (let n of r.edges)
-    for (let s of Hn(n, t))
-      e.push(s);
+  for (let n of s.edges)
+    for (let r of ti(n, t))
+      e.push(r);
   return e;
 }
-function Gn(r, t) {
-  return r instanceof i.Line ? Ht(r, t) : r instanceof i.Segment ? ae(r, t) : r instanceof i.Arc ? fe(r, t) : [];
+function ni(s, t) {
+  return s instanceof i.Line ? Ft(s, t) : s instanceof i.Segment ? ge(s, t) : s instanceof i.Arc ? pe(s, t) : [];
 }
-function De(r, t) {
-  return t.some((e) => e.equalTo(r));
+function Ze(s, t) {
+  return t.some((e) => e.equalTo(s));
 }
-class R extends ie {
+function nt(s) {
+  return new i.Line(s.start, s.norm);
+}
+function Xe(s, t) {
+  return Mt(t, nt(s)).filter((e) => s.contains(e));
+}
+function Ke(s, t) {
+  return Yt(nt(s), t).filter((e) => s.contains(e));
+}
+function Je(s, t) {
+  return at(nt(s), t).filter((e) => s.contains(e));
+}
+function ii(s, t) {
+  return vt(nt(s), t).filter((e) => s.contains(e));
+}
+function tn(s, t) {
+  return St(nt(s), t).filter((e) => s.contains(e));
+}
+function ri(s, t) {
+  return St(nt(s), nt(t)).filter((e) => s.contains(e)).filter((e) => t.contains(e));
+}
+function en(s, t) {
+  return Ft(nt(s), t).filter((e) => s.contains(e));
+}
+const Ie = {
+  stroke: "black"
+};
+class si {
+  constructor(t = Ie) {
+    for (const e in t)
+      this[e] = t[e];
+    this.stroke = t.stroke ?? Ie.stroke;
+  }
+  toAttributesString() {
+    return Object.keys(this).reduce(
+      (t, e) => t + (this[e] !== void 0 ? this.toAttrString(e, this[e]) : ""),
+      ""
+    );
+  }
+  toAttrString(t, e) {
+    const n = t === "className" ? "class" : this.convertCamelToKebabCase(t);
+    return e === null ? `${n} ` : `${n}="${e.toString()}" `;
+  }
+  convertCamelToKebabCase(t) {
+    return t.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).join("-").toLowerCase();
+  }
+}
+function ft(s) {
+  return new si(s).toAttributesString();
+}
+class R extends ue {
   constructor(...t) {
     if (super(), t.length !== 0 && t.length == 1 && t[0] instanceof Array) {
       let e = t[0];
@@ -960,8 +1031,8 @@ class R extends ie {
         return;
       e.every((n) => n instanceof i.Segment || n instanceof i.Arc || n instanceof i.Ray || n instanceof i.Line);
       for (let n of e) {
-        let s = new i.Edge(n);
-        this.append(s);
+        let r = new i.Edge(n);
+        this.append(r);
       }
     }
   }
@@ -1006,8 +1077,8 @@ class R extends ie {
       return e.prev;
     if (n[1] === null)
       return e;
-    let s = new i.Edge(n[0]), l = e.prev;
-    return this.insert(s, l), e.shape = n[1], s;
+    let r = new i.Edge(n[0]), l = e.prev;
+    return this.insert(r, l), e.shape = n[1], r;
   }
   /**
    * Split edges of multiline with intersection points and return mutated multiline
@@ -1046,7 +1117,7 @@ class R extends ie {
   /**
    * Return new multiline rotated by given angle around given point
    * If point omitted, rotate around origin (0,0)
-   * Positive value of angle defines rotation counter clockwise, negative - clockwise
+   * Positive value of angle defines rotation counterclockwise, negative - clockwise
    * @param {number} angle - rotation angle in radians
    * @param {Point} center - rotation center, default is (0,0)
    * @returns {Multiline} - new rotated polygon
@@ -1080,37 +1151,35 @@ class R extends ie {
   }
   /**
    * Return string to draw multiline in svg
-   * @param attrs  - an object with attributes for svg path element,
-   * like "stroke", "strokeWidth", "fill", "fillRule", "fillOpacity"
-   * Defaults are stroke:"black", strokeWidth:"1", fill:"lightcyan", fillRule:"evenodd", fillOpacity: "1"
+   * @param attrs  - an object with attributes for svg path element
    * TODO: support semi-infinite Ray and infinite Line
    * @returns {string}
    */
   svg(t = {}) {
-    let { stroke: e, strokeWidth: n, fill: s, fillRule: l, fillOpacity: o, id: a, className: h } = t, f = a && a.length > 0 ? `id="${a}"` : "", u = h && h.length > 0 ? `class="${h}"` : "", p = `
-<path stroke="${e || "black"}" stroke-width="${n || 1}" fill="${s || "none"}" fill-opacity="${o || 1}" ${f} ${u} d="`;
-    p += `
+    let e = `
+<path ${ft({ fill: "none", ...t })} d="`;
+    e += `
 M${this.first.start.x},${this.first.start.y}`;
-    for (let _ of this)
-      p += _.svg();
-    return p += `" >
-</path>`, p;
+    for (let n of this)
+      e += n.svg();
+    return e += `" >
+</path>`, e;
   }
 }
 i.Multiline = R;
-const Dn = (...r) => new i.Multiline(...r);
-i.multiline = Dn;
-function wt(r, t) {
-  let e, n = new i.Ray(t), s = new i.Line(n.pt, n.norm);
+const oi = (...s) => new i.Multiline(...s);
+i.multiline = oi;
+function At(s, t) {
+  let e, n = new i.Ray(t), r = new i.Line(n.pt, n.norm);
   const l = new i.Box(
     n.box.xmin - i.DP_TOL,
     n.box.ymin - i.DP_TOL,
     n.box.xmax,
     n.box.ymax + i.DP_TOL
   );
-  if (r.box.not_intersect(l))
+  if (s.box.not_intersect(l))
     return i.OUTSIDE;
-  let o = r.edges.search(l);
+  let o = s.edges.search(l);
   if (o.length == 0)
     return i.OUTSIDE;
   for (let f of o)
@@ -1126,122 +1195,122 @@ function wt(r, t) {
         edge: f
       });
     }
-  a.sort((f, u) => Me(f.pt.x, u.pt.x) ? -1 : Ue(f.pt.x, u.pt.x) ? 1 : 0);
+  a.sort((f, u) => qe(f.pt.x, u.pt.x) ? -1 : $e(f.pt.x, u.pt.x) ? 1 : 0);
   let h = 0;
   for (let f = 0; f < a.length; f++) {
     let u = a[f];
     if (u.pt.equalTo(u.edge.shape.start)) {
       if (f > 0 && u.pt.equalTo(a[f - 1].pt) && u.edge.prev === a[f - 1].edge)
         continue;
-      let p = u.edge.prev;
-      for (; Qt(p.length); )
-        p = p.prev;
-      let _ = p.shape.tangentInEnd(), I = u.pt.translate(_), v = u.edge.shape.tangentInStart(), E = u.pt.translate(v), y = I.leftTo(s), x = E.leftTo(s);
-      (y && !x || !y && x) && h++;
+      let g = u.edge.prev;
+      for (; te(g.length); )
+        g = g.prev;
+      let x = g.shape.tangentInEnd(), I = u.pt.translate(x), T = u.edge.shape.tangentInStart(), E = u.pt.translate(T), S = I.leftTo(r), m = E.leftTo(r);
+      (S && !m || !S && m) && h++;
     } else if (u.pt.equalTo(u.edge.shape.end)) {
       if (f > 0 && u.pt.equalTo(a[f - 1].pt) && u.edge.next === a[f - 1].edge)
         continue;
-      let p = u.edge.next;
-      for (; Qt(p.length); )
-        p = p.next;
-      let _ = p.shape.tangentInStart(), I = u.pt.translate(_), v = u.edge.shape.tangentInEnd(), E = u.pt.translate(v), y = I.leftTo(s), x = E.leftTo(s);
-      (y && !x || !y && x) && h++;
+      let g = u.edge.next;
+      for (; te(g.length); )
+        g = g.next;
+      let x = g.shape.tangentInStart(), I = u.pt.translate(x), T = u.edge.shape.tangentInEnd(), E = u.pt.translate(T), S = I.leftTo(r), m = E.leftTo(r);
+      (S && !m || !S && m) && h++;
     } else if (u.edge.shape instanceof i.Segment)
       h++;
     else {
-      let p = u.edge.shape.box;
-      nt(u.pt.y, p.ymin) || nt(u.pt.y, p.ymax) || h++;
+      let g = u.edge.shape.box;
+      st(u.pt.y, g.ymin) || st(u.pt.y, g.ymax) || h++;
     }
   }
-  return e = h % 2 == 1 ? xt : Ce, e;
+  return e = h % 2 == 1 ? bt : Fe, e;
 }
-function zn(r, t) {
-  return mt(r, t).equal();
+function li(s, t) {
+  return yt(s, t).equal();
 }
-function ze(r, t) {
-  return mt(r, t).intersect();
+function nn(s, t) {
+  return yt(s, t).intersect();
 }
-function Qn(r, t) {
-  return mt(r, t).touch();
+function ai(s, t) {
+  return yt(s, t).touch();
 }
-function Wn(r, t) {
-  return !ze(r, t);
+function fi(s, t) {
+  return !nn(s, t);
 }
-function Qe(r, t) {
-  return mt(r, t).inside();
+function rn(s, t) {
+  return yt(s, t).inside();
 }
-function We(r, t) {
-  return mt(r, t).covered();
+function sn(s, t) {
+  return yt(s, t).covered();
 }
-function Yn(r, t) {
-  return Qe(t, r);
+function ui(s, t) {
+  return rn(t, s);
 }
-function Ye(r, t) {
-  return We(t, r);
+function on(s, t) {
+  return sn(t, s);
 }
-function mt(r, t) {
-  if (r instanceof i.Line && t instanceof i.Line)
-    return jn(r, t);
-  if (r instanceof i.Line && t instanceof i.Circle)
-    return Xn(r, t);
-  if (r instanceof i.Line && t instanceof i.Box)
-    return Zn(r, t);
-  if (r instanceof i.Line && t instanceof i.Polygon)
-    return Jn(r, t);
-  if ((r instanceof i.Segment || r instanceof i.Arc) && t instanceof i.Polygon)
-    return ve(r, t);
-  if ((r instanceof i.Segment || r instanceof i.Arc) && (t instanceof i.Circle || t instanceof i.Box))
-    return ve(r, new i.Polygon(t));
-  if (r instanceof i.Polygon && t instanceof i.Polygon)
-    return Lt(r, t);
-  if ((r instanceof i.Circle || r instanceof i.Box) && (t instanceof i.Circle || t instanceof i.Box))
-    return Lt(new i.Polygon(r), new i.Polygon(t));
-  if ((r instanceof i.Circle || r instanceof i.Box) && t instanceof i.Polygon)
-    return Lt(new i.Polygon(r), t);
-  if (r instanceof i.Polygon && (t instanceof i.Circle || t instanceof i.Box))
-    return Lt(r, new i.Polygon(t));
+function yt(s, t) {
+  if (s instanceof i.Line && t instanceof i.Line)
+    return hi(s, t);
+  if (s instanceof i.Line && t instanceof i.Circle)
+    return ci(s, t);
+  if (s instanceof i.Line && t instanceof i.Box)
+    return di(s, t);
+  if (s instanceof i.Line && t instanceof i.Polygon)
+    return gi(s, t);
+  if ((s instanceof i.Segment || s instanceof i.Arc) && t instanceof i.Polygon)
+    return be(s, t);
+  if ((s instanceof i.Segment || s instanceof i.Arc) && (t instanceof i.Circle || t instanceof i.Box))
+    return be(s, new i.Polygon(t));
+  if (s instanceof i.Polygon && t instanceof i.Polygon)
+    return Vt(s, t);
+  if ((s instanceof i.Circle || s instanceof i.Box) && (t instanceof i.Circle || t instanceof i.Box))
+    return Vt(new i.Polygon(s), new i.Polygon(t));
+  if ((s instanceof i.Circle || s instanceof i.Box) && t instanceof i.Polygon)
+    return Vt(new i.Polygon(s), t);
+  if (s instanceof i.Polygon && (t instanceof i.Circle || t instanceof i.Box))
+    return Vt(s, new i.Polygon(t));
 }
-function jn(r, t) {
-  let e = new gt(), n = Bt(r, t);
-  return n.length === 0 ? r.contains(t.pt) && t.contains(r.pt) ? (e.I2I = [r], e.I2E = [], e.E2I = []) : (e.I2I = [], e.I2E = [r], e.E2I = [t]) : (e.I2I = n, e.I2E = r.split(n), e.E2I = t.split(n)), e;
+function hi(s, t) {
+  let e = new Tt(), n = St(s, t);
+  return n.length === 0 ? s.contains(t.pt) && t.contains(s.pt) ? (e.I2I = [s], e.I2E = [], e.E2I = []) : (e.I2I = [], e.I2E = [s], e.E2I = [t]) : (e.I2I = n, e.I2E = s.split(n), e.E2I = t.split(n)), e;
 }
-function Xn(r, t) {
-  let e = new gt(), n = _t(r, t);
+function ci(s, t) {
+  let e = new Tt(), n = at(s, t);
   if (n.length === 0)
-    e.I2I = [], e.I2B = [], e.I2E = [r], e.E2I = [t];
+    e.I2I = [], e.I2B = [], e.I2E = [s], e.E2I = [t];
   else if (n.length === 1)
-    e.I2I = [], e.I2B = n, e.I2E = r.split(n), e.E2I = [t];
+    e.I2I = [], e.I2B = n, e.I2E = s.split(n), e.E2I = [t];
   else {
-    let s = new R([r]), l = r.sortPoints(n);
-    s.split(l);
-    let o = s.toShapes();
-    e.I2I = [o[1]], e.I2B = l, e.I2E = [o[0], o[2]], e.E2I = new i.Polygon([t.toArc()]).cut(s);
+    let r = new R([s]), l = s.sortPoints(n);
+    r.split(l);
+    let o = r.toShapes();
+    e.I2I = [o[1]], e.I2B = l, e.I2E = [o[0], o[2]], e.E2I = new i.Polygon([t.toArc()]).cut(r);
   }
   return e;
 }
-function Zn(r, t) {
-  let e = new gt(), n = It(r, t);
+function di(s, t) {
+  let e = new Tt(), n = vt(s, t);
   if (n.length === 0)
-    e.I2I = [], e.I2B = [], e.I2E = [r], e.E2I = [t];
+    e.I2I = [], e.I2B = [], e.I2E = [s], e.E2I = [t];
   else if (n.length === 1)
-    e.I2I = [], e.I2B = n, e.I2E = r.split(n), e.E2I = [t];
+    e.I2I = [], e.I2B = n, e.I2E = s.split(n), e.E2I = [t];
   else {
-    let s = new R([r]), l = r.sortPoints(n);
-    s.split(l);
-    let o = s.toShapes();
-    t.toSegments().some((a) => a.contains(n[0]) && a.contains(n[1])) ? (e.I2I = [], e.I2B = [o[1]], e.I2E = [o[0], o[2]], e.E2I = [t]) : (e.I2I = [o[1]], e.I2B = l, e.I2E = [o[0], o[2]], e.E2I = new i.Polygon(t.toSegments()).cut(s));
+    let r = new R([s]), l = s.sortPoints(n);
+    r.split(l);
+    let o = r.toShapes();
+    t.toSegments().some((a) => a.contains(n[0]) && a.contains(n[1])) ? (e.I2I = [], e.I2B = [o[1]], e.I2E = [o[0], o[2]], e.E2I = [t]) : (e.I2I = [o[1]], e.I2B = l, e.I2E = [o[0], o[2]], e.E2I = new i.Polygon(t.toSegments()).cut(r));
   }
   return e;
 }
-function Jn(r, t) {
-  let e = new gt(), n = Ht(r, t), s = new R([r]), l = n.length > 0 ? n.slice() : r.sortPoints(n);
-  return s.split(l), [...s].forEach((o) => o.setInclusion(t)), e.I2I = [...s].filter((o) => o.bv === i.INSIDE).map((o) => o.shape), e.I2B = [...s].slice(1).map((o) => o.bv === i.BOUNDARY ? o.shape : o.shape.start), e.I2E = [...s].filter((o) => o.bv === i.OUTSIDE).map((o) => o.shape), e.E2I = t.cut(s), e;
+function gi(s, t) {
+  let e = new Tt(), n = Ft(s, t), r = new R([s]), l = n.length > 0 ? n.slice() : s.sortPoints(n);
+  return r.split(l), [...r].forEach((o) => o.setInclusion(t)), e.I2I = [...r].filter((o) => o.bv === i.INSIDE).map((o) => o.shape), e.I2B = [...r].slice(1).map((o) => o.bv === i.BOUNDARY ? o.shape : o.shape.start), e.I2E = [...r].filter((o) => o.bv === i.OUTSIDE).map((o) => o.shape), e.E2I = t.cut(r), e;
 }
-function ve(r, t) {
-  let e = new gt(), n = Gn(r, t), s = n.length > 0 ? n.slice() : r.sortPoints(n), l = new R([r]);
-  l.split(s), [...l].forEach((o) => o.setInclusion(t)), e.I2I = [...l].filter((o) => o.bv === i.INSIDE).map((o) => o.shape), e.I2B = [...l].slice(1).map((o) => o.bv === i.BOUNDARY ? o.shape : o.shape.start), e.I2E = [...l].filter((o) => o.bv === i.OUTSIDE).map((o) => o.shape), e.B2I = [], e.B2B = [], e.B2E = [];
-  for (let o of [r.start, r.end])
-    switch (wt(t, o)) {
+function be(s, t) {
+  let e = new Tt(), n = ni(s, t), r = n.length > 0 ? n.slice() : s.sortPoints(n), l = new R([s]);
+  l.split(r), [...l].forEach((o) => o.setInclusion(t)), e.I2I = [...l].filter((o) => o.bv === i.INSIDE).map((o) => o.shape), e.I2B = [...l].slice(1).map((o) => o.bv === i.BOUNDARY ? o.shape : o.shape.start), e.I2E = [...l].filter((o) => o.bv === i.OUTSIDE).map((o) => o.shape), e.B2I = [], e.B2B = [], e.B2E = [];
+  for (let o of [s.start, s.end])
+    switch (At(t, o)) {
       case i.INSIDE:
         e.B2I.push(o);
         break;
@@ -1254,22 +1323,23 @@ function ve(r, t) {
     }
   return e;
 }
-function Lt(r, t) {
-  let e = new gt(), [n, s] = Fe(r, t), l = $e(r, t), o = Xt(r, t), a = Xt(t, r), [h, f] = Be(r, t), u = Zt(r, t), p = Zt(t, r);
-  return e.I2I = l.isEmpty() ? [] : [l], e.I2B = f, e.I2E = o.isEmpty() ? [] : [o], e.B2I = h, e.B2B = n, e.B2E = u, e.E2I = a.isEmpty() ? [] : [a], e.E2B = p, e;
+function Vt(s, t) {
+  let e = new Tt(), [n, r] = ze(s, t), l = Ge(s, t), o = ie(s, t), a = ie(t, s), [h, f] = De(s, t), u = re(s, t), g = re(t, s);
+  return e.I2I = l.isEmpty() ? [] : [l], e.I2B = f, e.I2E = o.isEmpty() ? [] : [o], e.B2I = h, e.B2B = n, e.B2E = u, e.E2I = a.isEmpty() ? [] : [a], e.E2B = g, e;
 }
-var Kn = /* @__PURE__ */ Object.freeze({
-  equal: zn,
-  intersect: ze,
-  touch: Qn,
-  disjoint: Wn,
-  inside: Qe,
-  covered: We,
-  contain: Yn,
-  cover: Ye,
-  relate: mt
+var pi = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  contain: ui,
+  cover: on,
+  covered: sn,
+  disjoint: fi,
+  equal: li,
+  inside: rn,
+  intersect: nn,
+  relate: yt,
+  touch: ai
 });
-let ti = class lt {
+let Lt = class ct {
   /**
    * Construct new instance of affine transformation matrix <br/>
    * If parameters omitted, construct identity matrix a = 1, d = 1
@@ -1280,15 +1350,15 @@ let ti = class lt {
    * @param {number} tx - position (2,0) translation by x
    * @param {number} ty - position (2,1) translation by y
    */
-  constructor(t = 1, e = 0, n = 0, s = 1, l = 0, o = 0) {
-    this.a = t, this.b = e, this.c = n, this.d = s, this.tx = l, this.ty = o;
+  constructor(t = 1, e = 0, n = 0, r = 1, l = 0, o = 0) {
+    this.a = t, this.b = e, this.c = n, this.d = r, this.tx = l, this.ty = o;
   }
   /**
    * Return new cloned instance of matrix
    * @return {Matrix}
    **/
   clone() {
-    return new lt(this.a, this.b, this.c, this.d, this.tx, this.ty);
+    return new ct(this.a, this.b, this.c, this.d, this.tx, this.ty);
   }
   /**
    * Transform vector [x,y] using transformation matrix. <br/>
@@ -1314,7 +1384,7 @@ let ti = class lt {
    * @returns {Matrix}
    */
   multiply(t) {
-    return new lt(
+    return new ct(
       this.a * t.a + this.c * t.b,
       this.b * t.a + this.d * t.b,
       this.a * t.c + this.c * t.d,
@@ -1326,30 +1396,33 @@ let ti = class lt {
   /**
    * Return new matrix as a result of multiplication of the current matrix
    * by the matrix(1,0,0,1,tx,ty)
-   * @param {number} tx - translation by x
-   * @param {number} ty - translation by y
+   * @param {Vector} vector - Translation by vector or
+   * @param {number} tx - translation by x-axis
+   * @param {number} ty - translation by y-axis
    * @returns {Matrix}
    */
   translate(...t) {
     let e, n;
-    if (t.length == 1 && t[0] instanceof i.Vector)
+    if (t.length == 1 && !isNaN(t[0].x) && !isNaN(t[0].y))
       e = t[0].x, n = t[0].y;
-    else if (t.length == 2 && typeof t[0] == "number" && typeof t[1] == "number")
+    else if (t.length === 2 && typeof t[0] == "number" && typeof t[1] == "number")
       e = t[0], n = t[1];
     else
-      throw i.Errors.ILLEGAL_PARAMETERS;
-    return this.multiply(new lt(1, 0, 0, 1, e, n));
+      throw w.ILLEGAL_PARAMETERS;
+    return this.multiply(new ct(1, 0, 0, 1, e, n));
   }
   /**
    * Return new matrix as a result of multiplication of the current matrix
    * by the matrix that defines rotation by given angle (in radians) around
-   * point (0,0) in counter clockwise direction
+   * center of rotation (centerX,centerY) in counterclockwise direction
    * @param {number} angle - angle in radians
+   * @param {number} centerX - center of rotation
+   * @param {number} centerY - center of rotation
    * @returns {Matrix}
    */
-  rotate(t) {
-    let e = Math.cos(t), n = Math.sin(t);
-    return this.multiply(new lt(e, n, -n, e, 0, 0));
+  rotate(t, e = 0, n = 0) {
+    let r = Math.cos(t), l = Math.sin(t);
+    return this.translate(e, n).multiply(new ct(r, l, -l, r, 0, 0)).translate(-e, -n);
   }
   /**
    * Return new matrix as a result of multiplication of the current matrix
@@ -1359,7 +1432,7 @@ let ti = class lt {
    * @returns {Matrix}
    */
   scale(t, e) {
-    return this.multiply(new lt(t, 0, 0, e, 0, 0));
+    return this.multiply(new ct(t, 0, 0, e, 0, 0));
   }
   /**
    * Returns true if two matrix are equal parameter by parameter
@@ -1370,10 +1443,10 @@ let ti = class lt {
     return !(!i.Utils.EQ(this.tx, t.tx) || !i.Utils.EQ(this.ty, t.ty) || !i.Utils.EQ(this.a, t.a) || !i.Utils.EQ(this.b, t.b) || !i.Utils.EQ(this.c, t.c) || !i.Utils.EQ(this.d, t.d));
   }
 };
-i.Matrix = ti;
-const ei = (...r) => new i.Matrix(...r);
-i.matrix = ei;
-const ni = class ee {
+i.Matrix = Lt;
+const _i = (...s) => new i.Matrix(...s);
+i.matrix = _i;
+const mi = class ae {
   /**
    * Accept two comparable values and creates new instance of interval
    * Predicate Interval.comparable_less(low, high) supposed to return true on these values
@@ -1388,7 +1461,7 @@ const ni = class ee {
    * @returns {Interval}
    */
   clone() {
-    return new ee(this.low, this.high);
+    return new ae(this.low, this.high);
   }
   /**
    * Propery max returns clone of this interval
@@ -1435,7 +1508,7 @@ const ni = class ee {
    * @returns {Interval}
    */
   merge(t) {
-    return new ee(
+    return new ae(
       this.low === void 0 ? t.low : Math.min(this.low, t.low),
       this.high === void 0 ? t.high : Math.max(this.high, t.high)
     );
@@ -1464,29 +1537,25 @@ const ni = class ee {
   static comparable_less_than(t, e) {
     return t < e;
   }
-}, b = 0, m = 1;
-class ot {
-  constructor(t = void 0, e = void 0, n = null, s = null, l = null, o = m) {
-    this.left = n, this.right = s, this.parent = l, this.color = o, this.item = { key: t, value: e }, t && t instanceof Array && t.length == 2 && !Number.isNaN(t[0]) && !Number.isNaN(t[1]) && (this.item.key = new ni(Math.min(t[0], t[1]), Math.max(t[0], t[1]))), this.max = this.item.key ? this.item.key.max : void 0;
+}, P = 0, _ = 1;
+class ht {
+  constructor(t = void 0, e = void 0, n = null, r = null, l = null, o = _) {
+    this.left = n, this.right = r, this.parent = l, this.color = o, this.item = { key: t, value: e }, t && t instanceof Array && t.length == 2 && !Number.isNaN(t[0]) && !Number.isNaN(t[1]) && (this.item.key = new mi(Math.min(t[0], t[1]), Math.max(t[0], t[1]))), this.max = this.item.key ? this.item.key.max : void 0;
   }
   isNil() {
-    return this.item.key === void 0 && this.item.value === void 0 && this.left === null && this.right === null && this.color === m;
+    return this.item.key === void 0 && this.item.value === void 0 && this.left === null && this.right === null && this.color === _;
+  }
+  _value_less_than(t) {
+    return this.item.value && t.item.value && this.item.value.less_than ? this.item.value.less_than(t.item.value) : this.item.value < t.item.value;
   }
   less_than(t) {
-    if (this.item.value === this.item.key && t.item.value === t.item.key)
-      return this.item.key.less_than(t.item.key);
-    {
-      let e = this.item.value && t.item.value && this.item.value.less_than ? this.item.value.less_than(t.item.value) : this.item.value < t.item.value;
-      return this.item.key.less_than(t.item.key) || this.item.key.equal_to(t.item.key) && e;
-    }
+    return this.item.value === this.item.key && t.item.value === t.item.key ? this.item.key.less_than(t.item.key) : this.item.key.less_than(t.item.key) || this.item.key.equal_to(t.item.key) && this._value_less_than(t);
+  }
+  _value_equal(t) {
+    return this.item.value && t.item.value && this.item.value.equal_to ? this.item.value.equal_to(t.item.value) : this.item.value == t.item.value;
   }
   equal_to(t) {
-    if (this.item.value === this.item.key && t.item.value === t.item.key)
-      return this.item.key.equal_to(t.item.key);
-    {
-      let e = this.item.value && t.item.value && this.item.value.equal_to ? this.item.value.equal_to(t.item.value) : this.item.value == t.item.value;
-      return this.item.key.equal_to(t.item.key) && e;
-    }
+    return this.item.value === this.item.key && t.item.value === t.item.key ? this.item.key.equal_to(t.item.key) : this.item.key.equal_to(t.item.key) && this._value_equal(t);
   }
   intersect(t) {
     return this.item.key.intersect(t.item.key);
@@ -1517,12 +1586,12 @@ class ot {
     return e(t.item.key.high, n);
   }
 }
-class Tt {
+class Rt {
   /**
    * Construct new empty instance of IntervalTree
    */
   constructor() {
-    this.root = null, this.nil_node = new ot();
+    this.root = null, this.nil_node = new ht();
   }
   /**
    * Returns number of items stored in the interval tree
@@ -1583,7 +1652,7 @@ class Tt {
   insert(t, e = t) {
     if (t === void 0)
       return;
-    let n = new ot(t, e, this.nil_node, this.nil_node, null, b);
+    let n = new ht(t, e, this.nil_node, this.nil_node, null, P);
     return this.tree_insert(n), this.recalc_max(n), n;
   }
   /**
@@ -1593,7 +1662,7 @@ class Tt {
    * @returns {boolean} true if item {key, value} exist in the tree, false otherwise
    */
   exist(t, e = t) {
-    let n = new ot(t, e);
+    let n = new ht(t, e);
     return !!this.tree_search(this.root, n);
   }
   /**
@@ -1603,8 +1672,8 @@ class Tt {
    * @returns {boolean} true if item {key, value} deleted, false if not found
    */
   remove(t, e = t) {
-    let n = new ot(t, e), s = this.tree_search(this.root, n);
-    return s && this.tree_delete(s), s;
+    let n = new ht(t, e), r = this.tree_search(this.root, n);
+    return r && this.tree_delete(r), r;
   }
   /**
    * Returns array of entry values which keys intersect with given interval <br/>
@@ -1613,9 +1682,9 @@ class Tt {
    * @param outputMapperFn(value,key) - optional function that maps (value, key) to custom output
    * @returns {Array}
    */
-  search(t, e = (n, s) => n === s ? s.output() : n) {
-    let n = new ot(t), s = [];
-    return this.tree_search_interval(this.root, n, s), s.map((l) => e(l.item.value, l.item.key));
+  search(t, e = (n, r) => n === r ? r.output() : n) {
+    let n = new ht(t), r = [];
+    return this.tree_search_interval(this.root, n, r), r.map((l) => e(l.item.value, l.item.key));
   }
   /**
    * Returns true if intersection between given and any interval stored in the tree found
@@ -1623,7 +1692,7 @@ class Tt {
    * @returns {boolean}
    */
   intersect_any(t) {
-    let e = new ot(t);
+    let e = new ht(t);
     return this.tree_find_any_interval(this.root, e);
   }
   /**
@@ -1638,7 +1707,7 @@ class Tt {
   * @param callback(value,key) - function to be called for each tree item
   */
   map(t) {
-    const e = new Tt();
+    const e = new Rt();
     return this.tree_walk(this.root, (n) => e.insert(n.item.key, t(n.item.value, n.item.key))), e;
   }
   recalc_max(t) {
@@ -1661,20 +1730,20 @@ class Tt {
   // Go upwords to the root and re-color until violation will be resolved
   insert_fixup(t) {
     let e, n;
-    for (e = t; e != this.root && e.parent.color == b; )
-      e.parent == e.parent.parent.left ? (n = e.parent.parent.right, n.color == b ? (e.parent.color = m, n.color = m, e.parent.parent.color = b, e = e.parent.parent) : (e == e.parent.right && (e = e.parent, this.rotate_left(e)), e.parent.color = m, e.parent.parent.color = b, this.rotate_right(e.parent.parent))) : (n = e.parent.parent.left, n.color == b ? (e.parent.color = m, n.color = m, e.parent.parent.color = b, e = e.parent.parent) : (e == e.parent.left && (e = e.parent, this.rotate_right(e)), e.parent.color = m, e.parent.parent.color = b, this.rotate_left(e.parent.parent)));
-    this.root.color = m;
+    for (e = t; e != this.root && e.parent.color == P; )
+      e.parent == e.parent.parent.left ? (n = e.parent.parent.right, n.color == P ? (e.parent.color = _, n.color = _, e.parent.parent.color = P, e = e.parent.parent) : (e == e.parent.right && (e = e.parent, this.rotate_left(e)), e.parent.color = _, e.parent.parent.color = P, this.rotate_right(e.parent.parent))) : (n = e.parent.parent.left, n.color == P ? (e.parent.color = _, n.color = _, e.parent.parent.color = P, e = e.parent.parent) : (e == e.parent.left && (e = e.parent, this.rotate_right(e)), e.parent.color = _, e.parent.parent.color = P, this.rotate_left(e.parent.parent)));
+    this.root.color = _;
   }
   tree_delete(t) {
     let e, n;
     t.left == this.nil_node || t.right == this.nil_node ? e = t : e = this.tree_successor(t), e.left != this.nil_node ? n = e.left : n = e.right, n.parent = e.parent, e == this.root ? this.root = n : (e == e.parent.left ? e.parent.left = n : e.parent.right = n, e.parent.update_max()), this.recalc_max(n), e != t && (t.copy_data(e), t.update_max(), this.recalc_max(t)), /*fix_node != this.nil_node && */
-    e.color == m && this.delete_fixup(n);
+    e.color == _ && this.delete_fixup(n);
   }
   delete_fixup(t) {
     let e = t, n;
-    for (; e != this.root && e.parent != null && e.color == m; )
-      e == e.parent.left ? (n = e.parent.right, n.color == b && (n.color = m, e.parent.color = b, this.rotate_left(e.parent), n = e.parent.right), n.left.color == m && n.right.color == m ? (n.color = b, e = e.parent) : (n.right.color == m && (n.color = b, n.left.color = m, this.rotate_right(n), n = e.parent.right), n.color = e.parent.color, e.parent.color = m, n.right.color = m, this.rotate_left(e.parent), e = this.root)) : (n = e.parent.left, n.color == b && (n.color = m, e.parent.color = b, this.rotate_right(e.parent), n = e.parent.left), n.left.color == m && n.right.color == m ? (n.color = b, e = e.parent) : (n.left.color == m && (n.color = b, n.right.color = m, this.rotate_left(n), n = e.parent.left), n.color = e.parent.color, e.parent.color = m, n.left.color = m, this.rotate_right(e.parent), e = this.root));
-    e.color = m;
+    for (; e != this.root && e.parent != null && e.color == _; )
+      e == e.parent.left ? (n = e.parent.right, n.color == P && (n.color = _, e.parent.color = P, this.rotate_left(e.parent), n = e.parent.right), n.left.color == _ && n.right.color == _ ? (n.color = P, e = e.parent) : (n.right.color == _ && (n.color = P, n.left.color = _, this.rotate_right(n), n = e.parent.right), n.color = e.parent.color, e.parent.color = _, n.right.color = _, this.rotate_left(e.parent), e = this.root)) : (n = e.parent.left, n.color == P && (n.color = _, e.parent.color = P, this.rotate_right(e.parent), n = e.parent.left), n.left.color == _ && n.right.color == _ ? (n.color = P, e = e.parent) : (n.left.color == _ && (n.color = P, n.right.color = _, this.rotate_left(n), n = e.parent.left), n.color = e.parent.color, e.parent.color = _, n.left.color = _, this.rotate_right(e.parent), e = this.root));
+    e.color = _;
   }
   tree_search(t, e) {
     if (!(t == null || t == this.nil_node))
@@ -1703,13 +1772,13 @@ class Tt {
     return e;
   }
   tree_successor(t) {
-    let e, n, s;
+    let e, n, r;
     if (t.right != this.nil_node)
       e = this.local_minimum(t.right);
     else {
-      for (n = t, s = t.parent; s != null && s.right == n; )
-        n = s, s = s.parent;
-      e = s;
+      for (n = t, r = t.parent; r != null && r.right == n; )
+        n = r, r = r.parent;
+      e = r;
     }
     return e;
   }
@@ -1734,25 +1803,25 @@ class Tt {
   testRedBlackProperty() {
     let t = !0;
     return this.tree_walk(this.root, function(e) {
-      e.color == b && (e.left.color == m && e.right.color == m || (t = !1));
+      e.color == P && (e.left.color == _ && e.right.color == _ || (t = !1));
     }), t;
   }
   /* Throw error if not every path from root to bottom has same black height */
   testBlackHeightProperty(t) {
-    let e = 0, n = 0, s = 0;
-    if (t.color == m && e++, t.left != this.nil_node ? n = this.testBlackHeightProperty(t.left) : n = 1, t.right != this.nil_node ? s = this.testBlackHeightProperty(t.right) : s = 1, n != s)
+    let e = 0, n = 0, r = 0;
+    if (t.color == _ && e++, t.left != this.nil_node ? n = this.testBlackHeightProperty(t.left) : n = 1, t.right != this.nil_node ? r = this.testBlackHeightProperty(t.right) : r = 1, n != r)
       throw new Error("Red-black height property violated");
     return e += n, e;
   }
 }
-class ii extends Set {
+class xi extends Set {
   /**
    * Create new instance of PlanarSet
    * @param shapes - array or set of geometric objects to store in planar set
    * Each object should have a <b>box</b> property
    */
   constructor(t) {
-    super(t), this.index = new Tt(), this.forEach((e) => this.index.insert(e));
+    super(t), this.index = new Rt(), this.forEach((e) => this.index.insert(e));
   }
   /**
    * Add new shape to planar set and to its spatial index.<br/>
@@ -1780,7 +1849,7 @@ class ii extends Set {
    * Clear planar set
    */
   clear() {
-    super.clear(), this.index = new Tt();
+    super.clear(), this.index = new Rt();
   }
   /**
    * 2d range search in planar set.<br/>
@@ -1798,7 +1867,7 @@ class ii extends Set {
    */
   hit(t) {
     let e = new i.Box(t.x - 1, t.y - 1, t.x + 1, t.y + 1);
-    return this.index.search(e).filter((s) => t.on(s));
+    return this.index.search(e).filter((r) => t.on(r));
   }
   /**
    * Returns svg string to draw all shapes in planar set
@@ -1808,15 +1877,71 @@ class ii extends Set {
     return [...this].reduce((e, n) => e + n.svg(), "");
   }
 }
-i.PlanarSet = ii;
-class he {
+i.PlanarSet = xi;
+class it {
+  get name() {
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+  }
+  get box() {
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+  }
+  clone() {
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+  }
+  /**
+   * Returns new shape translated by given vector.
+   * Translation vector may be also defined by a pair of numbers.
+   * @param {Vector | (number, number) } args - Translation vector
+   * or tuple of numbers
+   * @returns {Shape}
+   */
+  translate(...t) {
+    return this.transform(new Lt().translate(...t));
+  }
+  /**
+   * Returns new shape rotated by given angle around given center point.
+   * If center point is omitted, rotates around zero point (0,0).
+   * Positive value of angle defines rotation in counterclockwise direction,
+   * negative angle defines rotation in clockwise direction
+   * @param {number} angle - angle in radians
+   * @param {Point} [center=(0,0)] center
+   * @returns {Shape}
+   */
+  rotate(t, e = new i.Point()) {
+    return this.transform(new Lt().rotate(t, e.x, e.y));
+  }
+  /**
+   * Return new shape with coordinates multiplied by scaling factor
+   * @param {number} sx - x-axis scaling factor
+   * @param {number} sy - y-axis scaling factor
+   * @returns {Shape}
+   */
+  scale(t, e) {
+    return this.transform(new Lt().scale(t, e));
+  }
+  transform(...t) {
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+  }
+  /**
+   * This method returns an object that defines how data will be
+   * serialized when called JSON.stringify() method
+   * @returns {Object}
+   */
+  toJSON() {
+    return Object.assign({}, this, { name: this.name });
+  }
+  svg(t = {}) {
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+  }
+}
+let Ei = class ln extends it {
   /**
    * Point may be constructed by two numbers, or by array of two numbers
    * @param {number} x - x-coordinate (float number)
    * @param {number} y - y-coordinate (float number)
    */
   constructor(...t) {
-    if (this.x = 0, this.y = 0, t.length !== 0) {
+    if (super(), this.x = 0, this.y = 0, t.length !== 0) {
       if (t.length === 1 && t[0] instanceof Array && t[0].length === 2) {
         let e = t[0];
         if (typeof e[0] == "number" && typeof e[1] == "number") {
@@ -1833,7 +1958,7 @@ class he {
         this.x = t[0], this.y = t[1];
         return;
       }
-      throw i.Errors.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -1872,34 +1997,7 @@ class he {
     return !!(i.Utils.LT(this.y, t.y) || i.Utils.EQ(this.y, t.y) && i.Utils.LT(this.x, t.x));
   }
   /**
-   * Returns new point rotated by given angle around given center point.
-   * If center point is omitted, rotates around zero point (0,0).
-   * Positive value of angle defines rotation in counter clockwise direction,
-   * negative angle defines rotation in clockwise clockwise direction
-   * @param {number} angle - angle in radians
-   * @param {Point} [center=(0,0)] center
-   * @returns {Point}
-   */
-  rotate(t, e = { x: 0, y: 0 }) {
-    var n = e.x + (this.x - e.x) * Math.cos(t) - (this.y - e.y) * Math.sin(t), s = e.y + (this.x - e.x) * Math.sin(t) + (this.y - e.y) * Math.cos(t);
-    return new i.Point(n, s);
-  }
-  /**
-   * Returns new point translated by given vector.
-   * Translation vector may by also defined by a pair of numbers.
-   * @param {Vector} vector - Translation vector defined as Flatten.Vector or
-   * @param {number|number} - Translation vector defined as pair of numbers
-   * @returns {Point}
-   */
-  translate(...t) {
-    if (t.length == 1 && (t[0] instanceof i.Vector || !isNaN(t[0].x) && !isNaN(t[0].y)))
-      return new i.Point(this.x + t[0].x, this.y + t[0].y);
-    if (t.length == 2 && typeof t[0] == "number" && typeof t[1] == "number")
-      return new i.Point(this.x + t[0], this.y + t[1]);
-    throw i.Errors.ILLEGAL_PARAMETERS;
-  }
-  /**
-   * Return new point transformed by affine transformation matrix m
+   * Return new point transformed by affine transformation matrix
    * @param {Matrix} m - affine transformation matrix (a,b,c,d,tx,ty)
    * @returns {Point}
    */
@@ -1917,8 +2015,8 @@ class he {
     let e = new i.Vector(this, t.pt);
     if (i.Utils.EQ_0(e.cross(t.norm)))
       return t.pt.clone();
-    let n = e.dot(t.norm), s = t.norm.multiply(n);
-    return this.translate(s);
+    let n = e.dot(t.norm), r = t.norm.multiply(n);
+    return this.translate(r);
   }
   /**
    * Returns true if point belongs to the "left" semi-plane, which means, point belongs to the same semi plane where line normal vector points to
@@ -1937,7 +2035,7 @@ class he {
    * @returns {Segment} shortest segment between point and shape (started at point, ended at shape)
    */
   distanceTo(t) {
-    if (t instanceof he) {
+    if (t instanceof ln) {
       let e = t.x - this.x, n = t.y - this.y;
       return [Math.sqrt(e * e + n * n), new i.Segment(this, t)];
     }
@@ -1964,6 +2062,8 @@ class he {
       return this.equalTo(t);
     if (t instanceof i.Line)
       return t.contains(this);
+    if (t instanceof i.Ray)
+      return t.contains(this);
     if (t instanceof i.Circle)
       return t.contains(this);
     if (t instanceof i.Segment)
@@ -1973,13 +2073,8 @@ class he {
     if (t instanceof i.Polygon)
       return t.contains(this);
   }
-  /**
-   * This method returns an object that defines how data will be
-   * serialized when called JSON.stringify() method
-   * @returns {Object}
-   */
-  toJSON() {
-    return Object.assign({}, this, { name: "point" });
+  get name() {
+    return "point";
   }
   /**
    * Return string to draw point in svg as circle with radius "r" <br/>
@@ -1995,15 +2090,16 @@ class he {
    * @returns {String}
    */
   svg(t = {}) {
-    let { r: e, stroke: n, strokeWidth: s, fill: l, id: o, className: a } = t, h = o && o.length > 0 ? `id="${o}"` : "", f = a && a.length > 0 ? `class="${a}"` : "";
+    const e = t.r ?? 3;
     return `
-<circle cx="${this.x}" cy="${this.y}" r="${e || 3}" stroke="${n || "black"}" stroke-width="${s || 1}" fill="${l || "red"}" ${h} ${f} />`;
+<circle cx="${this.x}" cy="${this.y}" r="${e}"
+            ${ft({ fill: "red", ...t })} />`;
   }
-}
-i.Point = he;
-const ri = (...r) => new i.Point(...r);
-i.point = ri;
-class si {
+};
+i.Point = Ei;
+const wi = (...s) => new i.Point(...s);
+i.point = wi;
+let vi = class extends it {
   /**
    * Vector may be constructed by two points, or by two float numbers,
    * or by array of two numbers
@@ -2011,7 +2107,7 @@ class si {
    * @param {Point} pe - end point
    */
   constructor(...t) {
-    if (this.x = 0, this.y = 0, t.length !== 0) {
+    if (super(), this.x = 0, this.y = 0, t.length !== 0) {
       if (t.length === 1 && t[0] instanceof Array && t[0].length === 2) {
         let e = t[0];
         if (typeof e[0] == "number" && typeof e[1] == "number") {
@@ -2035,7 +2131,7 @@ class si {
           return;
         }
       }
-      throw i.Errors.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2103,21 +2199,31 @@ class si {
   normalize() {
     if (!i.Utils.EQ_0(this.length))
       return new i.Vector(this.x / this.length, this.y / this.length);
-    throw i.Errors.ZERO_DIVISION;
+    throw w.ZERO_DIVISION;
   }
   /**
    * Returns new vector rotated by given angle,
-   * positive angle defines rotation in counter clockwise direction,
+   * positive angle defines rotation in counterclockwise direction,
    * negative - in clockwise direction
+   * Vector only can be rotated around (0,0) point!
    * @param {number} angle - Angle in radians
    * @returns {Vector}
    */
-  rotate(t) {
-    let n = new i.Point(this.x, this.y).rotate(t);
-    return new i.Vector(n.x, n.y);
+  rotate(t, e = new i.Point()) {
+    if (e.x === 0 && e.y === 0)
+      return this.transform(new Lt().rotate(t));
+    throw w.OPERATION_IS_NOT_SUPPORTED;
   }
   /**
-   * Returns vector rotated 90 degrees counter clockwise
+   * Return new vector transformed by affine transformation matrix m
+   * @param {Matrix} m - affine transformation matrix (a,b,c,d,tx,ty)
+   * @returns {Vector}
+   */
+  transform(t) {
+    return new i.Vector(t.transform([this.x, this.y]));
+  }
+  /**
+   * Returns vector rotated 90 degrees counterclockwise
    * @returns {Vector}
    */
   rotate90CCW() {
@@ -2155,14 +2261,14 @@ class si {
   }
   /**
    * Return angle between this vector and other vector. <br/>
-   * Angle is measured from 0 to 2*PI in the counter clockwise direction
-   * from current vector to other.
+   * Angle is measured from 0 to 2*PI in the counterclockwise direction
+   * from current vector to  another.
    * @param {Vector} v Another vector
    * @returns {number}
    */
   angleTo(t) {
-    let e = this.normalize(), n = t.normalize(), s = Math.atan2(e.cross(n), e.dot(n));
-    return s < 0 && (s += 2 * Math.PI), s;
+    let e = this.normalize(), n = t.normalize(), r = Math.atan2(e.cross(n), e.dot(n));
+    return r < 0 && (r += 2 * Math.PI), r;
   }
   /**
    * Return vector projection of the current vector on another vector
@@ -2173,26 +2279,21 @@ class si {
     let e = t.normalize(), n = this.dot(e);
     return e.multiply(n);
   }
-  /**
-   * This method returns an object that defines how data will be
-   * serialized when called JSON.stringify() method
-   * @returns {Object}
-   */
-  toJSON() {
-    return Object.assign({}, this, { name: "vector" });
+  get name() {
+    return "vector";
   }
-}
-i.Vector = si;
-const oi = (...r) => new i.Vector(...r);
-i.vector = oi;
-class vt {
+};
+i.Vector = vi;
+const Ti = (...s) => new i.Vector(...s);
+i.vector = Ti;
+class Qt extends it {
   /**
    *
    * @param {Point} ps - start point
    * @param {Point} pe - end point
    */
   constructor(...t) {
-    if (this.ps = new i.Point(), this.pe = new i.Point(), t.length !== 0) {
+    if (super(), this.ps = new i.Point(), this.pe = new i.Point(), t.length !== 0) {
       if (t.length === 1 && t[0] instanceof Array && t[0].length === 4) {
         let e = t[0];
         this.ps = new i.Point(e[0], e[1]), this.pe = new i.Point(e[2], e[3]);
@@ -2215,7 +2316,7 @@ class vt {
         this.ps = new i.Point(t[0], t[1]), this.pe = new i.Point(t[2], t[3]);
         return;
       }
-      throw i.Errors.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2297,17 +2398,19 @@ class vt {
     if (t instanceof i.Point)
       return this.contains(t) ? [t] : [];
     if (t instanceof i.Line)
-      return Ft(this, t);
+      return Mt(this, t);
+    if (t instanceof i.Ray)
+      return Xe(t, this);
     if (t instanceof i.Segment)
-      return At(this, t);
+      return Bt(this, t);
     if (t instanceof i.Circle)
-      return Vt(this, t);
+      return jt(this, t);
     if (t instanceof i.Box)
-      return kn(this, t);
+      return Wn(this, t);
     if (t instanceof i.Arc)
-      return rt(this, t);
+      return lt(this, t);
     if (t instanceof i.Polygon)
-      return ae(this, t);
+      return ge(this, t);
   }
   /**
    * Calculate distance and shortest segment from segment to shape and return as array [distance, shortest segment]
@@ -2364,7 +2467,7 @@ class vt {
    * @returns {Segment}
    */
   reverse() {
-    return new vt(this.end, this.start);
+    return new Qt(this.end, this.start);
   }
   /**
    * When point belongs to segment, return array of two segments split by given point,
@@ -2409,28 +2512,8 @@ class vt {
     return e;
   }
   definiteIntegral(t = 0) {
-    let e = this.end.x - this.start.x, n = this.start.y - t, s = this.end.y - t;
-    return e * (n + s) / 2;
-  }
-  /**
-   * Returns new segment translated by vector vec
-   * @param {Vector} vec
-   * @returns {Segment}
-   */
-  translate(...t) {
-    return new vt(this.ps.translate(...t), this.pe.translate(...t));
-  }
-  /**
-   * Return new segment rotated by given angle around given point
-   * If point omitted, rotate around origin (0,0)
-   * Positive value of angle defines rotation counter clockwise, negative - clockwise
-   * @param {number} angle - rotation angle in radians
-   * @param {Point} center - center point, default is (0,0)
-   * @returns {Segment}
-   */
-  rotate(t = 0, e = new i.Point()) {
-    let n = new i.Matrix();
-    return n = n.translate(e.x, e.y).rotate(t).translate(-e.x, -e.y), this.transform(n);
+    let e = this.end.x - this.start.x, n = this.start.y - t, r = this.end.y - t;
+    return e * (n + r) / 2;
   }
   /**
    * Return new segment transformed using affine transformation matrix
@@ -2438,7 +2521,7 @@ class vt {
    * @returns {Segment} - transformed segment
    */
   transform(t = new i.Matrix()) {
-    return new vt(this.ps.transform(t), this.pe.transform(t));
+    return new Qt(this.ps.transform(t), this.pe.transform(t));
   }
   /**
    * Returns true if segment start is equal to segment end up to DP_TOL
@@ -2455,13 +2538,8 @@ class vt {
   sortPoints(t) {
     return new i.Line(this.start, this.end).sortPoints(t);
   }
-  /**
-   * This method returns an object that defines how data will be
-   * serialized when called JSON.stringify() method
-   * @returns {Object}
-   */
-  toJSON() {
-    return Object.assign({}, this, { name: "segment" });
+  get name() {
+    return "segment";
   }
   /**
    * Return string to draw segment in svg
@@ -2471,48 +2549,46 @@ class vt {
    * @returns {string}
    */
   svg(t = {}) {
-    let { stroke: e, strokeWidth: n, id: s, className: l } = t, o = s && s.length > 0 ? `id="${s}"` : "", a = l && l.length > 0 ? `class="${l}"` : "";
     return `
-<line x1="${this.start.x}" y1="${this.start.y}" x2="${this.end.x}" y2="${this.end.y}" stroke="${e || "black"}" stroke-width="${n || 1}" ${o} ${a} />`;
+<line x1="${this.start.x}" y1="${this.start.y}" x2="${this.end.x}" y2="${this.end.y}" ${ft(t)} />`;
   }
 }
-i.Segment = vt;
-const li = (...r) => new i.Segment(...r);
-i.segment = li;
-let { vector: Ot } = i;
-class ue {
+i.Segment = Qt;
+const Si = (...s) => new i.Segment(...s);
+i.segment = Si;
+let { vector: It } = i, yi = class an extends it {
   /**
    * Line may be constructed by point and normal vector or by two points that a line passes through
    * @param {Point} pt - point that a line passes through
    * @param {Vector|Point} norm - normal vector to a line or second point a line passes through
    */
   constructor(...t) {
-    if (this.pt = new i.Point(), this.norm = new i.Vector(0, 1), t.length != 0) {
-      if (t.length == 1 && t[0] instanceof Object && t[0].name === "line") {
+    if (super(), this.pt = new i.Point(), this.norm = new i.Vector(0, 1), t.length !== 0) {
+      if (t.length === 1 && t[0] instanceof Object && t[0].name === "line") {
         let { pt: e, norm: n } = t[0];
         this.pt = new i.Point(e), this.norm = new i.Vector(n);
         return;
       }
-      if (t.length == 2) {
+      if (t.length === 2) {
         let e = t[0], n = t[1];
         if (e instanceof i.Point && n instanceof i.Point) {
-          this.pt = e, this.norm = ue.points2norm(e, n), this.norm.dot(Ot(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
+          this.pt = e, this.norm = an.points2norm(e, n), this.norm.dot(It(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
           return;
         }
         if (e instanceof i.Point && n instanceof i.Vector) {
           if (i.Utils.EQ_0(n.x) && i.Utils.EQ_0(n.y))
-            throw i.Errors.ILLEGAL_PARAMETERS;
-          this.pt = e.clone(), this.norm = n.clone(), this.norm = this.norm.normalize(), this.norm.dot(Ot(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
+            throw w.ILLEGAL_PARAMETERS;
+          this.pt = e.clone(), this.norm = n.clone(), this.norm = this.norm.normalize(), this.norm.dot(It(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
           return;
         }
         if (e instanceof i.Vector && n instanceof i.Point) {
           if (i.Utils.EQ_0(e.x) && i.Utils.EQ_0(e.y))
-            throw i.Errors.ILLEGAL_PARAMETERS;
-          this.pt = n.clone(), this.norm = e.clone(), this.norm = this.norm.normalize(), this.norm.dot(Ot(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
+            throw w.ILLEGAL_PARAMETERS;
+          this.pt = n.clone(), this.norm = e.clone(), this.norm = this.norm.normalize(), this.norm.dot(It(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
           return;
         }
       }
-      throw i.Errors.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2572,7 +2648,7 @@ class ue {
    * @returns {number[]} - array of coefficients
    */
   get standard() {
-    let t = this.norm.x, e = this.norm.y, n = this.norm.dot(this.pt);
+    let t = this.norm.x, e = this.norm.y, n = this.norm.dot(It(this.pt.x, this.pt.y));
     return [t, e, n];
   }
   /**
@@ -2603,15 +2679,15 @@ class ue {
     return i.Utils.EQ_0(this.norm.dot(e));
   }
   /**
-   * Return coordinate of the point that lays on the line in the transformed
+   * Return coordinate of the point that lies on the line in the transformed
    * coordinate system where center is the projection of the point(0,0) to
    * the line and axe y is collinear to the normal vector. <br/>
-   * This method assumes that point lays on the line and does not check it
-   * @param {Point} pt - point on line
+   * This method assumes that point lies on the line and does not check it
+   * @param {Point} pt - point on a line
    * @returns {number}
    */
   coord(t) {
-    return Ot(t.x, t.y).cross(this.norm);
+    return It(t.x, t.y).cross(this.norm);
   }
   /**
    * Returns array of intersection points
@@ -2622,23 +2698,24 @@ class ue {
     if (t instanceof i.Point)
       return this.contains(t) ? [t] : [];
     if (t instanceof i.Line)
-      return Bt(this, t);
+      return St(this, t);
+    if (t instanceof i.Ray)
+      return tn(t, this);
     if (t instanceof i.Circle)
-      return _t(this, t);
+      return at(this, t);
     if (t instanceof i.Box)
-      return It(this, t);
+      return vt(this, t);
     if (t instanceof i.Segment)
-      return Ft(t, this);
+      return Mt(t, this);
     if (t instanceof i.Arc)
-      return se(this, t);
+      return Yt(this, t);
     if (t instanceof i.Polygon)
-      return Ht(this, t);
+      return Ft(this, t);
   }
   /**
    * Calculate distance and shortest segment from line to shape and returns array [distance, shortest_segment]
    * @param {Shape} shape Shape of the one of the types Point, Circle, Segment, Arc, Polygon
-   * @returns {Number}
-   * @returns {Segment}
+   * @returns {[number, Segment]}
    */
   distanceTo(t) {
     if (t instanceof i.Point) {
@@ -2663,10 +2740,10 @@ class ue {
     }
   }
   /**
-   * Split line with array of points and return array of shapes
-   * Assumed that all points lay on the line
-   * @param {Point[]}
-   * @returns {Shape[]}
+   * Split line with a point or array of points and return array of shapes
+   * Assumed (but not checked) that all points lay on the line
+   * @param {Point | Point[]} pt
+   * @returns {MultilineShapes}
    */
   split(t) {
     if (t instanceof i.Point)
@@ -2677,7 +2754,29 @@ class ue {
     }
   }
   /**
-   * Sort given array of points that lay on line with respect to coordinate on a line
+   * Return new line rotated by angle
+   * @param {number} angle - angle in radians
+   * @param {Point} center - center of rotation
+   */
+  rotate(t, e = new i.Point()) {
+    return new i.Line(
+      this.pt.rotate(t, e),
+      this.norm.rotate(t)
+    );
+  }
+  /**
+   * Return new line transformed by affine transformation matrix
+   * @param {Matrix} m - affine transformation matrix (a,b,c,d,tx,ty)
+   * @returns {Line}
+   */
+  transform(t) {
+    return new i.Line(
+      this.pt.transform(t),
+      this.norm.clone()
+    );
+  }
+  /**
+   * Sort given array of points that lay on a line with respect to coordinate on a line
    * The method assumes that points lay on the line and does not check this
    * @param {Point[]} pts - array of points
    * @returns {Point[]} new array sorted
@@ -2685,13 +2784,8 @@ class ue {
   sortPoints(t) {
     return t.slice().sort((e, n) => this.coord(e) < this.coord(n) ? -1 : this.coord(e) > this.coord(n) ? 1 : 0);
   }
-  /**
-   * This method returns an object that defines how data will be
-   * serialized when called JSON.stringify() method
-   * @returns {Object}
-   */
-  toJSON() {
-    return Object.assign({}, this, { name: "line" });
+  get name() {
+    return "line";
   }
   /**
    * Return string to draw svg segment representing line inside given box
@@ -2699,36 +2793,38 @@ class ue {
    * @param {Object} attrs - an object with attributes of svg circle element
    */
   svg(t, e = {}) {
-    let n = It(this, t);
+    let n = vt(this, t);
     if (n.length === 0)
       return "";
-    let s = n[0], l = n.length == 2 ? n[1] : n.find((a) => !a.equalTo(s));
-    return l === void 0 && (l = s), new i.Segment(s, l).svg(e);
+    let r = n[0], l = n.length === 2 ? n[1] : n.find((a) => !a.equalTo(r));
+    return l === void 0 && (l = r), new i.Segment(r, l).svg(e);
   }
   static points2norm(t, e) {
     if (t.equalTo(e))
-      throw i.Errors.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     return new i.Vector(t, e).normalize().rotate90CCW();
   }
-}
-i.Line = ue;
-const ai = (...r) => new i.Line(...r);
-i.line = ai;
-class fi {
+};
+i.Line = yi;
+const Ii = (...s) => new i.Line(...s);
+i.line = Ii;
+let bi = class extends it {
+  /**
+   * Class private property
+   * @type {string}
+   */
   /**
    *
    * @param {Point} pc - circle center point
    * @param {number} r - circle radius
    */
   constructor(...t) {
-    if (this.pc = new i.Point(), this.r = 1, t.length == 1 && t[0] instanceof Object && t[0].name === "circle") {
+    if (super(), this.pc = new i.Point(), this.r = 1, t.length === 1 && t[0] instanceof Object && t[0].name === "circle") {
       let { pc: e, r: n } = t[0];
       this.pc = new i.Point(e), this.r = n;
-      return;
     } else {
       let [e, n] = [...t];
       e && e instanceof i.Point && (this.pc = e.clone()), n !== void 0 && (this.r = n);
-      return;
     }
   }
   /**
@@ -2781,6 +2877,25 @@ class fi {
     return new i.Arc(this.center, this.r, Math.PI, -Math.PI, t);
   }
   /**
+   * Method scale is supported only for uniform scaling of the circle with (0,0) center
+   * @param {number} sx
+   * @param {number} sy
+   * @returns {Circle}
+   */
+  scale(t, e) {
+    if (t !== e || !(this.pc.x === 0 && this.pc.y === 0))
+      throw w.OPERATION_IS_NOT_SUPPORTED;
+    return new i.Circle(this.pc, this.r * t);
+  }
+  /**
+   * Return new circle transformed using affine transformation matrix
+   * @param {Matrix} matrix - affine transformation matrix
+   * @returns {Circle}
+   */
+  transform(t = new i.Matrix()) {
+    return new i.Circle(this.pc.transform(t), this.r);
+  }
+  /**
    * Returns array of intersection points between circle and other shape
    * @param {Shape} shape Shape of the one of supported types
    * @returns {Point[]}
@@ -2789,17 +2904,19 @@ class fi {
     if (t instanceof i.Point)
       return this.contains(t) ? [t] : [];
     if (t instanceof i.Line)
-      return _t(t, this);
+      return at(t, this);
+    if (t instanceof i.Ray)
+      return Je(t, this);
     if (t instanceof i.Segment)
-      return Vt(t, this);
+      return jt(t, this);
     if (t instanceof i.Circle)
-      return He(t, this);
+      return We(t, this);
     if (t instanceof i.Box)
-      return Un(this, t);
+      return Yn(this, t);
     if (t instanceof i.Arc)
-      return le(t, this);
+      return de(t, this);
     if (t instanceof i.Polygon)
-      return Ge(this, t);
+      return je(this, t);
   }
   /**
        * Calculate distance and shortest segment from circle to shape and return array [distance, shortest segment]
@@ -2838,49 +2955,40 @@ class fi {
       return [e, n];
     }
   }
-  /**
-   * This method returns an object that defines how data will be
-   * serialized when called JSON.stringify() method
-   * @returns {Object}
-   */
-  toJSON() {
-    return Object.assign({}, this, { name: "circle" });
+  get name() {
+    return "circle";
   }
   /**
    * Return string to draw circle in svg
-   * @param {Object} attrs - an object with attributes of svg circle element,
-   * like "stroke", "strokeWidth", "fill" <br/>
-   * Defaults are stroke:"black", strokeWidth:"1", fill:"none"
+   * @param {Object} attrs - an object with attributes of svg circle element
    * @returns {string}
    */
   svg(t = {}) {
-    let { stroke: e, strokeWidth: n, fill: s, fillOpacity: l, id: o, className: a } = t, h = o && o.length > 0 ? `id="${o}"` : "", f = a && a.length > 0 ? `class="${a}"` : "";
     return `
-<circle cx="${this.pc.x}" cy="${this.pc.y}" r="${this.r}" stroke="${e || "black"}" stroke-width="${n || 1}" fill="${s || "none"}" fill-opacity="${l || 1}" ${h} ${f} />`;
+<circle cx="${this.pc.x}" cy="${this.pc.y}" r="${this.r}"
+                ${ft({ fill: "none", ...t })} />`;
   }
-}
-i.Circle = fi;
-const hi = (...r) => new i.Circle(...r);
-i.circle = hi;
-class ui {
+};
+i.Circle = bi;
+const Pi = (...s) => new i.Circle(...s);
+i.circle = Pi;
+class Ai extends it {
   /**
    *
    * @param {Point} pc - arc center
    * @param {number} r - arc radius
    * @param {number} startAngle - start angle in radians from 0 to 2*PI
    * @param {number} endAngle - end angle in radians from 0 to 2*PI
-   * @param {boolean} counterClockwise - arc direction, true - clockwise, false - counter clockwise
+   * @param {boolean} counterClockwise - arc direction, true - clockwise, false - counterclockwise
    */
   constructor(...t) {
-    if (this.pc = new i.Point(), this.r = 1, this.startAngle = 0, this.endAngle = 2 * Math.PI, this.counterClockwise = i.CCW, t.length != 0)
-      if (t.length == 1 && t[0] instanceof Object && t[0].name === "arc") {
-        let { pc: e, r: n, startAngle: s, endAngle: l, counterClockwise: o } = t[0];
-        this.pc = new i.Point(e.x, e.y), this.r = n, this.startAngle = s, this.endAngle = l, this.counterClockwise = o;
-        return;
+    if (super(), this.pc = new i.Point(), this.r = 1, this.startAngle = 0, this.endAngle = 2 * Math.PI, this.counterClockwise = i.CCW, t.length !== 0)
+      if (t.length === 1 && t[0] instanceof Object && t[0].name === "arc") {
+        let { pc: e, r: n, startAngle: r, endAngle: l, counterClockwise: o } = t[0];
+        this.pc = new i.Point(e.x, e.y), this.r = n, this.startAngle = r, this.endAngle = l, this.counterClockwise = o;
       } else {
-        let [e, n, s, l, o] = [...t];
-        e && e instanceof i.Point && (this.pc = e.clone()), n !== void 0 && (this.r = n), s !== void 0 && (this.startAngle = s), l !== void 0 && (this.endAngle = l), o !== void 0 && (this.counterClockwise = o);
-        return;
+        let [e, n, r, l, o] = [...t];
+        e && e instanceof i.Point && (this.pc = e.clone()), n !== void 0 && (this.r = n), r !== void 0 && (this.startAngle = r), l !== void 0 && (this.endAngle = l), o !== void 0 && (this.counterClockwise = o);
       }
   }
   /**
@@ -2938,7 +3046,7 @@ class ui {
    * @returns {Box}
    */
   get box() {
-    let e = this.breakToFunctional().reduce((n, s) => n.merge(s.start.box), new i.Box());
+    let e = this.breakToFunctional().reduce((n, r) => n.merge(r.start.box), new i.Box());
     return e = e.merge(this.end.box), e;
   }
   /**
@@ -2988,9 +3096,9 @@ class ui {
   pointAtLength(t) {
     if (t > this.length || t < 0)
       return null;
-    if (t == 0)
+    if (t === 0)
       return this.start;
-    if (t == this.length)
+    if (t === this.length)
       return this.end;
     let e = t / this.length, n = this.counterClockwise ? this.startAngle + this.sweep * e : this.startAngle - this.sweep * e;
     return new i.Arc(this.pc, this.r, this.startAngle, n, this.counterClockwise).end;
@@ -3005,23 +3113,25 @@ class ui {
   /**
    * Returns array of intersection points between arc and other shape
    * @param {Shape} shape Shape of the one of supported types <br/>
-   * @returns {Points[]}
+   * @returns {Point[]}
    */
   intersect(t) {
     if (t instanceof i.Point)
       return this.contains(t) ? [t] : [];
     if (t instanceof i.Line)
-      return se(t, this);
+      return Yt(t, this);
+    if (t instanceof i.Ray)
+      return Ke(t, this);
     if (t instanceof i.Circle)
-      return le(this, t);
+      return de(this, t);
     if (t instanceof i.Segment)
-      return rt(t, this);
+      return lt(t, this);
     if (t instanceof i.Box)
-      return Mn(this, t);
+      return jn(this, t);
     if (t instanceof i.Arc)
-      return oe(this, t);
+      return ce(this, t);
     if (t instanceof i.Polygon)
-      return fe(this, t);
+      return pe(this, t);
   }
   /**
        * Calculate distance and shortest segment from arc to shape and return array [distance, shortest segment]
@@ -3062,7 +3172,7 @@ class ui {
   }
   /**
    * Breaks arc in extreme point 0, pi/2, pi, 3*pi/2 and returns array of sub-arcs
-   * @returns {Arcs[]}
+   * @returns {Arc[]}
    */
   breakToFunctional() {
     let t = [], e = [0, Math.PI / 2, 2 * Math.PI / 2, 3 * Math.PI / 2], n = [
@@ -3070,16 +3180,16 @@ class ui {
       this.pc.translate(0, this.r),
       this.pc.translate(-this.r, 0),
       this.pc.translate(0, -this.r)
-    ], s = [];
+    ], r = [];
     for (let l = 0; l < 4; l++)
-      n[l].on(this) && s.push(new i.Arc(this.pc, this.r, this.startAngle, e[l], this.counterClockwise));
-    if (s.length == 0)
+      n[l].on(this) && r.push(new i.Arc(this.pc, this.r, this.startAngle, e[l], this.counterClockwise));
+    if (r.length === 0)
       t.push(this.clone());
     else {
-      s.sort((a, h) => a.length - h.length);
-      for (let a = 0; a < s.length; a++) {
+      r.sort((a, h) => a.length - h.length);
+      for (let a = 0; a < r.length; a++) {
         let h = t.length > 0 ? t[t.length - 1] : void 0, f;
-        h ? f = new i.Arc(this.pc, this.r, h.endAngle, s[a].endAngle, this.counterClockwise) : f = new i.Arc(this.pc, this.r, this.startAngle, s[a].endAngle, this.counterClockwise), i.Utils.EQ_0(f.length) || t.push(f.clone());
+        h ? f = new i.Arc(this.pc, this.r, h.endAngle, r[a].endAngle, this.counterClockwise) : f = new i.Arc(this.pc, this.r, this.startAngle, r[a].endAngle, this.counterClockwise), i.Utils.EQ_0(f.length) || t.push(f.clone());
       }
       let l = t.length > 0 ? t[t.length - 1] : void 0, o;
       l ? o = new i.Arc(this.pc, this.r, l.endAngle, this.endAngle, this.counterClockwise) : o = new i.Arc(this.pc, this.r, this.startAngle, this.endAngle, this.counterClockwise), !i.Utils.EQ_0(o.length) && !i.Utils.EQ(o.sweep, 2 * Math.PI) && t.push(o.clone());
@@ -3110,57 +3220,22 @@ class ui {
     return new i.Arc(this.pc, this.r, this.endAngle, this.startAngle, !this.counterClockwise);
   }
   /**
-   * Returns new arc translated by vector vec
-   * @param {Vector} vec
-   * @returns {Segment}
-   */
-  translate(...t) {
-    let e = this.clone();
-    return e.pc = this.pc.translate(...t), e;
-  }
-  /**
-   * Return new segment rotated by given angle around given point
-   * If point omitted, rotate around origin (0,0)
-   * Positive value of angle defines rotation counter clockwise, negative - clockwise
-   * @param {number} angle - rotation angle in radians
-   * @param {Point} center - center point, default is (0,0)
-   * @returns {Arc}
-   */
-  rotate(t = 0, e = new i.Point()) {
-    let n = new i.Matrix();
-    return n = n.translate(e.x, e.y).rotate(t).translate(-e.x, -e.y), this.transform(n);
-  }
-  /**
-   * Return new arc scaled by scaleX, scaleY.
-   * @param {number} scaleX - scale value by X
-   * @param {number} scaleY - scale value by Y
-   * @returns {Arc}
-   */
-  scale(t = 1, e = 1) {
-    let n = new i.Matrix();
-    return n = n.scale(t, e), this.transform(n);
-  }
-  /**
    * Return new arc transformed using affine transformation matrix <br/>
-   * Note 1. Non-equal scaling by x and y (abs(matrix[0]) != abs(matrix[3])) produce illegal result because
-   * it should create elliptic arc but this package does not support ellipses
-   * Note 2. Mirror transformation (matrix[0] * matrix[3] < 0) change direction of the arc to the opposite
-   * TODO: support non-equal scaling arc to ellipse or throw exception ?
    * @param {Matrix} matrix - affine transformation matrix
    * @returns {Arc}
    */
   transform(t = new i.Matrix()) {
-    let e = this.start.transform(t), n = this.end.transform(t), s = this.pc.transform(t), l = this.counterClockwise;
-    return t.a * t.d < 0 && (l = !l), i.Arc.arcSE(s, e, n, l);
+    let e = this.start.transform(t), n = this.end.transform(t), r = this.pc.transform(t), l = this.counterClockwise;
+    return t.a * t.d < 0 && (l = !l), i.Arc.arcSE(r, e, n, l);
   }
-  static arcSE(t, e, n, s) {
+  static arcSE(t, e, n, r) {
     let { vector: l } = i, o = l(t, e).slope, a = l(t, n).slope;
-    i.Utils.EQ(o, a) && (a += 2 * Math.PI, s = !0);
+    i.Utils.EQ(o, a) && (a += 2 * Math.PI, r = !0);
     let h = l(t, e).length;
-    return new i.Arc(t, h, o, a, s);
+    return new i.Arc(t, h, o, a, r);
   }
   definiteIntegral(t = 0) {
-    return this.breakToFunctional().reduce((s, l) => s + l.circularSegmentDefiniteIntegral(t), 0);
+    return this.breakToFunctional().reduce((r, l) => r + l.circularSegmentDefiniteIntegral(t), 0);
   }
   circularSegmentDefiniteIntegral(t) {
     let e = new i.Line(this.start, this.end), n = this.pc.leftTo(e), l = new i.Segment(this.start, this.end).definiteIntegral(t), o = this.circularSegmentArea();
@@ -3171,43 +3246,36 @@ class ui {
   }
   /**
    * Sort given array of points from arc start to end, assuming all points lay on the arc
-   * @param {Point[]} array of points
+   * @param {Point[]} pts array of points
    * @returns {Point[]} new array sorted
    */
   sortPoints(t) {
     let { vector: e } = i;
-    return t.slice().sort((n, s) => {
-      let l = e(this.pc, n).slope, o = e(this.pc, s).slope;
+    return t.slice().sort((n, r) => {
+      let l = e(this.pc, n).slope, o = e(this.pc, r).slope;
       return l < o ? -1 : l > o ? 1 : 0;
     });
   }
-  /**
-   * This method returns an object that defines how data will be
-   * serialized when called JSON.stringify() method
-   * @returns {Object}
-   */
-  toJSON() {
-    return Object.assign({}, this, { name: "arc" });
+  get name() {
+    return "arc";
   }
   /**
    * Return string to draw arc in svg
-   * @param {Object} attrs - an object with attributes of svg path element,
-   * like "stroke", "strokeWidth", "fill" <br/>
-   * Defaults are stroke:"black", strokeWidth:"1", fill:"none"
+   * @param {Object} attrs - an object with attributes of svg path element
    * @returns {string}
    */
   svg(t = {}) {
-    let e = this.sweep <= Math.PI ? "0" : "1", n = this.counterClockwise ? "1" : "0", { stroke: s, strokeWidth: l, fill: o, id: a, className: h } = t, f = a && a.length > 0 ? `id="${a}"` : "", u = h && h.length > 0 ? `class="${h}"` : "";
+    let e = this.sweep <= Math.PI ? "0" : "1", n = this.counterClockwise ? "1" : "0";
     return i.Utils.EQ(this.sweep, 2 * Math.PI) ? new i.Circle(this.pc, this.r).svg(t) : `
 <path d="M${this.start.x},${this.start.y}
                              A${this.r},${this.r} 0 ${e},${n} ${this.end.x},${this.end.y}"
-                    stroke="${s || "black"}" stroke-width="${l || 1}" fill="${o || "none"}" ${f} ${u} />`;
+                    ${ft({ fill: "none", ...t })} />`;
   }
 }
-i.Arc = ui;
-const ci = (...r) => new i.Arc(...r);
-i.arc = ci;
-class Mt {
+i.Arc = Ai;
+const Li = (...s) => new i.Arc(...s);
+i.arc = Li;
+class Ot extends it {
   /**
    *
    * @param {number} xmin - minimal x coordinate
@@ -3215,15 +3283,15 @@ class Mt {
    * @param {number} xmax - maximal x coordinate
    * @param {number} ymax - maximal y coordinate
    */
-  constructor(t = void 0, e = void 0, n = void 0, s = void 0) {
-    this.xmin = t, this.ymin = e, this.xmax = n, this.ymax = s;
+  constructor(t = void 0, e = void 0, n = void 0, r = void 0) {
+    super(), this.xmin = t, this.ymin = e, this.xmax = n, this.ymax = r;
   }
   /**
    * Return new cloned instance of box
    * @returns {Box}
    */
   clone() {
-    return new Mt(this.xmin, this.ymin, this.xmax, this.ymax);
+    return new Ot(this.xmin, this.ymin, this.xmax, this.ymax);
   }
   /**
    * Property low need for interval tree interface
@@ -3296,7 +3364,7 @@ class Mt {
    * @returns {Box}
    */
   merge(t) {
-    return new Mt(
+    return new Ot(
       this.xmin === void 0 ? t.xmin : Math.min(this.xmin, t.xmin),
       this.ymin === void 0 ? t.ymin : Math.min(this.ymin, t.ymin),
       this.xmax === void 0 ? t.xmax : Math.max(this.xmax, t.xmax),
@@ -3330,16 +3398,16 @@ class Mt {
   }
   /**
    * Set new values to the box object
-   * @param {number} xmin - miminal x coordinate
+   * @param {number} xmin - mininal x coordinate
    * @param {number} ymin - minimal y coordinate
    * @param {number} xmax - maximal x coordinate
    * @param {number} ymax - maximal y coordinate
    */
-  set(t, e, n, s) {
-    this.xmin = t, this.ymin = e, this.xmax = n, this.ymax = s;
+  set(t, e, n, r) {
+    this.xmin = t, this.ymin = e, this.xmax = n, this.ymax = r;
   }
   /**
-   * Transform box into array of points from low left corner in counter clockwise
+   * Transform box into array of points from low left corner in counterclockwise
    * @returns {Point[]}
    */
   toPoints() {
@@ -3351,7 +3419,7 @@ class Mt {
     ];
   }
   /**
-   * Transform box into array of segments from low left corner in counter clockwise
+   * Transform box into array of segments from low left corner in counterclockwise
    * @returns {Segment[]}
    */
   toSegments() {
@@ -3364,22 +3432,45 @@ class Mt {
     ];
   }
   /**
-   * Return string to draw circle in svg
-   * @param {Object} attrs - an object with attributes of svg rectangle element,
-   * like "stroke", "strokeWidth", "fill" <br/>
-   * Defaults are stroke:"black", strokeWidth:"1", fill:"none"
+   * Box rotation is not supported
+   * Attempt to rotate box throws error
+   * @param {number} angle - angle in radians
+   * @param {Point} [center=(0,0)] center
+   */
+  rotate(t, e = new i.Point()) {
+    throw w.OPERATION_IS_NOT_SUPPORTED;
+  }
+  /**
+   * Return new box transformed using affine transformation matrix
+   * New box is a bounding box of transformed corner points
+   * @param {Matrix} m - affine transformation matrix
+   * @returns {Box}
+   */
+  transform(t = new i.Matrix()) {
+    return this.toPoints().map((n) => n.transform(t)).reduce(
+      (n, r) => n.merge(r.box),
+      new Ot()
+    );
+  }
+  get name() {
+    return "box";
+  }
+  /**
+   * Return string to draw box in svg
+   * @param {Object} attrs - an object with attributes of svg rectangle element
    * @returns {string}
    */
   svg(t = {}) {
-    let { stroke: e, strokeWidth: n, fill: s, id: l, className: o } = t, a = l && l.length > 0 ? `id="${l}"` : "", h = o && o.length > 0 ? `class="${o}"` : "", f = this.xmax - this.xmin, u = this.ymax - this.ymin;
+    const e = this.xmax - this.xmin, n = this.ymax - this.ymin;
     return `
-<rect x="${this.xmin}" y="${this.ymin}" width=${f} height=${u} stroke="${e || "black"}" stroke-width="${n || 1}" fill="${s || "none"}" ${a} ${h} />`;
+<rect x="${this.xmin}" y="${this.ymin}" width=${e} height=${n}
+                ${ft({ fill: "none", ...t })} />`;
   }
 }
-i.Box = Mt;
-const di = (...r) => new i.Box(...r);
-i.box = di;
-class pi {
+i.Box = Ot;
+const Oi = (...s) => new i.Box(...s);
+i.box = Oi;
+class Ci {
   /**
    * Construct new instance of edge
    * @param {Shape} shape Shape of type Segment or Arc
@@ -3450,12 +3541,12 @@ class pi {
       return this.bv;
     if (this.shape instanceof i.Line || this.shape instanceof i.Ray)
       return this.bv = i.OUTSIDE, this.bv;
-    if (this.bvStart === void 0 && (this.bvStart = wt(t, this.start)), this.bvEnd === void 0 && (this.bvEnd = wt(t, this.end)), this.bvStart === i.OUTSIDE || this.bvEnd == i.OUTSIDE)
+    if (this.bvStart === void 0 && (this.bvStart = At(t, this.start)), this.bvEnd === void 0 && (this.bvEnd = At(t, this.end)), this.bvStart === i.OUTSIDE || this.bvEnd == i.OUTSIDE)
       this.bv = i.OUTSIDE;
     else if (this.bvStart === i.INSIDE || this.bvEnd == i.INSIDE)
       this.bv = i.INSIDE;
     else {
-      let e = wt(t, this.middle());
+      let e = At(t, this.middle());
       this.bv = e;
     }
     return this.bv;
@@ -3466,8 +3557,8 @@ class pi {
    * @param edge
    */
   setOverlap(t) {
-    let e, n = this.shape, s = t.shape;
-    n instanceof i.Segment && s instanceof i.Segment ? n.start.equalTo(s.start) && n.end.equalTo(s.end) ? e = i.OVERLAP_SAME : n.start.equalTo(s.end) && n.end.equalTo(s.start) && (e = i.OVERLAP_OPPOSITE) : (n instanceof i.Arc && s instanceof i.Arc || n instanceof i.Segment && s instanceof i.Arc || n instanceof i.Arc && s instanceof i.Segment) && (n.start.equalTo(s.start) && n.end.equalTo(s.end) && n.middle().equalTo(s.middle()) ? e = i.OVERLAP_SAME : n.start.equalTo(s.end) && n.end.equalTo(s.start) && n.middle().equalTo(s.middle()) && (e = i.OVERLAP_OPPOSITE)), this.overlap === void 0 && (this.overlap = e), t.overlap === void 0 && (t.overlap = e);
+    let e, n = this.shape, r = t.shape;
+    n instanceof i.Segment && r instanceof i.Segment ? n.start.equalTo(r.start) && n.end.equalTo(r.end) ? e = i.OVERLAP_SAME : n.start.equalTo(r.end) && n.end.equalTo(r.start) && (e = i.OVERLAP_OPPOSITE) : (n instanceof i.Arc && r instanceof i.Arc || n instanceof i.Segment && r instanceof i.Arc || n instanceof i.Arc && r instanceof i.Segment) && (n.start.equalTo(r.start) && n.end.equalTo(r.end) && n.middle().equalTo(r.middle()) ? e = i.OVERLAP_SAME : n.start.equalTo(r.end) && n.end.equalTo(r.start) && n.middle().equalTo(r.middle()) && (e = i.OVERLAP_OPPOSITE)), this.overlap === void 0 && (this.overlap = e), t.overlap === void 0 && (t.overlap = e);
   }
   svg() {
     if (this.shape instanceof i.Segment)
@@ -3475,7 +3566,7 @@ class pi {
     if (this.shape instanceof i.Arc) {
       let t = this.shape, e, n = t.counterClockwise ? "1" : "0";
       if (i.Utils.EQ(t.sweep, 2 * Math.PI)) {
-        let s = t.counterClockwise ? 1 : -1, l = new i.Arc(t.pc, t.r, t.startAngle, t.startAngle + s * Math.PI, t.counterClockwise), o = new i.Arc(t.pc, t.r, t.startAngle + s * Math.PI, t.endAngle, t.counterClockwise);
+        let r = t.counterClockwise ? 1 : -1, l = new i.Arc(t.pc, t.r, t.startAngle, t.startAngle + r * Math.PI, t.counterClockwise), o = new i.Arc(t.pc, t.r, t.startAngle + r * Math.PI, t.endAngle, t.counterClockwise);
         return e = "0", ` A${l.r},${l.r} 0 ${e},${n} ${l.end.x},${l.end.y}
                     A${o.r},${o.r} 0 ${e},${n} ${o.end.x},${o.end.y}`;
       } else
@@ -3486,8 +3577,8 @@ class pi {
     return this.shape.toJSON();
   }
 }
-i.Edge = pi;
-class gi extends ie {
+i.Edge = Ci;
+class Ni extends ue {
   constructor(t, e) {
     super(t, e), this.setCircularLinks();
   }
@@ -3529,37 +3620,37 @@ class gi extends ie {
     return super.remove(t), this;
   }
 }
-class at extends gi {
+class dt extends Ni {
   constructor(t, ...e) {
-    if (super(), this._box = void 0, this._orientation = void 0, e.length != 0) {
-      if (e.length == 1) {
+    if (super(), this._box = void 0, this._orientation = void 0, e.length !== 0) {
+      if (e.length === 1) {
         if (e[0] instanceof Array) {
           let n = e[0];
-          if (n.length == 0)
+          if (n.length === 0)
             return;
-          if (n.every((s) => s instanceof i.Point)) {
-            let s = at.points2segments(n);
-            this.shapes2face(t.edges, s);
-          } else if (n.every((s) => s instanceof Array && s.length === 2)) {
-            let s = n.map((o) => new i.Point(o[0], o[1])), l = at.points2segments(s);
+          if (n.every((r) => r instanceof i.Point)) {
+            let r = dt.points2segments(n);
+            this.shapes2face(t.edges, r);
+          } else if (n.every((r) => r instanceof Array && r.length === 2)) {
+            let r = n.map((o) => new i.Point(o[0], o[1])), l = dt.points2segments(r);
             this.shapes2face(t.edges, l);
-          } else if (n.every((s) => s instanceof i.Segment || s instanceof i.Arc))
+          } else if (n.every((r) => r instanceof i.Segment || r instanceof i.Arc))
             this.shapes2face(t.edges, n);
-          else if (n.every((s) => s.name === "segment" || s.name === "arc")) {
-            let s = [];
+          else if (n.every((r) => r.name === "segment" || r.name === "arc")) {
+            let r = [];
             for (let l of n) {
               let o;
-              l.name === "segment" ? o = new i.Segment(l) : o = new i.Arc(l), s.push(o);
+              l.name === "segment" ? o = new i.Segment(l) : o = new i.Arc(l), r.push(o);
             }
-            this.shapes2face(t.edges, s);
+            this.shapes2face(t.edges, r);
           }
-        } else if (e[0] instanceof at) {
+        } else if (e[0] instanceof dt) {
           let n = e[0];
           this.first = n.first, this.last = n.last;
-          for (let s of n)
-            t.edges.add(s);
+          for (let r of n)
+            t.edges.add(r);
         } else if (e[0] instanceof i.Circle)
-          this.shapes2face(t.edges, [e[0].toArc(i.CCW)]);
+          this.shapes2face(t.edges, [e[0].toArc(Be)]);
         else if (e[0] instanceof i.Box) {
           let n = e[0];
           this.shapes2face(t.edges, [
@@ -3570,7 +3661,7 @@ class at extends gi {
           ]);
         }
       }
-      e.length == 2 && e[0] instanceof i.Edge && e[1] instanceof i.Edge && (this.first = e[0], this.last = e[1], this.last.next = this.first, this.first.prev = this.last, this.setArcLength());
+      e.length === 2 && e[0] instanceof i.Edge && e[1] instanceof i.Edge && (this.first = e[0], this.last = e[1], this.last.next = this.first, this.first.prev = this.last, this.setArcLength());
     }
   }
   /**
@@ -3631,8 +3722,8 @@ class at extends gi {
   }
   shapes2face(t, e) {
     for (let n of e) {
-      let s = new i.Edge(n);
-      this.append(s), t.add(s);
+      let r = new i.Edge(n);
+      this.append(r), t.add(r);
     }
   }
   /**
@@ -3661,9 +3752,19 @@ class at extends gi {
     return super.remove(t), this.setArcLength(), this;
   }
   /**
+   * Merge current edge with the next edge. Given edge will be extended,
+   * next edge after it will be removed. The distortion of the polygon
+   * is on the responsibility of the user of this method
+   * @param {Edge} edge - edge to be extended
+   * @returns {Face}
+   */
+  merge_with_next_edge(t) {
+    return t.shape.end.x = t.next.shape.end.x, t.shape.end.y = t.next.shape.end.y, this.remove(t.next), this;
+  }
+  /**
    * Reverse orientation of the face: first edge become last and vice a verse,
    * all edges starts and ends swapped, direction of arcs inverted. If face was oriented
-   * clockwise, it becomes counter clockwise and vice versa
+   * clockwise, it becomes counterclockwise and vice versa
    */
   reverse() {
     let t = [], e = this.last;
@@ -3711,7 +3812,7 @@ class at extends gi {
    * Return face orientation: one of Flatten.ORIENTATION.CCW, Flatten.ORIENTATION.CW, Flatten.ORIENTATION.NOT_ORIENTABLE <br/>
    * According to Green theorem the area of a closed curve may be calculated as double integral,
    * and the sign of the integral will be defined by the direction of the curve.
-   * When the integral ("signed area") will be negative, direction is counter clockwise,
+   * When the integral ("signed area") will be negative, direction is counterclockwise,
    * when positive - clockwise and when it is zero, polygon is not orientable.
    * See {@link https://mathinsight.org/greens_theorem_find_area}
    * @returns {number}
@@ -3719,7 +3820,7 @@ class at extends gi {
   orientation() {
     if (this._orientation === void 0) {
       let t = this.signedArea();
-      i.Utils.EQ_0(t) ? this._orientation = i.ORIENTATION.NOT_ORIENTABLE : i.Utils.LT(t, 0) ? this._orientation = i.ORIENTATION.CCW : this._orientation = i.ORIENTATION.CW;
+      i.Utils.EQ_0(t) ? this._orientation = qt.NOT_ORIENTABLE : i.Utils.LT(t, 0) ? this._orientation = qt.CCW : this._orientation = qt.CW;
     }
     return this._orientation;
   }
@@ -3727,14 +3828,14 @@ class at extends gi {
    * Returns true if face of the polygon is simple (no self-intersection points found)
    * NOTE: this method is incomplete because it does not exclude touching points.
    * Self intersection test should check if polygon change orientation in the test point.
-   * @param {Edges} edges - reference to polygon.edges to provide search index
+   * @param {PlanarSet} edges - reference to polygon edges to provide search index
    * @returns {boolean}
    */
   isSimple(t) {
-    return at.getSelfIntersections(this, t, !0).length == 0;
+    return dt.getSelfIntersections(this, t, !0).length === 0;
   }
   static getSelfIntersections(t, e, n = !1) {
-    let s = [];
+    let r = [];
     for (let l of t) {
       let o = e.search(l.box);
       for (let a of o) {
@@ -3742,15 +3843,15 @@ class at extends gi {
           continue;
         let h = l.shape.intersect(a.shape);
         for (let f of h)
-          if (!(f.equalTo(l.start) && f.equalTo(a.end) && a === l.prev) && !(f.equalTo(l.end) && f.equalTo(a.start) && a === l.next) && (s.push(f), n))
+          if (!(f.equalTo(l.start) && f.equalTo(a.end) && a === l.prev) && !(f.equalTo(l.end) && f.equalTo(a.start) && a === l.next) && (r.push(f), n))
             break;
-        if (s.length > 0 && n)
+        if (r.length > 0 && n)
           break;
       }
-      if (s.length > 0 && n)
+      if (r.length > 0 && n)
         break;
     }
-    return s;
+    return r;
   }
   /**
    * Returns edge which contains given point
@@ -3760,7 +3861,7 @@ class at extends gi {
   findEdgeByPoint(t) {
     let e;
     for (let n of this)
-      if (n.shape.contains(t)) {
+      if (!t.equalTo(n.shape.start) && (t.equalTo(n.shape.end) || n.shape.contains(t))) {
         e = n;
         break;
       }
@@ -3788,8 +3889,8 @@ M${this.first.start.x},${this.first.start.y}`;
     return t += " z", t;
   }
 }
-i.Face = at;
-class ce {
+i.Face = dt;
+class _e extends it {
   /**
    * Ray may be constructed by setting an <b>origin</b> point and a <b>normal</b> vector, so that any point <b>x</b>
    * on a ray fit an equation: <br />
@@ -3801,12 +3902,12 @@ class ce {
    * @param {Vector} norm - normal vector
    */
   constructor(...t) {
-    if (this.pt = new i.Point(), this.norm = new i.Vector(0, 1), t.length != 0 && (t.length >= 1 && t[0] instanceof i.Point && (this.pt = t[0].clone()), t.length !== 1)) {
+    if (super(), this.pt = new i.Point(), this.norm = new i.Vector(0, 1), t.length !== 0 && (t.length >= 1 && t[0] instanceof i.Point && (this.pt = t[0].clone()), t.length !== 1)) {
       if (t.length === 2 && t[1] instanceof i.Vector) {
         this.norm = t[1].clone();
         return;
       }
-      throw i.Errors.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -3814,7 +3915,7 @@ class ce {
    * @returns {Ray}
    */
   clone() {
-    return new ce(this.pt, this.norm);
+    return new _e(this.pt, this.norm);
   }
   /**
    * Slope of the ray - angle in radians between ray and axe x from 0 to 2PI
@@ -3833,7 +3934,7 @@ class ce {
       t > Math.PI / 2 && t < 3 * Math.PI / 2 ? Number.NEGATIVE_INFINITY : this.pt.x,
       t >= 0 && t <= Math.PI ? this.pt.y : Number.NEGATIVE_INFINITY,
       t >= Math.PI / 2 && t <= 3 * Math.PI / 2 ? this.pt.x : Number.POSITIVE_INFINITY,
-      t >= Math.PI && t <= 2 * Math.PI || t == 0 ? this.pt.y : Number.POSITIVE_INFINITY
+      t >= Math.PI && t <= 2 * Math.PI || t === 0 ? this.pt.y : Number.POSITIVE_INFINITY
     );
   }
   /**
@@ -3879,27 +3980,52 @@ class ce {
     ] : [];
   }
   /**
-   * Returns array of intersection points between ray and segment or arc
-   * @param {Segment|Arc} - Shape to intersect with ray
-   * @returns {Array} array of intersection points
+   * Returns array of intersection points between ray and another shape
+   * @param {Shape} shape - Shape to intersect with ray
+   * @returns {Point[]} array of intersection points
    */
   intersect(t) {
+    if (t instanceof i.Point)
+      return this.contains(t) ? [t] : [];
     if (t instanceof i.Segment)
-      return this.intersectRay2Segment(this, t);
+      return Xe(this, t);
     if (t instanceof i.Arc)
-      return this.intersectRay2Arc(this, t);
+      return Ke(this, t);
+    if (t instanceof i.Line)
+      return tn(this, t);
+    if (t instanceof i.Ray)
+      return ri(this, t);
+    if (t instanceof i.Circle)
+      return Je(this, t);
+    if (t instanceof i.Box)
+      return ii(this, t);
+    if (t instanceof i.Polygon)
+      return en(this, t);
   }
-  intersectRay2Segment(t, e) {
-    let n = [], s = new i.Line(t.start, t.norm), l = s.intersect(e);
-    for (let o of l)
-      t.contains(o) && n.push(o);
-    return l.length == 2 && n.length == 1 && t.start.on(s) && n.push(t.start), n;
+  /**
+   * Return new line rotated by angle
+   * @param {number} angle - angle in radians
+   * @param {Point} center - center of rotation
+   */
+  rotate(t, e = new i.Point()) {
+    return new i.Ray(
+      this.pt.rotate(t, e),
+      this.norm.rotate(t)
+    );
   }
-  intersectRay2Arc(t, e) {
-    let n = [], l = new i.Line(t.start, t.norm).intersect(e);
-    for (let o of l)
-      t.contains(o) && n.push(o);
-    return n;
+  /**
+   * Return new ray transformed by affine transformation matrix
+   * @param {Matrix} m - affine transformation matrix (a,b,c,d,tx,ty)
+   * @returns {Ray}
+   */
+  transform(t) {
+    return new i.Ray(
+      this.pt.transform(t),
+      this.norm.clone()
+    );
+  }
+  get name() {
+    return "ray";
   }
   /**
    * Return string to draw svg segment representing ray inside given box
@@ -3907,14 +4033,14 @@ class ce {
    * @param {Object} attrs - an object with attributes of svg segment element
    */
   svg(t, e = {}) {
-    let n = new i.Line(this.pt, this.norm), s = It(n, t);
-    return s = s.filter((o) => this.contains(o)), s.length === 0 || s.length === 2 ? "" : new i.Segment(this.pt, s[0]).svg(e);
+    let n = new i.Line(this.pt, this.norm), r = vt(n, t);
+    return r = r.filter((o) => this.contains(o)), r.length === 0 || r.length === 2 ? "" : new i.Segment(this.pt, r[0]).svg(e);
   }
 }
-i.Ray = ce;
-const _i = (...r) => new i.Ray(...r);
-i.ray = _i;
-class ft {
+i.Ray = _e;
+const Ri = (...s) => new i.Ray(...s);
+i.ray = Ri;
+class rt {
   /**
    * Constructor creates new instance of polygon. With no arguments new polygon is empty.<br/>
    * Constructor accepts as argument array that define loop of shapes
@@ -3937,9 +4063,9 @@ class ft {
           this.faces.add(new i.Face(this, e));
         else
           for (let n of e)
-            if (n instanceof Array && n[0] instanceof Array && n[0].every((s) => s instanceof Array && s.length === 2 && typeof s[0] == "number" && typeof s[1] == "number"))
-              for (let s of n)
-                this.faces.add(new i.Face(this, s));
+            if (n instanceof Array && n[0] instanceof Array && n[0].every((r) => r instanceof Array && r.length === 2 && typeof r[0] == "number" && typeof r[1] == "number"))
+              for (let r of n)
+                this.faces.add(new i.Face(this, r));
             else
               this.faces.add(new i.Face(this, n));
       else
@@ -3965,7 +4091,7 @@ class ft {
    * @returns {Polygon}
    */
   clone() {
-    let t = new ft();
+    let t = new rt();
     for (let e of this.faces)
       t.addFace(e.shapes);
     return t;
@@ -4004,7 +4130,7 @@ class ft {
   }
   /**
    * Add new face to polygon. Returns added face
-   * @param {Points[]|Segments[]|Arcs[]|Circle|Box} args -  new face may be create with one of the following ways: <br/>
+   * @param {Point[]|Segment[]|Arc[]|Circle|Box} args -  new face may be create with one of the following ways: <br/>
    * 1) array of points that describe closed path (edges are segments) <br/>
    * 2) array of shapes (segments and arcs) which describe closed path <br/>
    * 3) circle - will be added as counterclockwise arc <br/>
@@ -4061,8 +4187,8 @@ class ft {
       this.deleteFace(t);
       return;
     }
-    for (let s = e; s !== n.next; s = s.next)
-      if (t.remove(s), this.edges.delete(s), t.isEmpty()) {
+    for (let r = e; r !== n.next; r = r.next)
+      if (t.remove(r), this.edges.delete(r), t.isEmpty()) {
         this.deleteFace(t);
         break;
       }
@@ -4083,8 +4209,16 @@ class ft {
       return e.prev;
     if (n[1] === null)
       return e;
-    let s = new i.Edge(n[0]), l = e.prev;
-    return e.face.insert(s, l), this.edges.delete(e), this.edges.add(s), e.shape = n[1], this.edges.add(e), s;
+    let r = new i.Edge(n[0]), l = e.prev;
+    return e.face.insert(r, l), this.edges.delete(e), this.edges.add(r), e.shape = n[1], this.edges.add(e), r;
+  }
+  /**
+   * Merge given edge with next edge and remove vertex between them
+   * @param {Edge} edge
+   */
+  removeEndVertex(t) {
+    const e = t.next;
+    e !== t && (t.face.merge_with_next_edge(t), this.edges.delete(e));
   }
   /**
    * Cut polygon with multiline and return array of new polygons
@@ -4096,14 +4230,14 @@ class ft {
   cut(t) {
     let e = [this.clone()];
     for (let n of t) {
-      if (n.setInclusion(this) !== xt)
+      if (n.setInclusion(this) !== bt)
         continue;
-      let s = n.shape.start, l = n.shape.end, o = [];
+      let r = n.shape.start, l = n.shape.end, o = [];
       for (let a of e)
-        if (a.findEdgeByPoint(s) === void 0)
+        if (a.findEdgeByPoint(r) === void 0)
           o.push(a);
         else {
-          let [h, f] = a.cutFace(s, l);
+          let [h, f] = a.cutFace(r, l);
           o.push(h, f);
         }
       e = o;
@@ -4118,19 +4252,19 @@ class ft {
    * @returns {Polygon[]}
    */
   cutFace(t, e) {
-    let n = this.findEdgeByPoint(t), s = this.findEdgeByPoint(e);
-    if (n.face !== s.face)
+    let n = this.findEdgeByPoint(t), r = this.findEdgeByPoint(e);
+    if (n.face !== r.face)
       return [];
     let l = this.addVertex(t, n);
-    s = this.findEdgeByPoint(e);
-    let o = this.addVertex(e, s), a = l.face, h = new i.Edge(
+    r = this.findEdgeByPoint(e);
+    let o = this.addVertex(e, r), a = l.face, h = new i.Edge(
       new i.Segment(l.end, o.end)
     ), f = new i.Edge(
       new i.Segment(o.end, l.end)
     );
     l.next.prev = f, f.next = l.next, l.next = h, h.prev = l, o.next.prev = h, h.next = o.next, o.next = f, f.prev = o, this.edges.add(h), this.edges.add(f);
-    let u = this.addFace(h, l), p = this.addFace(f, o);
-    return this.faces.delete(a), [u.toPolygon(), p.toPolygon()];
+    let u = this.addFace(h, l), g = this.addFace(f, o);
+    return this.faces.delete(a), [u.toPolygon(), g.toPolygon()];
   }
   /**
    * Return a result of cutting polygon with line
@@ -4138,32 +4272,33 @@ class ft {
    * @returns {Polygon} newPoly - resulted polygon
    */
   cutWithLine(t) {
-    let e = this.clone(), n = new R([t]), s = {
+    let e = this.clone(), n = new R([t]), r = {
       int_points1: [],
       int_points2: [],
       int_points1_sorted: [],
       int_points2_sorted: []
     };
     for (let a of e.edges) {
-      let h = qe(a, t);
+      let h = Ye(a, t);
       for (let f of h)
-        ct(n.first, f, s.int_points1), ct(a, f, s.int_points2);
+        xt(n.first, f, r.int_points1), xt(a, f, r.int_points2);
     }
-    if (s.int_points1.length === 0)
+    if (r.int_points1.length === 0)
       return e;
-    s.int_points1_sorted = Gt(t, s.int_points1), s.int_points2_sorted = Et(s.int_points2), pt(n, s.int_points1_sorted), pt(e, s.int_points2_sorted), re(s), s.int_points1_sorted = Gt(t, s.int_points1), s.int_points2_sorted = Et(s.int_points2), Yt(s.int_points1), jt(s.int_points1, e);
-    for (let a of s.int_points1_sorted)
-      a.edge_before.bv === a.edge_after.bv && (s.int_points2[a.id] = -1, a.id = -1);
-    if (s.int_points1 = s.int_points1.filter((a) => a.id >= 0), s.int_points2 = s.int_points2.filter((a) => a.id >= 0), s.int_points1.length === 0)
+    r.int_points1_sorted = Xt(t, r.int_points1), r.int_points2_sorted = Pt(r.int_points2), wt(n, r.int_points1_sorted), wt(e, r.int_points2_sorted), he(r), r.int_points1_sorted = Xt(t, r.int_points1), r.int_points2_sorted = Pt(r.int_points2), ee(r.int_points1), ne(r.int_points1, e);
+    for (let a of r.int_points1_sorted)
+      a.edge_before.bv === a.edge_after.bv && (r.int_points2[a.id] = -1, a.id = -1);
+    if (r.int_points1 = r.int_points1.filter((a) => a.id >= 0), r.int_points2 = r.int_points2.filter((a) => a.id >= 0), r.int_points1.length === 0)
       return e;
-    s.int_points1_sorted = Gt(t, s.int_points1), s.int_points2_sorted = Et(s.int_points2);
-    let l = s.int_points1[0], o;
-    for (let a of s.int_points1_sorted)
-      a.edge_before.bv === xt && (o = new i.Edge(new i.Segment(l.pt, a.pt)), ge(s.int_points2[l.id], s.int_points2[a.id], o), e.edges.add(o), o = new i.Edge(new i.Segment(a.pt, l.pt)), ge(s.int_points2[a.id], s.int_points2[l.id], o), e.edges.add(o)), l = a;
+    r.int_points1_sorted = Xt(t, r.int_points1), r.int_points2_sorted = Pt(r.int_points2);
+    let l = r.int_points1[0], o;
+    for (let a of r.int_points1_sorted)
+      a.edge_before.bv === bt && (o = new i.Edge(new i.Segment(l.pt, a.pt)), xe(r.int_points2[l.id], r.int_points2[a.id], o), e.edges.add(o), o = new i.Edge(new i.Segment(a.pt, l.pt)), xe(r.int_points2[a.id], r.int_points2[l.id], o), e.edges.add(o)), l = a;
     return e.recreateFaces(), e;
   }
   /**
-   * Returns the first founded edge of polygon that contains given point
+   * Returns the first found edge of polygon that contains given point
+   * If point is a vertex, return the edge where the point is an end vertex, not a start one
    * @param {Point} pt
    * @returns {Edge}
    */
@@ -4183,10 +4318,10 @@ class ft {
     if (this.isEmpty())
       return [];
     let t = this.toArray();
-    t.sort((s, l) => l.area() - s.area());
-    let e = [...t[0].faces][0].orientation(), n = t.filter((s) => [...s.faces][0].orientation() === e);
-    for (let s of t) {
-      let l = [...s.faces][0];
+    t.sort((r, l) => l.area() - r.area());
+    let e = [...t[0].faces][0].orientation(), n = t.filter((r) => [...r.faces][0].orientation() === e);
+    for (let r of t) {
+      let l = [...r.faces][0];
       if (l.orientation() !== e) {
         for (let o of n)
           if (l.shapes.every((a) => o.contains(a))) {
@@ -4214,10 +4349,10 @@ class ft {
    */
   contains(t) {
     if (t instanceof i.Point) {
-      let e = wt(this, t);
-      return e === xt || e === z;
+      let e = At(this, t);
+      return e === bt || e === z;
     } else
-      return Ye(this, t);
+      return on(this, t);
   }
   /**
    * Return distance and shortest segment between polygon and other shape as array [distance, shortest_segment]
@@ -4234,10 +4369,10 @@ class ft {
       return n = n.reverse(), [e, n];
     }
     if (t instanceof i.Polygon) {
-      let e = [Number.POSITIVE_INFINITY, new i.Segment()], n, s;
+      let e = [Number.POSITIVE_INFINITY, new i.Segment()], n, r;
       for (let l of this.edges) {
         let o = e[0];
-        [n, s] = i.Distance.shape2planarSet(l.shape, t.edges, o), i.Utils.LT(n, o) && (e = [n, s]);
+        [n, r] = i.Distance.shape2planarSet(l.shape, t.edges, o), i.Utils.LT(n, o) && (e = [n, r]);
       }
       return e;
     }
@@ -4251,15 +4386,17 @@ class ft {
     if (t instanceof i.Point)
       return this.contains(t) ? [t] : [];
     if (t instanceof i.Line)
-      return Ht(t, this);
+      return Ft(t, this);
+    if (t instanceof i.Ray)
+      return en(t, this);
     if (t instanceof i.Circle)
-      return Ge(t, this);
+      return je(t, this);
     if (t instanceof i.Segment)
-      return ae(t, this);
+      return ge(t, this);
     if (t instanceof i.Arc)
-      return fe(t, this);
+      return pe(t, this);
     if (t instanceof i.Polygon)
-      return qn(t, this);
+      return ei(t, this);
   }
   /**
    * Returns new polygon translated by vector vec
@@ -4267,23 +4404,35 @@ class ft {
    * @returns {Polygon}
    */
   translate(t) {
-    let e = new ft();
+    let e = new rt();
     for (let n of this.faces)
-      e.addFace(n.shapes.map((s) => s.translate(t)));
+      e.addFace(n.shapes.map((r) => r.translate(t)));
     return e;
   }
   /**
    * Return new polygon rotated by given angle around given point
    * If point omitted, rotate around origin (0,0)
-   * Positive value of angle defines rotation counter clockwise, negative - clockwise
+   * Positive value of angle defines rotation counterclockwise, negative - clockwise
    * @param {number} angle - rotation angle in radians
    * @param {Point} center - rotation center, default is (0,0)
    * @returns {Polygon} - new rotated polygon
    */
   rotate(t = 0, e = new i.Point()) {
-    let n = new ft();
-    for (let s of this.faces)
-      n.addFace(s.shapes.map((l) => l.rotate(t, e)));
+    let n = new rt();
+    for (let r of this.faces)
+      n.addFace(r.shapes.map((l) => l.rotate(t, e)));
+    return n;
+  }
+  /**
+   * Return new polygon with coordinates multiplied by scaling factor
+   * @param {number} sx - x-axis scaling factor
+   * @param {number} sy - y-axis scaling factor
+   * @returns {Polygon}
+   */
+  scale(t, e) {
+    let n = new rt();
+    for (let r of this.faces)
+      n.addFace(r.shapes.map((l) => l.scale(t, e)));
     return n;
   }
   /**
@@ -4292,9 +4441,9 @@ class ft {
    * @returns {Polygon} - new polygon
    */
   transform(t = new i.Matrix()) {
-    let e = new ft();
+    let e = new rt();
     for (let n of this.faces)
-      e.addFace(n.shapes.map((s) => s.transform(t)));
+      e.addFace(n.shapes.map((r) => r.transform(t)));
     return e;
   }
   /**
@@ -4314,25 +4463,23 @@ class ft {
   }
   /**
    * Return string to draw polygon in svg
-   * @param attrs  - an object with attributes for svg path element,
-   * like "stroke", "strokeWidth", "fill", "fillRule", "fillOpacity"
-   * Defaults are stroke:"black", strokeWidth:"1", fill:"lightcyan", fillRule:"evenodd", fillOpacity: "1"
+   * @param attrs  - an object with attributes for svg path element
    * @returns {string}
    */
   svg(t = {}) {
-    let { stroke: e, strokeWidth: n, fill: s, fillRule: l, fillOpacity: o, id: a, className: h } = t, f = a && a.length > 0 ? `id="${a}"` : "", u = h && h.length > 0 ? `class="${h}"` : "", p = `
-<path stroke="${e || "black"}" stroke-width="${n || 1}" fill="${s || "lightcyan"}" fill-rule="${l || "evenodd"}" fill-opacity="${o || 1}" ${f} ${u} d="`;
-    for (let _ of this.faces)
-      p += _.svg();
-    return p += `" >
-</path>`, p;
+    let e = `
+<path ${ft({ fillRule: "evenodd", fill: "lightcyan", ...t })} d="`;
+    for (let n of this.faces)
+      e += n.svg();
+    return e += `" >
+</path>`, e;
   }
 }
-i.Polygon = ft;
-const mi = (...r) => new i.Polygon(...r);
-i.polygon = mi;
-const { Circle: Dt, Line: ye, Point: Se, Vector: Nt, Utils: zt } = i;
-class yt {
+i.Polygon = rt;
+const Ui = (...s) => new i.Polygon(...s);
+i.polygon = Ui;
+const { Circle: Kt, Line: Pe, Point: Ae, Vector: Ht, Utils: Jt } = i;
+class Ct {
   /**
    * Inversion constructor
    * @param {Circle} inversion_circle inversion circle
@@ -4344,42 +4491,42 @@ class yt {
     return this.circle;
   }
   static inversePoint(t, e) {
-    const n = new Nt(t.pc, e), s = t.r * t.r, l = n.dot(n);
-    return zt.EQ_0(l) ? new Se(Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY) : t.pc.translate(n.multiply(s / l));
+    const n = new Ht(t.pc, e), r = t.r * t.r, l = n.dot(n);
+    return Jt.EQ_0(l) ? new Ae(Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY) : t.pc.translate(n.multiply(r / l));
   }
   static inverseCircle(t, e) {
     const n = t.pc.distanceTo(e.pc)[0];
-    if (zt.EQ(n, e.r)) {
-      let s = t.r * t.r / (2 * e.r), l = new Nt(t.pc, e.pc);
+    if (Jt.EQ(n, e.r)) {
+      let r = t.r * t.r / (2 * e.r), l = new Ht(t.pc, e.pc);
       l = l.normalize();
-      let o = t.pc.translate(l.multiply(s));
-      return new ye(o, l);
+      let o = t.pc.translate(l.multiply(r));
+      return new Pe(o, l);
     } else {
-      let s = new Nt(t.pc, e.pc), l = t.r * t.r / (s.dot(s) - e.r * e.r), o = t.pc.translate(s.multiply(l)), a = Math.abs(l) * e.r;
-      return new Dt(o, a);
+      let r = new Ht(t.pc, e.pc), l = t.r * t.r / (r.dot(r) - e.r * e.r), o = t.pc.translate(r.multiply(l)), a = Math.abs(l) * e.r;
+      return new Kt(o, a);
     }
   }
   static inverseLine(t, e) {
-    const [n, s] = t.pc.distanceTo(e);
-    if (zt.EQ_0(n))
+    const [n, r] = t.pc.distanceTo(e);
+    if (Jt.EQ_0(n))
       return e.clone();
     {
-      let l = t.r * t.r / (2 * n), o = new Nt(t.pc, s.end);
-      return o = o.multiply(l / n), new Dt(t.pc.translate(o), l);
+      let l = t.r * t.r / (2 * n), o = new Ht(t.pc, r.end);
+      return o = o.multiply(l / n), new Kt(t.pc.translate(o), l);
     }
   }
   inverse(t) {
-    if (t instanceof Se)
-      return yt.inversePoint(this.circle, t);
-    if (t instanceof Dt)
-      return yt.inverseCircle(this.circle, t);
-    if (t instanceof ye)
-      return yt.inverseLine(this.circle, t);
+    if (t instanceof Ae)
+      return Ct.inversePoint(this.circle, t);
+    if (t instanceof Kt)
+      return Ct.inverseCircle(this.circle, t);
+    if (t instanceof Pe)
+      return Ct.inverseLine(this.circle, t);
   }
 }
-i.Inversion = yt;
-const xi = (r) => new i.Inversion(r);
-i.inversion = xi;
+i.Inversion = Ct;
+const ki = (s) => new i.Inversion(s);
+i.inversion = ki;
 class d {
   /**
    * Calculate distance and shortest segment between points
@@ -4407,7 +4554,7 @@ class d {
    * @returns {Number | Segment} - distance and shortest segment
    */
   static point2circle(t, e) {
-    let [n, s] = t.distanceTo(e.center);
+    let [n, r] = t.distanceTo(e.center);
     if (i.Utils.EQ_0(n))
       return [e.r, new i.Segment(t, e.toArc().start)];
     {
@@ -4424,10 +4571,10 @@ class d {
   static point2segment(t, e) {
     if (e.start.equalTo(e.end))
       return d.point2point(t, e.start);
-    let n = new i.Vector(e.start, e.end), s = new i.Vector(e.start, t), l = new i.Vector(e.end, t), o = n.dot(s), a = -n.dot(l), h, f;
+    let n = new i.Vector(e.start, e.end), r = new i.Vector(e.start, t), l = new i.Vector(e.end, t), o = n.dot(r), a = -n.dot(l), h, f;
     if (i.Utils.GE(o, 0) && i.Utils.GE(a, 0)) {
       let u = e.tangentInStart();
-      return h = Math.abs(u.cross(s)), f = e.start.translate(u.multiply(u.dot(s))), [h, new i.Segment(t, f)];
+      return h = Math.abs(u.cross(r)), f = e.start.translate(u.multiply(u.dot(r))), [h, new i.Segment(t, f)];
     } else
       return o < 0 ? t.distanceTo(e.start) : t.distanceTo(e.end);
   }
@@ -4438,8 +4585,8 @@ class d {
    * @returns {Number | Segment} - distance and shortest segment
    */
   static point2arc(t, e) {
-    let n = new i.Circle(e.pc, e.r), s = [], l, o;
-    return [l, o] = d.point2circle(t, n), o.end.on(e) && s.push(d.point2circle(t, n)), s.push(d.point2point(t, e.start)), s.push(d.point2point(t, e.end)), d.sort(s), s[0];
+    let n = new i.Circle(e.pc, e.r), r = [], l, o;
+    return [l, o] = d.point2circle(t, n), o.end.on(e) && r.push(d.point2circle(t, n)), r.push(d.point2point(t, e.start)), r.push(d.point2point(t, e.end)), d.sort(r), r[0];
   }
   /**
    * Calculate distance and shortest segment between segment and line
@@ -4451,8 +4598,8 @@ class d {
     let n = t.intersect(e);
     if (n.length > 0)
       return [0, new i.Segment(n[0], n[0])];
-    let s = [];
-    return s.push(d.point2line(t.start, e)), s.push(d.point2line(t.end, e)), d.sort(s), s[0];
+    let r = [];
+    return r.push(d.point2line(t.start, e)), r.push(d.point2line(t.end, e)), d.sort(r), r[0];
   }
   /**
    * Calculate distance and shortest segment between two segments
@@ -4461,11 +4608,11 @@ class d {
    * @returns {Number | Segment} - distance and shortest segment
    */
   static segment2segment(t, e) {
-    let n = At(t, e);
+    let n = Bt(t, e);
     if (n.length > 0)
       return [0, new i.Segment(n[0], n[0])];
-    let s = [], l, o;
-    return [l, o] = d.point2segment(e.start, t), s.push([l, o.reverse()]), [l, o] = d.point2segment(e.end, t), s.push([l, o.reverse()]), s.push(d.point2segment(t.start, e)), s.push(d.point2segment(t.end, e)), d.sort(s), s[0];
+    let r = [], l, o;
+    return [l, o] = d.point2segment(e.start, t), r.push([l, o.reverse()]), [l, o] = d.point2segment(e.end, t), r.push([l, o.reverse()]), r.push(d.point2segment(t.start, e)), r.push(d.point2segment(t.end, e)), d.sort(r), r[0];
   }
   /**
    * Calculate distance and shortest segment between segment and circle
@@ -4477,7 +4624,7 @@ class d {
     let n = t.intersect(e);
     if (n.length > 0)
       return [0, new i.Segment(n[0], n[0])];
-    let s = new i.Line(t.ps, t.pe), [l, o] = d.point2line(e.center, s);
+    let r = new i.Line(t.ps, t.pe), [l, o] = d.point2line(e.center, r);
     if (i.Utils.GE(l, e.r) && o.end.on(t))
       return d.point2circle(o.end, e);
     {
@@ -4495,11 +4642,11 @@ class d {
     let n = t.intersect(e);
     if (n.length > 0)
       return [0, new i.Segment(n[0], n[0])];
-    let s = new i.Line(t.ps, t.pe), l = new i.Circle(e.pc, e.r), [o, a] = d.point2line(l.center, s);
+    let r = new i.Line(t.ps, t.pe), l = new i.Circle(e.pc, e.r), [o, a] = d.point2line(l.center, r);
     if (i.Utils.GE(o, l.r) && a.end.on(t)) {
-      let [p, _] = d.point2circle(a.end, l);
-      if (_.end.on(e))
-        return [p, _];
+      let [g, x] = d.point2circle(a.end, l);
+      if (x.end.on(e))
+        return [g, x];
     }
     let h = [];
     h.push(d.point2arc(t.start, e)), h.push(d.point2arc(t.end, e));
@@ -4517,10 +4664,10 @@ class d {
     if (n.length > 0)
       return [0, new i.Segment(n[0], n[0])];
     if (t.center.equalTo(e.center)) {
-      let s = t.toArc(), l = e.toArc();
-      return d.point2point(s.start, l.start);
+      let r = t.toArc(), l = e.toArc();
+      return d.point2point(r.start, l.start);
     } else {
-      let s = new i.Line(t.center, e.center), l = s.intersect(t), o = s.intersect(e), a = [];
+      let r = new i.Line(t.center, e.center), l = r.intersect(t), o = r.intersect(e), a = [];
       return a.push(d.point2point(l[0], o[0])), a.push(d.point2point(l[0], o[1])), a.push(d.point2point(l[1], o[0])), a.push(d.point2point(l[1], o[1])), d.sort(a), a[0];
     }
   }
@@ -4534,7 +4681,7 @@ class d {
     let n = t.intersect(e);
     if (n.length > 0)
       return [0, new i.Segment(n[0], n[0])];
-    let [s, l] = d.point2line(t.center, e), [o, a] = d.point2circle(l.end, t);
+    let [r, l] = d.point2line(t.center, e), [o, a] = d.point2circle(l.end, t);
     return a = a.reverse(), [o, a];
   }
   /**
@@ -4547,9 +4694,9 @@ class d {
     let n = e.intersect(t);
     if (n.length > 0)
       return [0, new i.Segment(n[0], n[0])];
-    let s = new i.Circle(t.center, t.r), [l, o] = d.point2line(s.center, e);
-    if (i.Utils.GE(l, s.r)) {
-      let [a, h] = d.point2circle(o.end, s);
+    let r = new i.Circle(t.center, t.r), [l, o] = d.point2line(r.center, e);
+    if (i.Utils.GE(l, r.r)) {
+      let [a, h] = d.point2circle(o.end, r);
       if (h.end.on(t))
         return [a, h];
     } else {
@@ -4567,7 +4714,7 @@ class d {
     let n = t.intersect(e);
     if (n.length > 0)
       return [0, new i.Segment(n[0], n[0])];
-    let s = new i.Circle(t.center, t.r), [l, o] = d.circle2circle(s, e);
+    let r = new i.Circle(t.center, t.r), [l, o] = d.circle2circle(r, e);
     if (o.start.on(t))
       return [l, o];
     {
@@ -4585,7 +4732,7 @@ class d {
     let n = t.intersect(e);
     if (n.length > 0)
       return [0, new i.Segment(n[0], n[0])];
-    let s = new i.Circle(t.center, t.r), l = new i.Circle(e.center, e.r), [o, a] = d.circle2circle(s, l);
+    let r = new i.Circle(t.center, t.r), l = new i.Circle(e.center, e.r), [o, a] = d.circle2circle(r, l);
     if (a.start.on(t) && a.end.on(e))
       return [o, a];
     {
@@ -4601,16 +4748,16 @@ class d {
    */
   static point2polygon(t, e) {
     let n = [Number.POSITIVE_INFINITY, new i.Segment()];
-    for (let s of e.edges) {
-      let [l, o] = s.shape instanceof i.Segment ? d.point2segment(t, s.shape) : d.point2arc(t, s.shape);
+    for (let r of e.edges) {
+      let [l, o] = r.shape instanceof i.Segment ? d.point2segment(t, r.shape) : d.point2arc(t, r.shape);
       i.Utils.LT(l, n[0]) && (n = [l, o]);
     }
     return n;
   }
   static shape2polygon(t, e) {
     let n = [Number.POSITIVE_INFINITY, new i.Segment()];
-    for (let s of e.edges) {
-      let [l, o] = t.distanceTo(s.shape);
+    for (let r of e.edges) {
+      let [l, o] = t.distanceTo(r.shape);
       i.Utils.LT(l, n[0]) && (n = [l, o]);
     }
     return n;
@@ -4623,9 +4770,9 @@ class d {
    */
   static polygon2polygon(t, e) {
     let n = [Number.POSITIVE_INFINITY, new i.Segment()];
-    for (let s of t.edges)
+    for (let r of t.edges)
       for (let l of e.edges) {
-        let [o, a] = s.shape.distanceTo(l.shape);
+        let [o, a] = r.shape.distanceTo(l.shape);
         i.Utils.LT(o, n[0]) && (n = [o, a]);
       }
     return n;
@@ -4645,20 +4792,20 @@ class d {
    * @returns {Number | Number} - minimal and maximal distance
    */
   static box2box_minmax(t, e) {
-    let n = Math.max(Math.max(t.xmin - e.xmax, 0), Math.max(e.xmin - t.xmax, 0)), s = Math.max(Math.max(t.ymin - e.ymax, 0), Math.max(e.ymin - t.ymax, 0)), l = n * n + s * s, o = t.merge(e), a = o.xmax - o.xmin, h = o.ymax - o.ymin, f = a * a + h * h;
+    let n = Math.max(Math.max(t.xmin - e.xmax, 0), Math.max(e.xmin - t.xmax, 0)), r = Math.max(Math.max(t.ymin - e.ymax, 0), Math.max(e.ymin - t.ymax, 0)), l = n * n + r * r, o = t.merge(e), a = o.xmax - o.xmin, h = o.ymax - o.ymin, f = a * a + h * h;
     return [l, f];
   }
-  static minmax_tree_process_level(t, e, n, s) {
+  static minmax_tree_process_level(t, e, n, r) {
     let l, o;
     for (let u of e)
-      [l, o] = d.box2box_minmax(t.box, u.item.key), u.item.value instanceof i.Edge ? s.insert([l, o], u.item.value.shape) : s.insert([l, o], u.item.value), i.Utils.LT(o, n) && (n = o);
+      [l, o] = d.box2box_minmax(t.box, u.item.key), u.item.value instanceof i.Edge ? r.insert([l, o], u.item.value.shape) : r.insert([l, o], u.item.value), i.Utils.LT(o, n) && (n = o);
     if (e.length === 0)
       return n;
     let a = e.map((u) => u.left.isNil() ? void 0 : u.left).filter((u) => u !== void 0), h = e.map((u) => u.right.isNil() ? void 0 : u.right).filter((u) => u !== void 0), f = [...a, ...h].filter((u) => {
-      let [p, _] = d.box2box_minmax(t.box, u.max);
-      return i.Utils.LE(p, n);
+      let [g, x] = d.box2box_minmax(t.box, u.max);
+      return i.Utils.LE(g, n);
     });
-    return n = d.minmax_tree_process_level(t, f, n, s), n;
+    return n = d.minmax_tree_process_level(t, f, n, r), n;
   }
   /**
    * Calculates sorted tree of [mindist, maxdist] intervals between query shape
@@ -4667,18 +4814,18 @@ class d {
    * @param set
    */
   static minmax_tree(t, e, n) {
-    let s = new Tt(), l = [e.index.root], o = n < Number.POSITIVE_INFINITY ? n * n : Number.POSITIVE_INFINITY;
-    return o = d.minmax_tree_process_level(t, l, o, s), s;
+    let r = new Rt(), l = [e.index.root], o = n < Number.POSITIVE_INFINITY ? n * n : Number.POSITIVE_INFINITY;
+    return o = d.minmax_tree_process_level(t, l, o, r), r;
   }
   static minmax_tree_calc_distance(t, e, n) {
-    let s, l;
+    let r, l;
     if (e != null && !e.isNil()) {
-      if ([s, l] = d.minmax_tree_calc_distance(t, e.left, n), l)
-        return [s, l];
-      if (i.Utils.LT(s[0], Math.sqrt(e.item.key.low)))
-        return [s, !0];
+      if ([r, l] = d.minmax_tree_calc_distance(t, e.left, n), l)
+        return [r, l];
+      if (i.Utils.LT(r[0], Math.sqrt(e.item.key.low)))
+        return [r, !0];
       let [o, a] = d.distance(t, e.item.value);
-      return i.Utils.LT(o, s[0]) && (s = [o, a]), [s, l] = d.minmax_tree_calc_distance(t, e.right, s), [s, l];
+      return i.Utils.LT(o, r[0]) && (r = [o, a]), [r, l] = d.minmax_tree_calc_distance(t, e.right, r), [r, l];
     }
     return [n, !1];
   }
@@ -4690,12 +4837,12 @@ class d {
    * @returns {*}
    */
   static shape2planarSet(t, e, n = Number.POSITIVE_INFINITY) {
-    let s = [n, new i.Segment()], l = !1;
+    let r = [n, new i.Segment()], l = !1;
     if (e instanceof i.PlanarSet) {
       let o = d.minmax_tree(t, e, n);
-      [s, l] = d.minmax_tree_calc_distance(t, o.root, s);
+      [r, l] = d.minmax_tree_calc_distance(t, o.root, r);
     }
-    return s;
+    return r;
   }
   static sort(t) {
     t.sort((e, n) => i.Utils.LT(e[0], n[0]) ? -1 : i.Utils.GT(e[0], n[0]) ? 1 : 0);
@@ -4705,19 +4852,19 @@ class d {
   }
 }
 i.Distance = d;
-i.BooleanOperations = An;
-i.Relations = Kn;
-const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
+i.BooleanOperations = $n;
+i.Relations = pi;
+const Le = i.Matrix, $t = 24, Oe = 60, _t = class X extends _n {
   /**
    * TrackSymbol constructor.
    *
    * @param latLng - Initial location.
    * @param options - Options.
    */
-  constructor(r, t) {
-    if (super(), Ne.setOptions(this, t), r == null)
+  constructor(t, e) {
+    if (super(), Me.setOptions(this, e), t == null)
       throw Error("latLng required");
-    t = t || {}, this._latLng = ut.latLng(r), this._heading = t.heading, this._course = t.course, this._speed = t.speed, this._setShapeOptions(t.shapeOptions);
+    e = e || {}, this._latLng = mt.latLng(t), this._heading = e.heading, this._course = e.course, this._speed = e.speed, this._setShapeOptions(e.shapeOptions);
   }
   // ---- Leaflet
   /**
@@ -4727,19 +4874,19 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    */
   _project() {
     this._currentShapePoints = this._getProjectedShapePoints(), this._currentLeaderPoints = this._getLeaderShapePoints();
-    const r = new en();
-    for (let t = 0; t < this._currentShapePoints.length; t++) {
-      const e = this._currentShapePoints[t];
-      r.extend(e);
+    const t = new mn();
+    for (let e = 0; e < this._currentShapePoints.length; e++) {
+      const n = this._currentShapePoints[e];
+      t.extend(n);
     }
     if (this._currentLeaderPoints !== void 0)
-      for (let t = 0; t < this._currentLeaderPoints.length; t++) {
-        const e = this._currentShapePoints[t];
-        r.extend(e);
+      for (let e = 0; e < this._currentLeaderPoints.length; e++) {
+        const n = this._currentShapePoints[e];
+        t.extend(n);
       }
-    this._currentBounds = r, this._currentLatLngBounds = new nn(
-      this._map.layerPointToLatLng(r.getBottomLeft()),
-      this._map.layerPointToLatLng(r.getTopRight())
+    this._currentBounds = t, this._currentLatLngBounds = new xn(
+      this._map.layerPointToLatLng(t.getBottomLeft()),
+      this._map.layerPointToLatLng(t.getTopRight())
     );
   }
   /**
@@ -4750,8 +4897,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
   _update() {
     if (!this._map)
       return;
-    let r = C._toSVGPath(this._currentShapePoints, !0);
-    this._currentLeaderPoints !== void 0 && (r += " " + C._toSVGPath(this._currentLeaderPoints, !1)), this.getElement().setAttribute("d", r);
+    let t = X._toSVGPath(this._currentShapePoints, !0);
+    this._currentLeaderPoints !== void 0 && (t += " " + X._toSVGPath(this._currentLeaderPoints, !1)), this.getElement().setAttribute("d", t);
   }
   // ----
   /**
@@ -4759,11 +4906,11 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    *
    * @param shapeOptions - Shape options.
    */
-  _setShapeOptions(r) {
-    this._shapeOptions = r || {
-      leaderTime: Te,
-      defaultShapeSet: C.DEFAULT_SHAPE_SET
-    }, this._shapeOptions.leaderTime === void 0 && (this._shapeOptions.leaderTime = Te), this._shapeOptions.defaultShapeSet === void 0 && (this._shapeOptions.defaultShapeSet = C.DEFAULT_SHAPE_SET), this._shapeOptions.shapeSetEntries !== void 0 && this._shapeOptions.shapeSetEntries.sort((t, e) => e.minZoomLevel - t.minZoomLevel);
+  _setShapeOptions(t) {
+    this._shapeOptions = t || {
+      leaderTime: Oe,
+      defaultShapeSet: X.DEFAULT_SHAPE_SET
+    }, this._shapeOptions.leaderTime === void 0 && (this._shapeOptions.leaderTime = Oe), this._shapeOptions.defaultShapeSet === void 0 && (this._shapeOptions.defaultShapeSet = X.DEFAULT_SHAPE_SET), this._shapeOptions.shapeSetEntries !== void 0 && this._shapeOptions.shapeSetEntries.sort((e, n) => n.minZoomLevel - e.minZoomLevel);
   }
   // ---
   /**
@@ -4772,10 +4919,10 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param latLng - Location.
    * @returns this
    */
-  setLatLng(r) {
-    const t = this._latLng;
-    return this._latLng = ut.latLng(r), this.fire("move", {
-      oldLatLng: t,
+  setLatLng(t) {
+    const e = this._latLng;
+    return this._latLng = mt.latLng(t), this.fire("move", {
+      oldLatLng: e,
       latlng: this._latLng
     }), this.redraw();
   }
@@ -4785,8 +4932,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param heading - Heading (unit: radians, from north, clockwise).
    * @returns this
    */
-  setHeading(r) {
-    return this._heading = r, this.redraw();
+  setHeading(t) {
+    return this._heading = t, this.redraw();
   }
   /**
    * Sets the course over ground.
@@ -4794,8 +4941,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param course - Course over ground (unit: radians, from north, clockwise).
    * @returns this
    */
-  setCourse(r) {
-    return this._course = r, this.redraw();
+  setCourse(t) {
+    return this._course = t, this.redraw();
   }
   /**
    * Sets the speed.
@@ -4803,8 +4950,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param speed - Speed (unit: m/s).
    * @returns this
    */
-  setSpeed(r) {
-    return this._speed = r, this.redraw();
+  setSpeed(t) {
+    return this._speed = t, this.redraw();
   }
   /**
    * Sets the shape options.
@@ -4812,8 +4959,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param shapeOptions - Shape options.
    * @returns this
    */
-  setShapeOptions(r) {
-    return this._setShapeOptions(r), this.redraw();
+  setShapeOptions(t) {
+    return this._setShapeOptions(t), this.redraw();
   }
   /**
    * Returns the bounding box.
@@ -4862,11 +5009,11 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param size - Size (units: pixels).
    * @returns The new shape.
    */
-  static createShape(r, t) {
+  static createShape(t, e) {
     return {
-      points: r,
-      length: t,
-      breadth: t,
+      points: t,
+      length: e,
+      breadth: e,
       units: "pixels"
     };
   }
@@ -4876,10 +5023,10 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param size - Size (units: pixels).
    * @returns The new shape set.
    */
-  static createShapeSet(r) {
+  static createShapeSet(t) {
     return {
-      withHeading: C.createShape(C.DEFAULT_HEADING_SHAPE_POINTS, r),
-      withoutHeading: C.createShape(C.DEFAULT_NOHEADING_SHAPE_POINTS, r)
+      withHeading: X.createShape(X.DEFAULT_HEADING_SHAPE_POINTS, t),
+      withoutHeading: X.createShape(X.DEFAULT_NOHEADING_SHAPE_POINTS, t)
     };
   }
   /**
@@ -4888,8 +5035,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param value - Y distance (m).
    * @returns dLat
    */
-  _getLatSizeOf(r) {
-    return r / 40075017 * 360;
+  _getLatSizeOf(t) {
+    return t / 40075017 * 360;
   }
   /**
    * Get longitude size of x-distance.
@@ -4897,8 +5044,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param value - X distance (m).
    * @returns dLng
    */
-  _getLngSizeOf(r) {
-    return r / 40075017 * 360 / Math.cos(Math.PI / 180 * this._latLng.lat);
+  _getLngSizeOf(t) {
+    return t / 40075017 * 360 / Math.cos(Math.PI / 180 * this._latLng.lat);
   }
   /**
    * Get view angle from model.
@@ -4906,8 +5053,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param modelAngle - Model angle (radians).
    * @returns View angle from model (radians).
    */
-  _getViewAngleFromModel(r) {
-    return r - Math.PI / 2;
+  _getViewAngleFromModel(t) {
+    return t - Math.PI / 2;
   }
   /**
    * Get leader shape points.
@@ -4917,8 +5064,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
   _getLeaderShapePoints() {
     if (this._course === void 0 || this._speed === void 0)
       return;
-    const r = this._getViewAngleFromModel(this._course), t = this._speed * this._shapeOptions.leaderTime, e = this._calcRelativeLatLng(this._latLng, t, r);
-    return this._latLngsToLayerPoints(this._latLng, e);
+    const t = this._getViewAngleFromModel(this._course), e = this._speed * this._shapeOptions.leaderTime, n = this._calcRelativeLatLng(this._latLng, e, t);
+    return this._latLngsToLayerPoints(this._latLng, n);
   }
   /**
    * Calculate relative lat/lng.
@@ -4928,10 +5075,10 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param angle - Angle (radians).
    * @returns Calculated LatLng.
    */
-  _calcRelativeLatLng(r, t, e) {
-    return new pe(
-      r.lat - this._getLatSizeOf(t * Math.sin(e)),
-      r.lng + this._getLngSizeOf(t * Math.cos(e))
+  _calcRelativeLatLng(t, e, n) {
+    return new me(
+      t.lat - this._getLatSizeOf(e * Math.sin(n)),
+      t.lng + this._getLngSizeOf(e * Math.cos(n))
     );
   }
   /**
@@ -4940,8 +5087,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param latLngs - LatLngs.
    * @returns Points.
    */
-  _latLngsToLayerPoints(...r) {
-    return r.map((t) => this._map.latLngToLayerPoint(t));
+  _latLngsToLayerPoints(...t) {
+    return t.map((e) => this._map.latLngToLayerPoint(e));
   }
   /**
    * Gets the shape set.
@@ -4951,8 +5098,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
   _getShapeSet() {
     if (this._shapeOptions.shapeSetEntries === void 0 || this._shapeOptions.shapeSetEntries.length == 0)
       return this._shapeOptions.defaultShapeSet;
-    const r = this._map.getZoom(), t = this._shapeOptions.shapeSetEntries.sort((e, n) => n.minZoomLevel - e.minZoomLevel).filter((e) => r >= e.minZoomLevel);
-    return t.length > 0 ? t[0].shapeSet : this._shapeOptions.defaultShapeSet;
+    const t = this._map.getZoom(), e = this._shapeOptions.shapeSetEntries.sort((n, r) => r.minZoomLevel - n.minZoomLevel).filter((n) => t >= n.minZoomLevel);
+    return e.length > 0 ? e[0].shapeSet : this._shapeOptions.defaultShapeSet;
   }
   /**
    * Gets the shape.
@@ -4960,8 +5107,8 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @returns The shape.
    */
   _getShape() {
-    const r = this._getShapeSet();
-    return this._heading !== void 0 ? r.withHeading : r.withoutHeading;
+    const t = this._getShapeSet();
+    return this._heading !== void 0 ? t.withHeading : t.withoutHeading;
   }
   /**
    * Get transformed shape points.
@@ -4969,13 +5116,13 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @returns Transformed points and units.
    */
   _getTransformedShapePoints() {
-    const r = this._getShape();
-    let t = new Ie();
+    const t = this._getShape();
+    let e = new Le();
     if (this._heading !== void 0) {
-      const n = this._getViewAngleFromModel(this._heading);
-      t = t.rotate(n);
+      const r = this._getViewAngleFromModel(this._heading);
+      e = e.rotate(r);
     }
-    return r.center !== void 0 && (t = t.translate(-r.center[0], -r.center[1])), t = t.scale(r.length, r.breadth), [r.points.map((n) => t.transform(n)), r.units];
+    return t.center !== void 0 && (e = e.translate(-t.center[0], -t.center[1])), e = e.scale(t.length, t.breadth), [t.points.map((r) => e.transform(r)), t.units];
   }
   /**
    * Get projected shape points.
@@ -4983,20 +5130,20 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @returns Points projected to map layer.
    */
   _getProjectedShapePoints() {
-    const [r, t] = this._getTransformedShapePoints();
-    switch (t) {
+    const [t, e] = this._getTransformedShapePoints();
+    switch (e) {
       case "pixels": {
-        const e = this._map.latLngToLayerPoint(this._latLng), n = new Ie().translate(e.x, e.y);
-        return r.map((s) => {
-          const l = n.transform(s);
-          return new rn(l[0], l[1]);
+        const n = this._map.latLngToLayerPoint(this._latLng), r = new Le().translate(n.x, n.y);
+        return t.map((l) => {
+          const o = r.transform(l);
+          return new En(o[0], o[1]);
         });
       }
       case "meters":
-        return r.map((e) => this._map.latLngToLayerPoint(
-          new pe(
-            this._latLng.lat - this._getLatSizeOf(e[1]),
-            this._latLng.lng + this._getLngSizeOf(e[0])
+        return t.map((n) => this._map.latLngToLayerPoint(
+          new me(
+            this._latLng.lat - this._getLatSizeOf(n[1]),
+            this._latLng.lng + this._getLngSizeOf(n[0])
           )
         ));
     }
@@ -5008,44 +5155,44 @@ const Ie = i.Matrix, Ct = 24, Te = 60, C = class extends tn {
    * @param close - Close path.
    * @returns SVG path string.
    */
-  static _toSVGPath(r, t) {
-    let e = "";
-    for (let n = 0; n < r.length; n++) {
-      const s = r[n];
-      e === "" ? e = `M ${s.x} ${s.y} ` : e += `L ${s.x} ${s.y} `;
+  static _toSVGPath(t, e) {
+    let n = "";
+    for (let r = 0; r < t.length; r++) {
+      const l = t[r];
+      n === "" ? n = `M ${l.x} ${l.y} ` : n += `L ${l.x} ${l.y} `;
     }
-    return t && (e += "Z"), e;
+    return e && (n += "Z"), n;
   }
 };
-let Z = C;
-Z.DEFAULT_HEADING_SHAPE_POINTS = [[0.75, 0], [-0.25, 0.3], [-0.25, -0.3]];
-Z.DEFAULT_NOHEADING_SHAPE_POINTS = [[0.3, 0], [0, 0.3], [-0.3, 0], [0, -0.3]];
-Z.DEFAULT_SHAPE_SET = {
+_t.DEFAULT_HEADING_SHAPE_POINTS = [[0.75, 0], [-0.25, 0.3], [-0.25, -0.3]];
+_t.DEFAULT_NOHEADING_SHAPE_POINTS = [[0.3, 0], [0, 0.3], [-0.3, 0], [0, -0.3]];
+_t.DEFAULT_SHAPE_SET = {
   withHeading: {
-    points: C.DEFAULT_HEADING_SHAPE_POINTS,
-    length: Ct,
-    breadth: Ct,
+    points: _t.DEFAULT_HEADING_SHAPE_POINTS,
+    length: $t,
+    breadth: $t,
     units: "pixels"
   },
   withoutHeading: {
-    points: C.DEFAULT_NOHEADING_SHAPE_POINTS,
-    length: Ct,
-    breadth: Ct,
+    points: _t.DEFAULT_NOHEADING_SHAPE_POINTS,
+    length: $t,
+    breadth: $t,
     units: "pixels"
   }
 };
-const Ei = 24, wi = 14, vi = 60, yi = 1.944, be = 102.3, Pe = 360, Ae = 360, je = "#000000", Xe = "#d3d3d3", O = "#000000", N = "#d3d3d3", tt = "#8b008b", et = "#ff00ff", U = "#00008b", M = "#ffff00", j = "#008b8b", X = "#00ffff", $ = "#00008b", B = "#0000ff", F = "#006400", V = "#90ee90", H = "#8b0000", q = "#ff0000", G = "#008b8b", D = "#00ffff", Ze = {
-  0: c("Not available", O, N),
-  20: c("Wing in ground (WIG), all ships of this type", O, N),
-  21: c("Wing in ground (WIG), Hazardous category A", O, N),
-  22: c("Wing in ground (WIG), Hazardous category B", O, N),
-  23: c("Wing in ground (WIG), Hazardous category C", O, N),
-  24: c("Wing in ground (WIG), Hazardous category D", O, N),
-  25: c("Wing in ground (WIG), Reserved for future use", O, N),
-  26: c("Wing in ground (WIG), Reserved for future use", O, N),
-  27: c("Wing in ground (WIG), Reserved for future use", O, N),
-  28: c("Wing in ground (WIG), Reserved for future use", O, N),
-  29: c("Wing in ground (WIG), Reserved for future use", O, N),
+let gt = _t;
+const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn = "#000000", un = "#d3d3d3", C = "#000000", N = "#d3d3d3", tt = "#8b008b", et = "#ff00ff", k = "#00008b", M = "#ffff00", j = "#008b8b", Z = "#00ffff", B = "#00008b", F = "#0000ff", V = "#006400", H = "#90ee90", $ = "#8b0000", q = "#ff0000", G = "#008b8b", D = "#00ffff", hn = {
+  0: c("Not available", C, N),
+  20: c("Wing in ground (WIG), all ships of this type", C, N),
+  21: c("Wing in ground (WIG), Hazardous category A", C, N),
+  22: c("Wing in ground (WIG), Hazardous category B", C, N),
+  23: c("Wing in ground (WIG), Hazardous category C", C, N),
+  24: c("Wing in ground (WIG), Hazardous category D", C, N),
+  25: c("Wing in ground (WIG), Reserved for future use", C, N),
+  26: c("Wing in ground (WIG), Reserved for future use", C, N),
+  27: c("Wing in ground (WIG), Reserved for future use", C, N),
+  28: c("Wing in ground (WIG), Reserved for future use", C, N),
+  29: c("Wing in ground (WIG), Reserved for future use", C, N),
   30: c("Fishing", tt, et),
   31: c("Towing", tt, et),
   32: c("Towing: length exceeds 200m or breadth exceeds 25m", tt, et),
@@ -5054,56 +5201,56 @@ const Ei = 24, wi = 14, vi = 60, yi = 1.944, be = 102.3, Pe = 360, Ae = 360, je 
   35: c("Military ops", tt, et),
   36: c("Sailing", tt, et),
   37: c("Pleasure Craft", tt, et),
-  40: c("High speed craft (HSC), all ships of this type", U, M),
-  41: c("High speed craft (HSC), Hazardous category A", U, M),
-  42: c("High speed craft (HSC), Hazardous category B", U, M),
-  43: c("High speed craft (HSC), Hazardous category C", U, M),
-  44: c("High speed craft (HSC), Hazardous category D", U, M),
-  45: c("High speed craft (HSC), Reserved for future use", U, M),
-  46: c("High speed craft (HSC), Reserved for future use", U, M),
-  47: c("High speed craft (HSC), Reserved for future use", U, M),
-  48: c("High speed craft (HSC), Reserved for future use", U, M),
-  49: c("High speed craft (HSC), No additional information", U, M),
-  50: c("Pilot Vessel", j, X),
-  51: c("Search and Rescue vessel", j, X),
-  52: c("Tug", j, X),
-  53: c("Port Tender", j, X),
-  54: c("Anti-pollution equipment", j, X),
-  55: c("Law Enforcement", j, X),
-  56: c("Spare - Local Vessel", j, X),
-  57: c("Spare - Local Vessel", j, X),
-  58: c("Medical Transport", j, X),
+  40: c("High speed craft (HSC), all ships of this type", k, M),
+  41: c("High speed craft (HSC), Hazardous category A", k, M),
+  42: c("High speed craft (HSC), Hazardous category B", k, M),
+  43: c("High speed craft (HSC), Hazardous category C", k, M),
+  44: c("High speed craft (HSC), Hazardous category D", k, M),
+  45: c("High speed craft (HSC), Reserved for future use", k, M),
+  46: c("High speed craft (HSC), Reserved for future use", k, M),
+  47: c("High speed craft (HSC), Reserved for future use", k, M),
+  48: c("High speed craft (HSC), Reserved for future use", k, M),
+  49: c("High speed craft (HSC), No additional information", k, M),
+  50: c("Pilot Vessel", j, Z),
+  51: c("Search and Rescue vessel", j, Z),
+  52: c("Tug", j, Z),
+  53: c("Port Tender", j, Z),
+  54: c("Anti-pollution equipment", j, Z),
+  55: c("Law Enforcement", j, Z),
+  56: c("Spare - Local Vessel", j, Z),
+  57: c("Spare - Local Vessel", j, Z),
+  58: c("Medical Transport", j, Z),
   59: c("Noncombatant ship according to RR Resolution No. 18", "", ""),
-  60: c("Passenger, all ships of this type", $, B),
-  61: c("Passenger, Hazardous category A", $, B),
-  62: c("Passenger, Hazardous category B", $, B),
-  63: c("Passenger, Hazardous category C", $, B),
-  64: c("Passenger, Hazardous category D", $, B),
-  65: c("Passenger, Reserved for future use", $, B),
-  66: c("Passenger, Reserved for future use", $, B),
-  67: c("Passenger, Reserved for future use", $, B),
-  68: c("Passenger, Reserved for future use", $, B),
-  69: c("Passenger, No additional information", $, B),
-  70: c("Cargo, all ships of this type", F, V),
-  71: c("Cargo, Hazardous category A", F, V),
-  72: c("Cargo, Hazardous category B", F, V),
-  73: c("Cargo, Hazardous category C", F, V),
-  74: c("Cargo, Hazardous category D", F, V),
-  75: c("Cargo, Reserved for future use", F, V),
-  76: c("Cargo, Reserved for future use", F, V),
-  77: c("Cargo, Reserved for future use", F, V),
-  78: c("Cargo, Reserved for future use", F, V),
-  79: c("Cargo, No additional information", F, V),
-  80: c("Tanker, all ships of this type", H, q),
-  81: c("Tanker, Hazardous category A", H, q),
-  82: c("Tanker, Hazardous category B", H, q),
-  83: c("Tanker, Hazardous category C", H, q),
-  84: c("Tanker, Hazardous category D", H, q),
-  85: c("Tanker, Reserved for future use", H, q),
-  86: c("Tanker, Reserved for future use", H, q),
-  87: c("Tanker, Reserved for future use", H, q),
-  88: c("Tanker, Reserved for future use", H, q),
-  89: c("Tanker, No additional information", H, q),
+  60: c("Passenger, all ships of this type", B, F),
+  61: c("Passenger, Hazardous category A", B, F),
+  62: c("Passenger, Hazardous category B", B, F),
+  63: c("Passenger, Hazardous category C", B, F),
+  64: c("Passenger, Hazardous category D", B, F),
+  65: c("Passenger, Reserved for future use", B, F),
+  66: c("Passenger, Reserved for future use", B, F),
+  67: c("Passenger, Reserved for future use", B, F),
+  68: c("Passenger, Reserved for future use", B, F),
+  69: c("Passenger, No additional information", B, F),
+  70: c("Cargo, all ships of this type", V, H),
+  71: c("Cargo, Hazardous category A", V, H),
+  72: c("Cargo, Hazardous category B", V, H),
+  73: c("Cargo, Hazardous category C", V, H),
+  74: c("Cargo, Hazardous category D", V, H),
+  75: c("Cargo, Reserved for future use", V, H),
+  76: c("Cargo, Reserved for future use", V, H),
+  77: c("Cargo, Reserved for future use", V, H),
+  78: c("Cargo, Reserved for future use", V, H),
+  79: c("Cargo, No additional information", V, H),
+  80: c("Tanker, all ships of this type", $, q),
+  81: c("Tanker, Hazardous category A", $, q),
+  82: c("Tanker, Hazardous category B", $, q),
+  83: c("Tanker, Hazardous category C", $, q),
+  84: c("Tanker, Hazardous category D", $, q),
+  85: c("Tanker, Reserved for future use", $, q),
+  86: c("Tanker, Reserved for future use", $, q),
+  87: c("Tanker, Reserved for future use", $, q),
+  88: c("Tanker, Reserved for future use", $, q),
+  89: c("Tanker, No additional information", $, q),
   90: c("Other Type, all ships of this type", G, D),
   91: c("Other Type, Hazardous category A", G, D),
   92: c("Other Type, Hazardous category B", G, D),
@@ -5114,15 +5261,15 @@ const Ei = 24, wi = 14, vi = 60, yi = 1.944, be = 102.3, Pe = 360, Ae = 360, je 
   97: c("Other Type, Reserved for future use", G, D),
   98: c("Other Type, Reserved for future use", G, D),
   99: c("Other Type, no additional information", G, D)
-}, Si = c("Reserved", je, Xe), Ii = c("Unknown", je, Xe), Rt = class extends Z {
+}, Hi = c("Reserved", fn, un), $i = c("Unknown", fn, un), cn = class Gt extends gt {
   /**
    * AISTrackSymbol constructor.
    *
    * @param positionReport - Position report.
    * @param options - Options.
    */
-  constructor(r, t) {
-    super([r.latitude, r.longitude], t), Ne.setOptions(this, t), t = t || {}, this._leaderTime = t.leaderTime || vi, this._minZoomLevel = t.minZoomLevel || wi, this._size = t.size || Ei, this.setPositionReport(r), this.setShipStaticData(t.shipStaticData);
+  constructor(t, e) {
+    super([t.latitude, t.longitude], e), Me.setOptions(this, e), e = e || {}, this._leaderTime = e.leaderTime || Fi, this._minZoomLevel = e.minZoomLevel || Bi, this._size = e.size || Mi, this.setPositionReport(t), this.setShipStaticData(e.shipStaticData);
   }
   /**
    * Sets the position report.
@@ -5130,8 +5277,8 @@ const Ei = 24, wi = 14, vi = 60, yi = 1.944, be = 102.3, Pe = 360, Ae = 360, je 
    * @param positionReport - Position report.
    * @returns this
    */
-  setPositionReport(r) {
-    return this._positionReport = r, this.setLatLng([r.latitude, r.longitude]), !w(r.trueHeading) && r.trueHeading < Ae ? this.setHeading(Le(r.trueHeading)) : this.setHeading(void 0), !w(r.cog) && r.cog < Pe ? this.setCourse(Le(r.cog)) : this.setCourse(void 0), !w(r.sog) && r.sog < be ? this.setSpeed(r.sog / yi) : this.setSpeed(void 0), this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData)), this.redraw();
+  setPositionReport(t) {
+    return this._positionReport = t, this.setLatLng([t.latitude, t.longitude]), !v(t.trueHeading) && t.trueHeading < Re ? this.setHeading(Ue(t.trueHeading)) : this.setHeading(void 0), !v(t.cog) && t.cog < Ne ? this.setCourse(Ue(t.cog)) : this.setCourse(void 0), !v(t.sog) && t.sog < Ce ? this.setSpeed(t.sog / Vi) : this.setSpeed(void 0), this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData)), this.redraw();
   }
   /**
    * Sets the ship static data.
@@ -5139,85 +5286,85 @@ const Ei = 24, wi = 14, vi = 60, yi = 1.944, be = 102.3, Pe = 360, Ae = 360, je 
    * @param shipStaticData - Ship static data.
    * @returns this
    */
-  setShipStaticData(r) {
-    this._shipStaticData = r;
-    const t = !w(r) && !w(r.type) ? Je(r.type) : Ze[0];
+  setShipStaticData(t) {
+    this._shipStaticData = t;
+    const e = !v(t) && !v(t.type) ? gn(t.type) : hn[0];
     return this.setStyle({
-      color: t.color,
+      color: e.color,
       fill: !0,
       fillOpacity: 1,
-      fillColor: t.fillColor
-    }), this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData)), this.setShapeOptions(Rt._getShapeOptions(
+      fillColor: e.fillColor
+    }), this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData)), this.setShapeOptions(Gt._getShapeOptions(
       this._leaderTime,
       this._minZoomLevel,
       this._size,
-      r
+      t
     ));
   }
-  static _getShapeOptions(r, t, e, n) {
-    const s = {
-      leaderTime: r,
-      defaultShapeSet: Z.createShapeSet(e)
-    }, l = Rt._getShapeSet(e, n);
-    return l !== null && (s.shapeSetEntries = [{
-      shapeSet: l,
-      minZoomLevel: t
-    }]), s;
+  static _getShapeOptions(t, e, n, r) {
+    const l = {
+      leaderTime: t,
+      defaultShapeSet: gt.createShapeSet(n)
+    }, o = Gt._getShapeSet(n, r);
+    return o !== null && (l.shapeSetEntries = [{
+      shapeSet: o,
+      minZoomLevel: e
+    }]), l;
   }
-  static _getShapeSet(r, t) {
-    return w(t) || w(t.dimension) || !Oe(t.dimension) ? null : {
+  static _getShapeSet(t, e) {
+    return v(e) || v(e.dimension) || !ke(e.dimension) ? null : {
       withHeading: {
-        points: Rt.DEFAULT_SILHOUETTE_SHAPE_POINTS,
-        center: [t.dimension.B, t.dimension.D],
-        length: t.dimension.A + t.dimension.B,
-        breadth: t.dimension.C + t.dimension.D,
+        points: Gt.DEFAULT_SILHOUETTE_SHAPE_POINTS,
+        center: [e.dimension.B, e.dimension.D],
+        length: e.dimension.A + e.dimension.B,
+        breadth: e.dimension.C + e.dimension.D,
         units: "meters"
       },
-      withoutHeading: Z.createShape(Z.DEFAULT_NOHEADING_SHAPE_POINTS, r)
+      withoutHeading: gt.createShape(gt.DEFAULT_NOHEADING_SHAPE_POINTS, t)
     };
   }
-  _getPopupContent(r, t) {
-    let e = "<table>";
-    w(t) || (e += P("User ID", t.userId), e += P("IMO Number", t.imoNumber), e += P("Call sign", t.callSign), e += P("Name", t.name)), w(r) || (e += P("Location", `${r.latitude.toFixed(5)}, ${r.longitude.toFixed(5)}`), e += P(
+  _getPopupContent(t, e) {
+    let n = "<table>";
+    v(e) || (n += A("User ID", e.userId), n += A("IMO Number", e.imoNumber), n += A("Call sign", e.callSign), n += A("Name", e.name)), v(t) || (n += A("Location", `${t.latitude.toFixed(5)}, ${t.longitude.toFixed(5)}`), n += A(
       "SOG",
-      !w(r.sog) && r.sog < be ? r.sog.toFixed(2) : void 0,
+      !v(t.sog) && t.sog < Ce ? t.sog.toFixed(2) : void 0,
       "knots"
-    ), e += P(
+    ), n += A(
       "COG",
-      !w(r.cog) && r.cog < Pe ? r.cog.toFixed(1) : void 0,
+      !v(t.cog) && t.cog < Ne ? t.cog.toFixed(1) : void 0,
       "°"
-    ), e += P(
+    ), n += A(
       "Heading",
-      !w(r.trueHeading) && r.trueHeading < Ae ? r.trueHeading.toFixed(1) : void 0,
+      !v(t.trueHeading) && t.trueHeading < Re ? t.trueHeading.toFixed(1) : void 0,
       "°"
-    ), e += P(
+    ), n += A(
       "Navigation status",
-      Pi(r.navigationalStatus)
-    )), w(t) || (e += P("Type", Ti(t.type)), !w(t.dimension) && Oe(t.dimension) && (e += P(
+      Di(t.navigationalStatus)
+    )), v(e) || (n += A("Type", qi(e.type)), !v(e.dimension) && ke(e.dimension) && (n += A(
       "Ship length",
-      t.dimension.A + t.dimension.B,
+      e.dimension.A + e.dimension.B,
       "m"
-    ), e += P(
+    ), n += A(
       "Ship width",
-      t.dimension.C + t.dimension.D,
+      e.dimension.C + e.dimension.D,
       "m"
-    )), e += P("Fix type", bi(t.fixType)), e += P("ETA", Ai(t.eta)), e += P(
+    )), n += A("Fix type", Gi(e.fixType)), n += A("ETA", zi(e.eta)), n += A(
       "Maximum static draught",
-      w(t.maximumStaticDraught) ? void 0 : t.maximumStaticDraught.toFixed(1),
+      v(e.maximumStaticDraught) ? void 0 : e.maximumStaticDraught.toFixed(1),
       "m"
-    ), e += P("Destination", t.destination), e += P("DTE", t.dte)), e += "</table>";
-    const n = sn.create("div");
-    return n.innerHTML = e, n;
+    ), n += A("Destination", e.destination), n += A("DTE", e.dte)), n += "</table>";
+    const r = wn.create("div");
+    return r.innerHTML = n, r;
   }
 };
-let de = Rt;
-de.DEFAULT_SILHOUETTE_SHAPE_POINTS = [[1, 0.5], [0.75, 1], [0, 1], [0, 0], [0.75, 0]];
-function Ti(r) {
-  return w(r) ? void 0 : Je(r).name;
+cn.DEFAULT_SILHOUETTE_SHAPE_POINTS = [[1, 0.5], [0.75, 1], [0, 1], [0, 0], [0.75, 0]];
+let dn = cn;
+function qi(s) {
+  return v(s) ? void 0 : gn(s).name;
 }
-function bi(r) {
-  if (!w(r))
-    switch (r) {
+function Gi(s) {
+  if (!v(s))
+    switch (s) {
       case 0:
         return;
       case 1:
@@ -5242,16 +5389,16 @@ function bi(r) {
       case 12:
       case 13:
       case 14:
-        return `not used (${r})`;
+        return `not used (${s})`;
       case 15:
         return "internal GNSS";
       default:
-        return `unknown (${r})`;
+        return `unknown (${s})`;
     }
 }
-function Pi(r) {
-  if (!w(r))
-    switch (r) {
+function Di(s) {
+  if (!v(s))
+    switch (s) {
       case 0:
         return "Under way using engine";
       case 1:
@@ -5285,53 +5432,53 @@ function Pi(r) {
       case 15:
         return "Not defined (default)";
       default:
-        return `unknown (${r})`;
+        return `unknown (${s})`;
     }
 }
-function Ai(r) {
-  if (!w(r))
-    return `${r.month.toString().padStart(2, "0")}/${r.day.toString().padStart(2, "0")} ${r.hour.toString().padStart(2, "0")}:${r.minute.toString().padStart(2, "0")} UTC`;
+function zi(s) {
+  if (!v(s))
+    return `${s.month.toString().padStart(2, "0")}/${s.day.toString().padStart(2, "0")} ${s.hour.toString().padStart(2, "0")}:${s.minute.toString().padStart(2, "0")} UTC`;
 }
-function Le(r) {
-  if (r != null)
-    return r * Math.PI / 180;
+function Ue(s) {
+  if (s != null)
+    return s * Math.PI / 180;
 }
-function w(r) {
-  return r == null;
+function v(s) {
+  return s == null;
 }
-function Oe(r) {
-  return !w(r) && r.A > 0 && r.B > 0 && r.C > 0 && r.D > 0;
+function ke(s) {
+  return !v(s) && s.A > 0 && s.B > 0 && s.C > 0 && s.D > 0;
 }
-function P(r, t, e) {
-  if (w(t))
+function A(s, t, e) {
+  if (v(t))
     return "";
   const n = String(t);
-  return `<tr><td>${r}</td><td>${n} ${w(e) ? "" : e}</td></tr>`;
+  return `<tr><td>${s}</td><td>${n} ${v(e) ? "" : e}</td></tr>`;
 }
-function c(r, t, e) {
+function c(s, t, e) {
   return {
-    name: r,
+    name: s,
     color: t,
     fillColor: e
   };
 }
-function Je(r) {
-  if (r < 0 || r > 99)
-    return Ii;
-  const t = Ze[r];
-  return w(t) ? Si : t;
+function gn(s) {
+  if (s < 0 || s > 99)
+    return $i;
+  const t = hn[s];
+  return v(t) ? Hi : t;
 }
-ut.trackSymbol = function(r, t) {
-  return new Z(r, t);
+mt.trackSymbol = function(s, t) {
+  return new gt(s, t);
 };
-ut.TrackSymbol = Z;
-ut.aisTrackSymbol = function(r, t) {
-  return new de(r, t);
+mt.TrackSymbol = gt;
+mt.aisTrackSymbol = function(s, t) {
+  return new dn(s, t);
 };
-ut.AISTrackSymbol = de;
+mt.AISTrackSymbol = dn;
 export {
-  de as AISTrackSymbol,
-  Z as TrackSymbol,
-  Z as default
+  dn as AISTrackSymbol,
+  gt as TrackSymbol,
+  gt as default
 };
 //# sourceMappingURL=leaflet-tracksymbol2.es.js.map
