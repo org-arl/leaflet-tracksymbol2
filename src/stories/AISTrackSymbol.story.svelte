@@ -16,33 +16,40 @@
     let ts2: AISTrackSymbol;
     let center = [1.251, 103.826];
 
+    let trueHeading1 = 320;
+    let cog1 = 45;
+    let sog1 = 2.0;
+    let trueHeading2 = 120;
+    let cog2 = 240;
+    let sog2 = 5.0;
+
     let positionReport1: PositionReport = {
         latitude: p1[0],
         longitude: p1[1],
-        trueHeading: 320,
-        cog: 45,
-        sog: 2.0,
+        trueHeading: trueHeading1,
+        cog: cog1,
+        sog: sog1,
     };
     let positionReport2: PositionReport = {
         latitude: p2[0],
         longitude: p2[1],
-        trueHeading: 120,
-        cog: 240,
-        sog: 5.0,
+        trueHeading: trueHeading2,
+        cog: cog2,
+        sog: sog2,
     };
 
     $: {
-        positionReport1.trueHeading;
-        positionReport1.cog;
-        positionReport1.sog;
+        positionReport1.trueHeading = trueHeading1;
+        positionReport1.cog = cog1;
+        positionReport1.sog = sog1;
         if (ts1) {
             ts1.setPositionReport(positionReport1);
         }
     }
     $: {
-        positionReport2.trueHeading;
-        positionReport2.cog;
-        positionReport2.sog;
+        positionReport2.trueHeading = trueHeading2;
+        positionReport2.cog = cog2;
+        positionReport2.sog = sog2;
         if (ts2) {
             ts2.setPositionReport(positionReport2);
         }
@@ -122,15 +129,15 @@
 
     <svelte:fragment slot="controls">
         <h3>AISTrackSymbol1</h3>
-        <Hst.Number bind:value={positionReport1.trueHeading} title="Heading (deg)" />
-        <Hst.Number bind:value={positionReport1.cog} title="COG (deg)" />
-        <Hst.Number bind:value={positionReport1.sog} title="SOG (knots)" />
+        <Hst.Number bind:value={trueHeading1} title="Heading (deg)" />
+        <Hst.Number bind:value={cog1} title="COG (deg)" />
+        <Hst.Number bind:value={sog1} title="SOG (knots)" />
         <button class="htw-p-2" on:click={() => center = p1}>Locate</button>
 
         <h3>AISTrackSymbol2</h3>
-        <Hst.Number bind:value={positionReport2.trueHeading} title="Heading (deg)" />
-        <Hst.Number bind:value={positionReport2.cog} title="COG (deg)" />
-        <Hst.Number bind:value={positionReport2.sog} title="SOG (knots)" />
+        <Hst.Number bind:value={trueHeading2} title="Heading (deg)" />
+        <Hst.Number bind:value={cog2} title="COG (deg)" />
+        <Hst.Number bind:value={sog2} title="SOG (knots)" />
         <button class="htw-p-2" on:click={() => center = p2}>Locate</button>
     </svelte:fragment>
 </Hst.Story>
