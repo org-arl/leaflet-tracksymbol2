@@ -1,21 +1,21 @@
-import mt, { Path as _n, Util as Me, Bounds as mn, LatLngBounds as xn, LatLng as me, Point as En, DomUtil as wn } from "leaflet";
-const Be = !0, vn = !1, qt = { CCW: -1, CW: 1, NOT_ORIENTABLE: 0 }, Tn = 2 * Math.PI, bt = 1, Fe = 0, z = 2, Sn = 3, yn = 4, In = 1, bn = 2, fe = 0, Dt = 1, pt = 2;
+import mt, { Path as _n, Util as ke, Bounds as mn, LatLngBounds as xn, LatLng as me, Point as En, DomUtil as wn } from "leaflet";
+const Be = !0, vn = !1, qt = { CCW: -1, CW: 1, NOT_ORIENTABLE: 0 }, Tn = 2 * Math.PI, bt = 1, Fe = 0, z = 2, yn = 3, Sn = 4, In = 1, bn = 2, fe = 0, Gt = 1, pt = 2;
 var zt = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   BOUNDARY: z,
   CCW: Be,
-  CONTAINS: Sn,
+  CONTAINS: yn,
   CW: vn,
   END_VERTEX: pt,
   INSIDE: bt,
-  INTERLACE: yn,
+  INTERLACE: Sn,
   NOT_VERTEX: fe,
   ORIENTATION: qt,
   OUTSIDE: Fe,
   OVERLAP_OPPOSITE: bn,
   OVERLAP_SAME: In,
   PIx2: Tn,
-  START_VERTEX: Dt
+  START_VERTEX: Gt
 });
 let Y = 1e-6;
 function Ve(s) {
@@ -86,7 +86,7 @@ Object.defineProperty(i, "DP_TOL", {
     Ve(s);
   }
 });
-class w {
+class v {
   /**
    * Throw error ILLEGAL_PARAMETERS when cannot instantiate from given parameter
    * @returns {ReferenceError}
@@ -126,7 +126,7 @@ class w {
     return new Error("Operation is not supported");
   }
 }
-i.Errors = w;
+i.Errors = v;
 class ue {
   constructor(t, e) {
     this.first = t, this.last = e || this.first;
@@ -210,7 +210,7 @@ class ue {
     let e = t, n = t;
     do {
       if (e != t && e === n)
-        throw w.INFINITE_LOOP;
+        throw v.INFINITE_LOOP;
       e = e.next, n = n.next.next;
     } while (e != t);
   }
@@ -222,7 +222,7 @@ function xt(s, t, e) {
   let l = 0;
   r[0] === null ? l = 0 : r[1] === null ? l = s.shape.length : l = r[0].length;
   let o = fe;
-  st(l, 0) && (o |= Dt), st(l, s.shape.length) && (o |= pt);
+  st(l, 0) && (o |= Gt), st(l, s.shape.length) && (o |= pt);
   let a = o & pt && s.next.arc_length === 0 ? 0 : s.arc_length + l;
   e.push({
     id: n,
@@ -295,20 +295,20 @@ function Nn(s) {
     a + h < r && s.int_points1_sorted[a + h].face === t ? f = a + h : f = e;
     let u = Et(s.int_points1_sorted, f, t);
     n = null;
-    for (let m = f; m < f + u; m++) {
-      let y = s.int_points1_sorted[m];
-      if (y.face === t && s.int_points2[y.id].face === s.int_points2[o.id].face) {
-        n = y;
+    for (let x = f; x < f + u; x++) {
+      let S = s.int_points1_sorted[x];
+      if (S.face === t && s.int_points2[S.id].face === s.int_points2[o.id].face) {
+        n = S;
         break;
       }
     }
     if (n === null)
       continue;
-    let g = o.edge_after, x = n.edge_before;
-    if (!(g.bv === z && x.bv === z) || g !== x)
+    let g = o.edge_after, E = n.edge_before;
+    if (!(g.bv === z && E.bv === z) || g !== E)
       continue;
-    let I = s.int_points2[o.id], T = s.int_points2[n.id], E = I.edge_after, S = T.edge_before;
-    E.bv === z && S.bv === z && E === S || (I = s.int_points2[n.id], T = s.int_points2[o.id], E = I.edge_after, S = T.edge_before), E.bv === z && S.bv === z && E === S && g.setOverlap(E);
+    let I = s.int_points2[o.id], T = s.int_points2[n.id], w = I.edge_after, y = T.edge_before;
+    w.bv === z && y.bv === z && w === y || (I = s.int_points2[n.id], T = s.int_points2[o.id], w = I.edge_after, y = T.edge_before), w.bv === z && y.bv === z && w === y && g.setOverlap(w);
   }
 }
 function Et(s, t, e) {
@@ -324,7 +324,7 @@ function wt(s, t) {
   if (t) {
     for (let e of t) {
       let n = e.edge_before;
-      if (e.is_vertex = fe, n.shape.start && n.shape.start.equalTo(e.pt) && (e.is_vertex |= Dt), n.shape.end && n.shape.end.equalTo(e.pt) && (e.is_vertex |= pt), e.is_vertex & Dt) {
+      if (e.is_vertex = fe, n.shape.start && n.shape.start.equalTo(e.pt) && (e.is_vertex |= Gt), n.shape.end && n.shape.end.equalTo(e.pt) && (e.is_vertex |= pt), e.is_vertex & Gt) {
         e.edge_before = n.prev, e.is_vertex = pt;
         continue;
       }
@@ -342,20 +342,20 @@ function xe(s, t, e) {
   n.next = e, e.prev = n, e.next = r, r.prev = e;
 }
 const { INSIDE: Q, OUTSIDE: W, BOUNDARY: b, OVERLAP_SAME: Rn, OVERLAP_OPPOSITE: Un } = zt, { NOT_VERTEX: Wi, START_VERTEX: Ee, END_VERTEX: we } = zt, Wt = 1, Ut = 2, ot = 3;
-function kn(s, t) {
-  let [e, n] = kt(s, t, Wt, !0);
+function Mn(s, t) {
+  let [e, n] = Mt(s, t, Wt, !0);
   return e;
 }
 function ie(s, t) {
-  let n = t.clone().reverse(), [r, l] = kt(s, n, ot, !0);
+  let n = t.clone().reverse(), [r, l] = Mt(s, n, ot, !0);
   return r;
 }
-function Ge(s, t) {
-  let [e, n] = kt(s, t, Ut, !0);
+function De(s, t) {
+  let [e, n] = Mt(s, t, Ut, !0);
   return e;
 }
-function De(s, t) {
-  let [e, n] = kt(s, t, Ut, !1), r = [];
+function Ge(s, t) {
+  let [e, n] = Mt(s, t, Ut, !1), r = [];
   for (let o of e.faces)
     r = [...r, ...[...o.edges].map((a) => a.shape)];
   let l = [];
@@ -364,7 +364,7 @@ function De(s, t) {
   return [r, l];
 }
 function re(s, t) {
-  let [e, n] = kt(s, t, ot, !1), r = [];
+  let [e, n] = Mt(s, t, ot, !1), r = [];
   for (let l of e.faces)
     r = [...r, ...[...l.edges].map((o) => o.shape)];
   return r;
@@ -375,18 +375,18 @@ function ze(s, t) {
   let l = r.int_points1_sorted.map((a) => a.pt), o = r.int_points2_sorted.map((a) => a.pt);
   return [l, o];
 }
-function Mn(s, t, e, n) {
+function kn(s, t, e, n) {
   let r = ve(s, e.int_points1), l = ve(t, e.int_points2);
   for (Te(r, t), Te(l, s), ee(e.int_points1), ee(e.int_points2), ne(e.int_points1, t), ne(e.int_points2, s); Fn(s, t, e.int_points1, e.int_points1_sorted, e.int_points2, e); )
     ;
-  Nn(e), se(s, n, e.int_points1_sorted, !0), se(t, n, e.int_points2_sorted, !1), Se(s, r, n, !0), Se(t, l, n, !1);
+  Nn(e), se(s, n, e.int_points1_sorted, !0), se(t, n, e.int_points2_sorted, !1), ye(s, r, n, !0), ye(t, l, n, !1);
 }
 function Bn(s, t, e, n) {
   Vn(s, t, n, e.int_points2), Hn(s, t, e), oe(s, e.int_points1), oe(t, e.int_points2), le(s, e.int_points1, e.int_points2), le(s, e.int_points2, e.int_points1);
 }
-function kt(s, t, e, n) {
+function Mt(s, t, e, n) {
   let r = s.clone(), l = t.clone(), o = Qe(r, l);
-  return Nt(o), wt(r, o.int_points1_sorted), wt(l, o.int_points2_sorted), he(o), Nt(o), Mn(r, l, o, e), n && Bn(r, l, o, e), [r, l];
+  return Nt(o), wt(r, o.int_points1_sorted), wt(l, o.int_points2_sorted), he(o), Nt(o), kn(r, l, o, e), n && Bn(r, l, o, e), [r, l];
 }
 function Qe(s, t) {
   let e = {
@@ -416,53 +416,53 @@ function Te(s, t) {
 function Fn(s, t, e, n, r, l) {
   let o, a, h, f = n.length, u = !1;
   for (let g = 0; g < f; g++) {
-    let x = n[g];
-    x.face !== o && (a = g, o = x.face);
-    let I = g, T = Et(n, g, o), E;
-    I + T < f && n[I + T].face === o ? E = I + T : E = a;
-    let S = Et(n, E, o);
+    let E = n[g];
+    E.face !== o && (a = g, o = E.face);
+    let I = g, T = Et(n, g, o), w;
+    I + T < f && n[I + T].face === o ? w = I + T : w = a;
+    let y = Et(n, w, o);
     h = null;
-    for (let p = E; p < E + S; p++) {
+    for (let p = w; p < w + y; p++) {
       let L = n[p];
-      if (L.face === o && r[L.id].face === r[x.id].face) {
+      if (L.face === o && r[L.id].face === r[E.id].face) {
         h = L;
         break;
       }
     }
     if (h === null)
       continue;
-    let m = x.edge_after, y = h.edge_before;
-    if (m.bv === b && y.bv != b) {
-      m.bv = y.bv;
+    let x = E.edge_after, S = h.edge_before;
+    if (x.bv === b && S.bv != b) {
+      x.bv = S.bv;
       continue;
     }
-    if (m.bv != b && y.bv === b) {
-      y.bv = m.bv;
+    if (x.bv != b && S.bv === b) {
+      S.bv = x.bv;
       continue;
     }
-    if (m.bv === b && y.bv === b && m != y || m.bv === Q && y.bv === W || m.bv === W && y.bv === Q) {
-      let p = m.next;
-      for (; p != y; )
+    if (x.bv === b && S.bv === b && x != S || x.bv === Q && S.bv === W || x.bv === W && S.bv === Q) {
+      let p = x.next;
+      for (; p != S; )
         p.bvStart = void 0, p.bvEnd = void 0, p.bv = void 0, p.setInclusion(t), p = p.next;
     }
-    if (m.bv === b && y.bv === b && m != y) {
-      let p = m.next, L;
-      for (; p != y; ) {
+    if (x.bv === b && S.bv === b && x != S) {
+      let p = x.next, L;
+      for (; p != S; ) {
         if (p.bv != b) {
           if (L === void 0)
             L = p.bv;
           else if (p.bv != L)
-            throw w.UNRESOLVED_BOUNDARY_CONFLICT;
+            throw v.UNRESOLVED_BOUNDARY_CONFLICT;
         }
         p = p.next;
       }
-      L != null && (m.bv = L, y.bv = L);
+      L != null && (x.bv = L, S.bv = L);
       continue;
     }
-    if (m.bv === Q && y.bv === W || m.bv === W && y.bv === Q) {
-      let p = m;
-      for (; p != y; ) {
-        if (p.bvStart === m.bv && p.bvEnd === y.bv) {
+    if (x.bv === Q && S.bv === W || x.bv === W && S.bv === Q) {
+      let p = x;
+      for (; p != S; ) {
+        if (p.bvStart === x.bv && p.bvEnd === S.bv) {
           let [L, Zt] = p.shape.distanceTo(t);
           if (L < 10 * i.DP_TOL) {
             xt(p, Zt.ps, e);
@@ -494,7 +494,7 @@ function Fn(s, t, e, n, r, l) {
       }
       if (u)
         break;
-      throw w.UNRESOLVED_BOUNDARY_CONFLICT;
+      throw v.UNRESOLVED_BOUNDARY_CONFLICT;
     }
   }
   return u;
@@ -508,13 +508,13 @@ function se(s, t, e, n) {
       continue;
     let f = h, u = Et(e, h, r), g;
     f + u < e.length && e[f + u].face === o.face ? g = f + u : g = l, a = e[g];
-    let x = g, I = Et(e, x, r), T = o.edge_after, E = a.edge_before;
-    if (T.bv === Q && E.bv === Q && t === Wt || T.bv === W && E.bv === W && t === Ut || (T.bv === W || E.bv === W) && t === ot && !n || (T.bv === Q || E.bv === Q) && t === ot && n || T.bv === b && E.bv === b && T.overlap & Rn && n || T.bv === b && E.bv === b && T.overlap & Un) {
-      s.removeChain(r, T, E);
-      for (let S = f; S < f + u; S++)
-        e[S].edge_after = void 0;
-      for (let S = x; S < x + I; S++)
-        e[S].edge_before = void 0;
+    let E = g, I = Et(e, E, r), T = o.edge_after, w = a.edge_before;
+    if (T.bv === Q && w.bv === Q && t === Wt || T.bv === W && w.bv === W && t === Ut || (T.bv === W || w.bv === W) && t === ot && !n || (T.bv === Q || w.bv === Q) && t === ot && n || T.bv === b && w.bv === b && T.overlap & Rn && n || T.bv === b && w.bv === b && T.overlap & Un) {
+      s.removeChain(r, T, w);
+      for (let y = f; y < f + u; y++)
+        e[y].edge_after = void 0;
+      for (let y = E; y < E + I; y++)
+        e[y].edge_before = void 0;
     }
     h += u - 1;
   }
@@ -551,7 +551,7 @@ function le(s, t, e) {
     try {
       ue.testInfiniteLoop(r);
     } catch {
-      throw w.CANNOT_COMPLETE_BOOLEAN_OPERATION;
+      throw v.CANNOT_COMPLETE_BOOLEAN_OPERATION;
     }
     let o = s.addFace(r, l);
     for (let a of t)
@@ -560,7 +560,7 @@ function le(s, t, e) {
       a.edge_before && a.edge_after && a.edge_before.face === o && a.edge_after.face === o && (a.face = o);
   }
 }
-function Se(s, t, e, n) {
+function ye(s, t, e, n) {
   for (let r of t) {
     let l = r.first.bv;
     (e === Wt && l === Q || e === ot && l === Q && n || e === ot && l === W && !n || e === Ut && l === W) && s.deleteFace(r);
@@ -572,16 +572,16 @@ var $n = /* @__PURE__ */ Object.freeze({
   BOOLEAN_SUBTRACT: ot,
   BOOLEAN_UNION: Wt,
   calculateIntersections: ze,
-  innerClip: De,
-  intersect: Ge,
+  innerClip: Ge,
+  intersect: De,
   outerClip: re,
   removeNotRelevantChains: se,
   removeOldFaces: oe,
   restoreFaces: le,
   subtract: ie,
-  unify: kn
+  unify: Mn
 });
-const qn = RegExp("T.F..FFF.|T.F...F.."), Gn = RegExp("T........|.T.......|...T.....|....T...."), Dn = RegExp("FT.......|F..T.....|F...T...."), zn = RegExp("T.F..F..."), Qn = RegExp("T.F..F...|.TF..F...|..FT.F...|..F.TF...");
+const qn = RegExp("T.F..FFF.|T.F...F.."), Dn = RegExp("T........|.T.......|...T.....|....T...."), Gn = RegExp("FT.......|F..T.....|F...T...."), zn = RegExp("T.F..F..."), Qn = RegExp("T.F..F...|.TF..F...|..FT.F...|..F.TF...");
 class Tt {
   /**
    * Create new instance of DE9IM matrix
@@ -730,10 +730,10 @@ class Tt {
     return qn.test(this.toString());
   }
   intersect() {
-    return Gn.test(this.toString());
+    return Dn.test(this.toString());
   }
   touch() {
-    return Dn.test(this.toString());
+    return Gn.test(this.toString());
   }
   inside() {
     return zn.test(this.toString());
@@ -742,11 +742,11 @@ class Tt {
     return Qn.test(this.toString());
   }
 }
-function St(s, t) {
+function yt(s, t) {
   let e = [], [n, r, l] = s.standard, [o, a, h] = t.standard, f = n * a - r * o, u = l * a - r * h, g = n * h - l * o;
   if (!i.Utils.EQ_0(f)) {
-    let x, I;
-    r === 0 ? (x = l / n, I = g / f) : a === 0 ? (x = h / o, I = g / f) : n === 0 ? (x = u / f, I = l / r) : o === 0 ? (x = u / f, I = h / a) : (x = u / f, I = g / f), e.push(new i.Point(x, I));
+    let E, I;
+    r === 0 ? (E = l / n, I = g / f) : a === 0 ? (E = h / o, I = g / f) : n === 0 ? (E = u / f, I = l / r) : o === 0 ? (E = u / f, I = h / a) : (E = u / f, I = g / f), e.push(new i.Point(E, I));
   }
   return e;
 }
@@ -763,7 +763,7 @@ function at(s, t) {
 function vt(s, t) {
   let e = [];
   for (let n of t.toSegments()) {
-    let r = Mt(n, s);
+    let r = kt(n, s);
     for (let l of r)
       Ze(l, e) || e.push(l);
   }
@@ -778,12 +778,12 @@ function Yt(s, t) {
     l.on(t) && e.push(l);
   return e;
 }
-function Mt(s, t) {
+function kt(s, t) {
   let e = [];
   if (s.ps.on(t) && e.push(s.ps), s.pe.on(t) && !s.isZeroLength() && e.push(s.pe), e.length > 0 || s.isZeroLength() || s.ps.leftTo(t) && s.pe.leftTo(t) || !s.ps.leftTo(t) && !s.pe.leftTo(t))
     return e;
   let n = new i.Line(s.ps, s.pe);
-  return St(n, t);
+  return yt(n, t);
 }
 function Bt(s, t) {
   let e = [];
@@ -797,12 +797,12 @@ function Bt(s, t) {
   if (n.incidentTo(r))
     s.ps.on(t) && e.push(s.ps), s.pe.on(t) && e.push(s.pe), t.ps.on(s) && !t.ps.equalTo(s.ps) && !t.ps.equalTo(s.pe) && e.push(t.ps), t.pe.on(s) && !t.pe.equalTo(s.ps) && !t.pe.equalTo(s.pe) && e.push(t.pe);
   else {
-    let l = St(n, r);
-    l.length > 0 && ye(l[0], s) && ye(l[0], t) && e.push(l[0]);
+    let l = yt(n, r);
+    l.length > 0 && Se(l[0], s) && Se(l[0], t) && e.push(l[0]);
   }
   return e;
 }
-function ye(s, t) {
+function Se(s, t) {
   const e = t.box;
   return i.Utils.LE(s.x, e.xmax) && i.Utils.GE(s.x, e.xmin) && i.Utils.LE(s.y, e.ymax) && i.Utils.GE(s.y, e.ymin);
 }
@@ -907,7 +907,7 @@ function Xn(s, t) {
   return s.isSegment() ? lt(s.shape, t) : ce(s.shape, t);
 }
 function Ye(s, t) {
-  return s.isSegment() ? Mt(s.shape, t) : Yt(t, s.shape);
+  return s.isSegment() ? kt(s.shape, t) : Yt(t, s.shape);
 }
 function Kn(s, t) {
   return s.isSegment() ? jt(s.shape, t) : de(s.shape, t);
@@ -977,7 +977,7 @@ function nt(s) {
   return new i.Line(s.start, s.norm);
 }
 function Xe(s, t) {
-  return Mt(t, nt(s)).filter((e) => s.contains(e));
+  return kt(t, nt(s)).filter((e) => s.contains(e));
 }
 function Ke(s, t) {
   return Yt(nt(s), t).filter((e) => s.contains(e));
@@ -989,10 +989,10 @@ function ii(s, t) {
   return vt(nt(s), t).filter((e) => s.contains(e));
 }
 function tn(s, t) {
-  return St(nt(s), t).filter((e) => s.contains(e));
+  return yt(nt(s), t).filter((e) => s.contains(e));
 }
 function ri(s, t) {
-  return St(nt(s), nt(t)).filter((e) => s.contains(e)).filter((e) => t.contains(e));
+  return yt(nt(s), nt(t)).filter((e) => s.contains(e)).filter((e) => t.contains(e));
 }
 function en(s, t) {
   return Ft(nt(s), t).filter((e) => s.contains(e));
@@ -1205,16 +1205,16 @@ function At(s, t) {
       let g = u.edge.prev;
       for (; te(g.length); )
         g = g.prev;
-      let x = g.shape.tangentInEnd(), I = u.pt.translate(x), T = u.edge.shape.tangentInStart(), E = u.pt.translate(T), S = I.leftTo(r), m = E.leftTo(r);
-      (S && !m || !S && m) && h++;
+      let E = g.shape.tangentInEnd(), I = u.pt.translate(E), T = u.edge.shape.tangentInStart(), w = u.pt.translate(T), y = I.leftTo(r), x = w.leftTo(r);
+      (y && !x || !y && x) && h++;
     } else if (u.pt.equalTo(u.edge.shape.end)) {
       if (f > 0 && u.pt.equalTo(a[f - 1].pt) && u.edge.next === a[f - 1].edge)
         continue;
       let g = u.edge.next;
       for (; te(g.length); )
         g = g.next;
-      let x = g.shape.tangentInStart(), I = u.pt.translate(x), T = u.edge.shape.tangentInEnd(), E = u.pt.translate(T), S = I.leftTo(r), m = E.leftTo(r);
-      (S && !m || !S && m) && h++;
+      let E = g.shape.tangentInStart(), I = u.pt.translate(E), T = u.edge.shape.tangentInEnd(), w = u.pt.translate(T), y = I.leftTo(r), x = w.leftTo(r);
+      (y && !x || !y && x) && h++;
     } else if (u.edge.shape instanceof i.Segment)
       h++;
     else {
@@ -1225,22 +1225,22 @@ function At(s, t) {
   return e = h % 2 == 1 ? bt : Fe, e;
 }
 function li(s, t) {
-  return yt(s, t).equal();
+  return St(s, t).equal();
 }
 function nn(s, t) {
-  return yt(s, t).intersect();
+  return St(s, t).intersect();
 }
 function ai(s, t) {
-  return yt(s, t).touch();
+  return St(s, t).touch();
 }
 function fi(s, t) {
   return !nn(s, t);
 }
 function rn(s, t) {
-  return yt(s, t).inside();
+  return St(s, t).inside();
 }
 function sn(s, t) {
-  return yt(s, t).covered();
+  return St(s, t).covered();
 }
 function ui(s, t) {
   return rn(t, s);
@@ -1248,7 +1248,7 @@ function ui(s, t) {
 function on(s, t) {
   return sn(t, s);
 }
-function yt(s, t) {
+function St(s, t) {
   if (s instanceof i.Line && t instanceof i.Line)
     return hi(s, t);
   if (s instanceof i.Line && t instanceof i.Circle)
@@ -1271,7 +1271,7 @@ function yt(s, t) {
     return Vt(s, new i.Polygon(t));
 }
 function hi(s, t) {
-  let e = new Tt(), n = St(s, t);
+  let e = new Tt(), n = yt(s, t);
   return n.length === 0 ? s.contains(t.pt) && t.contains(s.pt) ? (e.I2I = [s], e.I2E = [], e.E2I = []) : (e.I2I = [], e.I2E = [s], e.E2I = [t]) : (e.I2I = n, e.I2E = s.split(n), e.E2I = t.split(n)), e;
 }
 function ci(s, t) {
@@ -1324,7 +1324,7 @@ function be(s, t) {
   return e;
 }
 function Vt(s, t) {
-  let e = new Tt(), [n, r] = ze(s, t), l = Ge(s, t), o = ie(s, t), a = ie(t, s), [h, f] = De(s, t), u = re(s, t), g = re(t, s);
+  let e = new Tt(), [n, r] = ze(s, t), l = De(s, t), o = ie(s, t), a = ie(t, s), [h, f] = Ge(s, t), u = re(s, t), g = re(t, s);
   return e.I2I = l.isEmpty() ? [] : [l], e.I2B = f, e.I2E = o.isEmpty() ? [] : [o], e.B2I = h, e.B2B = n, e.B2E = u, e.E2I = a.isEmpty() ? [] : [a], e.E2B = g, e;
 }
 var pi = /* @__PURE__ */ Object.freeze({
@@ -1336,7 +1336,7 @@ var pi = /* @__PURE__ */ Object.freeze({
   equal: li,
   inside: rn,
   intersect: nn,
-  relate: yt,
+  relate: St,
   touch: ai
 });
 let Lt = class ct {
@@ -1408,7 +1408,7 @@ let Lt = class ct {
     else if (t.length === 2 && typeof t[0] == "number" && typeof t[1] == "number")
       e = t[0], n = t[1];
     else
-      throw w.ILLEGAL_PARAMETERS;
+      throw v.ILLEGAL_PARAMETERS;
     return this.multiply(new ct(1, 0, 0, 1, e, n));
   }
   /**
@@ -1880,13 +1880,13 @@ class xi extends Set {
 i.PlanarSet = xi;
 class it {
   get name() {
-    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
   get box() {
-    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
   clone() {
-    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
   /**
    * Returns new shape translated by given vector.
@@ -1920,7 +1920,7 @@ class it {
     return this.transform(new Lt().scale(t, e));
   }
   transform(...t) {
-    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
   /**
    * This method returns an object that defines how data will be
@@ -1931,7 +1931,7 @@ class it {
     return Object.assign({}, this, { name: this.name });
   }
   svg(t = {}) {
-    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
 }
 let Ei = class ln extends it {
@@ -1958,7 +1958,7 @@ let Ei = class ln extends it {
         this.x = t[0], this.y = t[1];
         return;
       }
-      throw w.ILLEGAL_PARAMETERS;
+      throw v.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2131,7 +2131,7 @@ let vi = class extends it {
           return;
         }
       }
-      throw w.ILLEGAL_PARAMETERS;
+      throw v.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2199,7 +2199,7 @@ let vi = class extends it {
   normalize() {
     if (!i.Utils.EQ_0(this.length))
       return new i.Vector(this.x / this.length, this.y / this.length);
-    throw w.ZERO_DIVISION;
+    throw v.ZERO_DIVISION;
   }
   /**
    * Returns new vector rotated by given angle,
@@ -2212,7 +2212,7 @@ let vi = class extends it {
   rotate(t, e = new i.Point()) {
     if (e.x === 0 && e.y === 0)
       return this.transform(new Lt().rotate(t));
-    throw w.OPERATION_IS_NOT_SUPPORTED;
+    throw v.OPERATION_IS_NOT_SUPPORTED;
   }
   /**
    * Return new vector transformed by affine transformation matrix m
@@ -2316,7 +2316,7 @@ class Qt extends it {
         this.ps = new i.Point(t[0], t[1]), this.pe = new i.Point(t[2], t[3]);
         return;
       }
-      throw w.ILLEGAL_PARAMETERS;
+      throw v.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2398,7 +2398,7 @@ class Qt extends it {
     if (t instanceof i.Point)
       return this.contains(t) ? [t] : [];
     if (t instanceof i.Line)
-      return Mt(this, t);
+      return kt(this, t);
     if (t instanceof i.Ray)
       return Xe(t, this);
     if (t instanceof i.Segment)
@@ -2554,9 +2554,9 @@ class Qt extends it {
   }
 }
 i.Segment = Qt;
-const Si = (...s) => new i.Segment(...s);
-i.segment = Si;
-let { vector: It } = i, yi = class an extends it {
+const yi = (...s) => new i.Segment(...s);
+i.segment = yi;
+let { vector: It } = i, Si = class an extends it {
   /**
    * Line may be constructed by point and normal vector or by two points that a line passes through
    * @param {Point} pt - point that a line passes through
@@ -2577,18 +2577,18 @@ let { vector: It } = i, yi = class an extends it {
         }
         if (e instanceof i.Point && n instanceof i.Vector) {
           if (i.Utils.EQ_0(n.x) && i.Utils.EQ_0(n.y))
-            throw w.ILLEGAL_PARAMETERS;
+            throw v.ILLEGAL_PARAMETERS;
           this.pt = e.clone(), this.norm = n.clone(), this.norm = this.norm.normalize(), this.norm.dot(It(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
           return;
         }
         if (e instanceof i.Vector && n instanceof i.Point) {
           if (i.Utils.EQ_0(e.x) && i.Utils.EQ_0(e.y))
-            throw w.ILLEGAL_PARAMETERS;
+            throw v.ILLEGAL_PARAMETERS;
           this.pt = n.clone(), this.norm = e.clone(), this.norm = this.norm.normalize(), this.norm.dot(It(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
           return;
         }
       }
-      throw w.ILLEGAL_PARAMETERS;
+      throw v.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2698,7 +2698,7 @@ let { vector: It } = i, yi = class an extends it {
     if (t instanceof i.Point)
       return this.contains(t) ? [t] : [];
     if (t instanceof i.Line)
-      return St(this, t);
+      return yt(this, t);
     if (t instanceof i.Ray)
       return tn(t, this);
     if (t instanceof i.Circle)
@@ -2706,7 +2706,7 @@ let { vector: It } = i, yi = class an extends it {
     if (t instanceof i.Box)
       return vt(this, t);
     if (t instanceof i.Segment)
-      return Mt(t, this);
+      return kt(t, this);
     if (t instanceof i.Arc)
       return Yt(this, t);
     if (t instanceof i.Polygon)
@@ -2801,11 +2801,11 @@ let { vector: It } = i, yi = class an extends it {
   }
   static points2norm(t, e) {
     if (t.equalTo(e))
-      throw w.ILLEGAL_PARAMETERS;
+      throw v.ILLEGAL_PARAMETERS;
     return new i.Vector(t, e).normalize().rotate90CCW();
   }
 };
-i.Line = yi;
+i.Line = Si;
 const Ii = (...s) => new i.Line(...s);
 i.line = Ii;
 let bi = class extends it {
@@ -2884,7 +2884,7 @@ let bi = class extends it {
    */
   scale(t, e) {
     if (t !== e || !(this.pc.x === 0 && this.pc.y === 0))
-      throw w.OPERATION_IS_NOT_SUPPORTED;
+      throw v.OPERATION_IS_NOT_SUPPORTED;
     return new i.Circle(this.pc, this.r * t);
   }
   /**
@@ -3438,7 +3438,7 @@ class Ot extends it {
    * @param {Point} [center=(0,0)] center
    */
   rotate(t, e = new i.Point()) {
-    throw w.OPERATION_IS_NOT_SUPPORTED;
+    throw v.OPERATION_IS_NOT_SUPPORTED;
   }
   /**
    * Return new box transformed using affine transformation matrix
@@ -3907,7 +3907,7 @@ class _e extends it {
         this.norm = t[1].clone();
         return;
       }
-      throw w.ILLEGAL_PARAMETERS;
+      throw v.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -4525,8 +4525,8 @@ class Ct {
   }
 }
 i.Inversion = Ct;
-const ki = (s) => new i.Inversion(s);
-i.inversion = ki;
+const Mi = (s) => new i.Inversion(s);
+i.inversion = Mi;
 class d {
   /**
    * Calculate distance and shortest segment between points
@@ -4644,9 +4644,9 @@ class d {
       return [0, new i.Segment(n[0], n[0])];
     let r = new i.Line(t.ps, t.pe), l = new i.Circle(e.pc, e.r), [o, a] = d.point2line(l.center, r);
     if (i.Utils.GE(o, l.r) && a.end.on(t)) {
-      let [g, x] = d.point2circle(a.end, l);
-      if (x.end.on(e))
-        return [g, x];
+      let [g, E] = d.point2circle(a.end, l);
+      if (E.end.on(e))
+        return [g, E];
     }
     let h = [];
     h.push(d.point2arc(t.start, e)), h.push(d.point2arc(t.end, e));
@@ -4802,7 +4802,7 @@ class d {
     if (e.length === 0)
       return n;
     let a = e.map((u) => u.left.isNil() ? void 0 : u.left).filter((u) => u !== void 0), h = e.map((u) => u.right.isNil() ? void 0 : u.right).filter((u) => u !== void 0), f = [...a, ...h].filter((u) => {
-      let [g, x] = d.box2box_minmax(t.box, u.max);
+      let [g, E] = d.box2box_minmax(t.box, u.max);
       return i.Utils.LE(g, n);
     });
     return n = d.minmax_tree_process_level(t, f, n, r), n;
@@ -4862,7 +4862,7 @@ const Le = i.Matrix, $t = 24, Oe = 60, _t = class X extends _n {
    * @param options - Options.
    */
   constructor(t, e) {
-    if (super(), Me.setOptions(this, e), t == null)
+    if (super(), ke.setOptions(this, e), t == null)
       throw Error("latLng required");
     e = e || {}, this._latLng = mt.latLng(t), this._heading = e.heading, this._course = e.course, this._speed = e.speed, this._setShapeOptions(e.shapeOptions);
   }
@@ -5181,7 +5181,7 @@ _t.DEFAULT_SHAPE_SET = {
   }
 };
 let gt = _t;
-const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn = "#000000", un = "#d3d3d3", C = "#000000", N = "#d3d3d3", tt = "#8b008b", et = "#ff00ff", k = "#00008b", M = "#ffff00", j = "#008b8b", Z = "#00ffff", B = "#00008b", F = "#0000ff", V = "#006400", H = "#90ee90", $ = "#8b0000", q = "#ff0000", G = "#008b8b", D = "#00ffff", hn = {
+const ki = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn = "#000000", un = "#d3d3d3", C = "#000000", N = "#d3d3d3", tt = "#8b008b", et = "#ff00ff", M = "#00008b", k = "#ffff00", j = "#008b8b", Z = "#00ffff", B = "#00008b", F = "#0000ff", V = "#006400", H = "#90ee90", $ = "#8b0000", q = "#ff0000", D = "#008b8b", G = "#00ffff", hn = {
   0: c("Not available", C, N),
   20: c("Wing in ground (WIG), all ships of this type", C, N),
   21: c("Wing in ground (WIG), Hazardous category A", C, N),
@@ -5201,16 +5201,16 @@ const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn 
   35: c("Military ops", tt, et),
   36: c("Sailing", tt, et),
   37: c("Pleasure Craft", tt, et),
-  40: c("High speed craft (HSC), all ships of this type", k, M),
-  41: c("High speed craft (HSC), Hazardous category A", k, M),
-  42: c("High speed craft (HSC), Hazardous category B", k, M),
-  43: c("High speed craft (HSC), Hazardous category C", k, M),
-  44: c("High speed craft (HSC), Hazardous category D", k, M),
-  45: c("High speed craft (HSC), Reserved for future use", k, M),
-  46: c("High speed craft (HSC), Reserved for future use", k, M),
-  47: c("High speed craft (HSC), Reserved for future use", k, M),
-  48: c("High speed craft (HSC), Reserved for future use", k, M),
-  49: c("High speed craft (HSC), No additional information", k, M),
+  40: c("High speed craft (HSC), all ships of this type", M, k),
+  41: c("High speed craft (HSC), Hazardous category A", M, k),
+  42: c("High speed craft (HSC), Hazardous category B", M, k),
+  43: c("High speed craft (HSC), Hazardous category C", M, k),
+  44: c("High speed craft (HSC), Hazardous category D", M, k),
+  45: c("High speed craft (HSC), Reserved for future use", M, k),
+  46: c("High speed craft (HSC), Reserved for future use", M, k),
+  47: c("High speed craft (HSC), Reserved for future use", M, k),
+  48: c("High speed craft (HSC), Reserved for future use", M, k),
+  49: c("High speed craft (HSC), No additional information", M, k),
   50: c("Pilot Vessel", j, Z),
   51: c("Search and Rescue vessel", j, Z),
   52: c("Tug", j, Z),
@@ -5251,17 +5251,17 @@ const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn 
   87: c("Tanker, Reserved for future use", $, q),
   88: c("Tanker, Reserved for future use", $, q),
   89: c("Tanker, No additional information", $, q),
-  90: c("Other Type, all ships of this type", G, D),
-  91: c("Other Type, Hazardous category A", G, D),
-  92: c("Other Type, Hazardous category B", G, D),
-  93: c("Other Type, Hazardous category C", G, D),
-  94: c("Other Type, Hazardous category D", G, D),
-  95: c("Other Type, Reserved for future use", G, D),
-  96: c("Other Type, Reserved for future use", G, D),
-  97: c("Other Type, Reserved for future use", G, D),
-  98: c("Other Type, Reserved for future use", G, D),
-  99: c("Other Type, no additional information", G, D)
-}, Hi = c("Reserved", fn, un), $i = c("Unknown", fn, un), cn = class Gt extends gt {
+  90: c("Other Type, all ships of this type", D, G),
+  91: c("Other Type, Hazardous category A", D, G),
+  92: c("Other Type, Hazardous category B", D, G),
+  93: c("Other Type, Hazardous category C", D, G),
+  94: c("Other Type, Hazardous category D", D, G),
+  95: c("Other Type, Reserved for future use", D, G),
+  96: c("Other Type, Reserved for future use", D, G),
+  97: c("Other Type, Reserved for future use", D, G),
+  98: c("Other Type, Reserved for future use", D, G),
+  99: c("Other Type, no additional information", D, G)
+}, Hi = c("Reserved", fn, un), $i = c("Unknown", fn, un), cn = class Dt extends gt {
   /**
    * AISTrackSymbol constructor.
    *
@@ -5269,7 +5269,16 @@ const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn 
    * @param options - Options.
    */
   constructor(t, e) {
-    super([t.latitude, t.longitude], e), Me.setOptions(this, e), e = e || {}, this._leaderTime = e.leaderTime || Fi, this._minZoomLevel = e.minZoomLevel || Bi, this._size = e.size || Mi, this.setPositionReport(t), this.setShipStaticData(e.shipStaticData);
+    super([t.latitude, t.longitude], e), ke.setOptions(this, e), e = e || {}, this._leaderTime = e.leaderTime || Fi, this._minZoomLevel = e.minZoomLevel || Bi, this._size = e.size || ki, this.setPositionReport(t), this.setShipStaticData(e.shipStaticData);
+  }
+  static etaFromDate(t) {
+    if (!m(t))
+      return {
+        month: t.getMonth() + 1,
+        day: t.getDate(),
+        hour: t.getHours(),
+        minute: t.getMinutes()
+      };
   }
   /**
    * Sets the position report.
@@ -5278,7 +5287,7 @@ const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn 
    * @returns this
    */
   setPositionReport(t) {
-    return this._positionReport = t, this.setLatLng([t.latitude, t.longitude]), !v(t.trueHeading) && t.trueHeading < Re ? this.setHeading(Ue(t.trueHeading)) : this.setHeading(void 0), !v(t.cog) && t.cog < Ne ? this.setCourse(Ue(t.cog)) : this.setCourse(void 0), !v(t.sog) && t.sog < Ce ? this.setSpeed(t.sog / Vi) : this.setSpeed(void 0), this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData)), this.redraw();
+    return this._positionReport = t, this.setLatLng([t.latitude, t.longitude]), !m(t.trueHeading) && t.trueHeading < Re ? this.setHeading(Ue(t.trueHeading)) : this.setHeading(void 0), !m(t.cog) && t.cog < Ne ? this.setCourse(Ue(t.cog)) : this.setCourse(void 0), !m(t.sog) && t.sog < Ce ? this.setSpeed(t.sog / Vi) : this.setSpeed(void 0), this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData)), this.redraw();
   }
   /**
    * Sets the ship static data.
@@ -5288,13 +5297,13 @@ const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn 
    */
   setShipStaticData(t) {
     this._shipStaticData = t;
-    const e = !v(t) && !v(t.type) ? gn(t.type) : hn[0];
+    const e = !m(t) && !m(t.type) ? gn(t.type) : hn[0];
     return this.setStyle({
       color: e.color,
       fill: !0,
       fillOpacity: 1,
       fillColor: e.fillColor
-    }), this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData)), this.setShapeOptions(Gt._getShapeOptions(
+    }), this.bindPopup(this._getPopupContent(this._positionReport, this._shipStaticData)), this.setShapeOptions(Dt._getShapeOptions(
       this._leaderTime,
       this._minZoomLevel,
       this._size,
@@ -5305,16 +5314,16 @@ const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn 
     const l = {
       leaderTime: t,
       defaultShapeSet: gt.createShapeSet(n)
-    }, o = Gt._getShapeSet(n, r);
+    }, o = Dt._getShapeSet(n, r);
     return o !== null && (l.shapeSetEntries = [{
       shapeSet: o,
       minZoomLevel: e
     }]), l;
   }
   static _getShapeSet(t, e) {
-    return v(e) || v(e.dimension) || !ke(e.dimension) ? null : {
+    return m(e) || m(e.dimension) || !Me(e.dimension) ? null : {
       withHeading: {
-        points: Gt.DEFAULT_SILHOUETTE_SHAPE_POINTS,
+        points: Dt.DEFAULT_SILHOUETTE_SHAPE_POINTS,
         center: [e.dimension.B, e.dimension.D],
         length: e.dimension.A + e.dimension.B,
         breadth: e.dimension.C + e.dimension.D,
@@ -5325,22 +5334,22 @@ const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn 
   }
   _getPopupContent(t, e) {
     let n = "<table>";
-    v(e) || (n += A("User ID", e.userId), n += A("IMO Number", e.imoNumber), n += A("Call sign", e.callSign), n += A("Name", e.name)), v(t) || (n += A("Location", `${t.latitude.toFixed(5)}, ${t.longitude.toFixed(5)}`), n += A(
+    m(e) || (n += A("User ID", e.userId), n += A("IMO Number", e.imoNumber), n += A("Call sign", e.callSign), n += A("Name", e.name)), m(t) || (n += A("Location", `${t.latitude.toFixed(5)}, ${t.longitude.toFixed(5)}`), n += A(
       "SOG",
-      !v(t.sog) && t.sog < Ce ? t.sog.toFixed(2) : void 0,
+      !m(t.sog) && t.sog < Ce ? t.sog.toFixed(2) : void 0,
       "knots"
     ), n += A(
       "COG",
-      !v(t.cog) && t.cog < Ne ? t.cog.toFixed(1) : void 0,
+      !m(t.cog) && t.cog < Ne ? t.cog.toFixed(1) : void 0,
       "°"
     ), n += A(
       "Heading",
-      !v(t.trueHeading) && t.trueHeading < Re ? t.trueHeading.toFixed(1) : void 0,
+      !m(t.trueHeading) && t.trueHeading < Re ? t.trueHeading.toFixed(1) : void 0,
       "°"
     ), n += A(
       "Navigation status",
-      Di(t.navigationalStatus)
-    )), v(e) || (n += A("Type", qi(e.type)), !v(e.dimension) && ke(e.dimension) && (n += A(
+      Gi(t.navigationalStatus)
+    )), m(e) || (n += A("Type", qi(e.type)), !m(e.dimension) && Me(e.dimension) && (n += A(
       "Ship length",
       e.dimension.A + e.dimension.B,
       "m"
@@ -5348,9 +5357,9 @@ const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn 
       "Ship width",
       e.dimension.C + e.dimension.D,
       "m"
-    )), n += A("Fix type", Gi(e.fixType)), n += A("ETA", zi(e.eta)), n += A(
+    )), n += A("Fix type", Di(e.fixType)), n += A("ETA", zi(e.eta)), n += A(
       "Maximum static draught",
-      v(e.maximumStaticDraught) ? void 0 : e.maximumStaticDraught.toFixed(1),
+      m(e.maximumStaticDraught) ? void 0 : e.maximumStaticDraught.toFixed(1),
       "m"
     ), n += A("Destination", e.destination), n += A("DTE", e.dte)), n += "</table>";
     const r = wn.create("div");
@@ -5360,10 +5369,10 @@ const Mi = 24, Bi = 14, Fi = 60, Vi = 1.944, Ce = 102.3, Ne = 360, Re = 360, fn 
 cn.DEFAULT_SILHOUETTE_SHAPE_POINTS = [[1, 0.5], [0.75, 1], [0, 1], [0, 0], [0.75, 0]];
 let dn = cn;
 function qi(s) {
-  return v(s) ? void 0 : gn(s).name;
+  return m(s) ? void 0 : gn(s).name;
 }
-function Gi(s) {
-  if (!v(s))
+function Di(s) {
+  if (!m(s))
     switch (s) {
       case 0:
         return;
@@ -5396,8 +5405,8 @@ function Gi(s) {
         return `unknown (${s})`;
     }
 }
-function Di(s) {
-  if (!v(s))
+function Gi(s) {
+  if (!m(s))
     switch (s) {
       case 0:
         return "Under way using engine";
@@ -5436,24 +5445,27 @@ function Di(s) {
     }
 }
 function zi(s) {
-  if (!v(s))
-    return `${s.month.toString().padStart(2, "0")}/${s.day.toString().padStart(2, "0")} ${s.hour.toString().padStart(2, "0")}:${s.minute.toString().padStart(2, "0")} UTC`;
+  if (m(s))
+    return;
+  const t = [];
+  if (!m(s.month) && !m(s.day) && t.push(`${s.month.toString().padStart(2, "0")}/${s.day.toString().padStart(2, "0")}`), !m(s.hour) && !m(s.minute) && t.push(`${s.hour.toString().padStart(2, "0")}:${s.minute.toString().padStart(2, "0")}`), t.length !== 0)
+    return `${t.join(" ")} UTC`;
 }
 function Ue(s) {
   if (s != null)
     return s * Math.PI / 180;
 }
-function v(s) {
+function m(s) {
   return s == null;
 }
-function ke(s) {
-  return !v(s) && s.A > 0 && s.B > 0 && s.C > 0 && s.D > 0;
+function Me(s) {
+  return !m(s) && s.A > 0 && s.B > 0 && s.C > 0 && s.D > 0;
 }
 function A(s, t, e) {
-  if (v(t))
+  if (m(t))
     return "";
   const n = String(t);
-  return `<tr><td>${s}</td><td>${n} ${v(e) ? "" : e}</td></tr>`;
+  return `<tr><td>${s}</td><td>${n} ${m(e) ? "" : e}</td></tr>`;
 }
 function c(s, t, e) {
   return {
@@ -5466,7 +5478,7 @@ function gn(s) {
   if (s < 0 || s > 99)
     return $i;
   const t = hn[s];
-  return v(t) ? Hi : t;
+  return m(t) ? Hi : t;
 }
 mt.trackSymbol = function(s, t) {
   return new gt(s, t);
