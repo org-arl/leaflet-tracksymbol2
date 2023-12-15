@@ -152,6 +152,18 @@ export class AISTrackSymbol
         this.setShipStaticData(options.shipStaticData);
     }
 
+    public static etaFromDate(date: Date | null | undefined): ETA | undefined {
+        if (isNullOrUndefined(date)) {
+            return undefined;
+        }
+        return {
+            month: date.getMonth() + 1,
+            day: date.getDate(),
+            hour: date.getHours(),
+            minute: date.getMinutes(),
+        }
+    }
+
     /**
      * Sets the position report.
      *
