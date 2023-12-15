@@ -1,9 +1,9 @@
 import { a as useRoute, c as computed, d as defineComponent, u as useCssVars, g as unref, aq as toRefs, r as ref, o as openBlock, b as createElementBlock, e as createVNode, w as withCtx, I as Icon, n as normalizeClass, f as createBaseVNode, t as toDisplayString, i as defineStore, j as useStorage, at as unindent, x as resolveDirective, y as withDirectives, au as useRouter, av as useResizeObserver, l as resolveComponent, q as createBlock, aw as Am, h as createCommentVNode, G as normalizeStyle, ax as withModifiers, A as pushScopeId, B as popScopeId, k as watch, ay as renderSlot, m as withKeys, z as createTextVNode, F as Fragment, p as renderList, J as onMounted, az as vModelText, aA as onUnmounted, aB as VTooltip, aC as createStaticVNode, s as useEventListener, E as reactive, P as applyState, aD as toRaw, ao as mergeProps, aE as Dropdown, aF as clone, aG as omit, aH as useTimeoutFn, aI as onClickOutside, v as isRef, aJ as nextTick, aK as Mm, aL as gm, aM as ym, aN as wm, ap as resolveDynamicComponent, an as watchEffect, am as markRaw, aO as shallowRef, aP as getHighlighter, T as Transition, O as h, aQ as onBeforeUnmount } from "./vendor-ae166dec.js";
-import { u as useStoryStore } from "./story-7d1c1874.js";
+import { u as useStoryStore } from "./story-9fcb02bf.js";
 import { u as useScrollOnActive, B as BaseListItemLink, _ as _export_sfc, i as isMobile, b as BaseSplitPane, a as _sfc_main$y } from "./MobileOverlay.vue2-d8d0a6e1.js";
 import { B as BaseEmpty } from "./BaseEmpty.vue-dc394d62.js";
-import { g as getContrastColor, _ as _sfc_main$x, b as SANDBOX_READY, E as EVENT_SEND, S as STATE_SYNC, t as toRawDeep, P as PREVIEW_SETTINGS_SYNC } from "./state-7bf2ca07.js";
-import { d as clientSupportPlugins, e as base, h as histoireConfig, i as isDark, _ as __vitePreload } from "./GenericMountStory.vue2-e6719f18.js";
+import { g as getContrastColor, _ as _sfc_main$x, b as SANDBOX_READY, E as EVENT_SEND, S as STATE_SYNC, t as toRawDeep, P as PREVIEW_SETTINGS_SYNC } from "./state-9c49674f.js";
+import { d as clientSupportPlugins, e as base, h as histoireConfig, i as isDark, _ as __vitePreload } from "./GenericMountStory.vue2-291923df.js";
 function useCurrentVariantRoute(variant) {
   const route = useRoute();
   const isActive = computed(() => route.query.variantId === variant.value.id);
@@ -2679,4 +2679,4 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 export {
   _sfc_main as default
 };
-//# sourceMappingURL=StoryView.vue-b3a0c7e2.js.map
+//# sourceMappingURL=StoryView.vue-8dd9c1c9.js.map

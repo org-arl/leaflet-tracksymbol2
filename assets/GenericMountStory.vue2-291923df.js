@@ -558,6 +558,17 @@ const _AISTrackSymbol = class _AISTrackSymbol2 extends TrackSymbol {
     this.setPositionReport(positionReport);
     this.setShipStaticData(options.shipStaticData);
   }
+  static etaFromDate(date) {
+    if (isNullOrUndefined(date)) {
+      return void 0;
+    }
+    return {
+      month: date.getMonth() + 1,
+      day: date.getDate(),
+      hour: date.getHours(),
+      minute: date.getMinutes()
+    };
+  }
   /**
    * Sets the position report.
    *
@@ -787,7 +798,17 @@ function toETAString(eta) {
   if (isNullOrUndefined(eta)) {
     return void 0;
   }
-  return `${eta.month.toString().padStart(2, "0")}/${eta.day.toString().padStart(2, "0")} ${eta.hour.toString().padStart(2, "0")}:${eta.minute.toString().padStart(2, "0")} UTC`;
+  const parts = [];
+  if (!isNullOrUndefined(eta.month) && !isNullOrUndefined(eta.day)) {
+    parts.push(`${eta.month.toString().padStart(2, "0")}/${eta.day.toString().padStart(2, "0")}`);
+  }
+  if (!isNullOrUndefined(eta.hour) && !isNullOrUndefined(eta.minute)) {
+    parts.push(`${eta.hour.toString().padStart(2, "0")}:${eta.minute.toString().padStart(2, "0")}`);
+  }
+  if (parts.length === 0) {
+    return void 0;
+  }
+  return `${parts.join(" ")} UTC`;
 }
 function toRadians$1(degs) {
   if (degs === null || degs === void 0) {
@@ -2140,12 +2161,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-574abb72.js"), true ? ["assets/HomeView.vue-574abb72.js","assets/story-7d1c1874.js","assets/vendor-ae166dec.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-4c901326.js"), true ? ["assets/HomeView.vue-4c901326.js","assets/story-9fcb02bf.js","assets/vendor-ae166dec.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-b3a0c7e2.js"), true ? ["assets/StoryView.vue-b3a0c7e2.js","assets/vendor-ae166dec.js","assets/story-7d1c1874.js","assets/MobileOverlay.vue2-d8d0a6e1.js","assets/BaseEmpty.vue-dc394d62.js","assets/state-7bf2ca07.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-8dd9c1c9.js"), true ? ["assets/StoryView.vue-8dd9c1c9.js","assets/vendor-ae166dec.js","assets/story-9fcb02bf.js","assets/MobileOverlay.vue2-d8d0a6e1.js","assets/BaseEmpty.vue-dc394d62.js","assets/state-9c49674f.js"] : void 0)
     }
   ]
 });
@@ -2281,4 +2302,4 @@ export {
   router as r,
   toggleDark as t
 };
-//# sourceMappingURL=GenericMountStory.vue2-e6719f18.js.map
+//# sourceMappingURL=GenericMountStory.vue2-291923df.js.map
