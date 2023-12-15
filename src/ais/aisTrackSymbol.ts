@@ -370,7 +370,17 @@ function toETAString(eta: ETA): string | undefined {
     if (isNullOrUndefined(eta)) {
         return undefined;
     }
-    return `${eta.month.toString().padStart(2, '0')}/${eta.day.toString().padStart(2, '0')} ${eta.hour.toString().padStart(2, '0')}:${eta.minute.toString().padStart(2, '0')} UTC`;
+    const parts: string[] = [];
+    if (!isNullOrUndefined(eta.month) && !isNullOrUndefined(eta.day)) {
+        parts.push(`${eta.month.toString().padStart(2, '0')}/${eta.day.toString().padStart(2, '0')}`);
+    }
+    if (!isNullOrUndefined(eta.hour) && !isNullOrUndefined(eta.minute)) {
+        parts.push(`${eta.hour.toString().padStart(2, '0')}:${eta.minute.toString().padStart(2, '0')}`);
+    }
+    if (parts.length === 0) {
+        return undefined;
+    }
+    return `${parts.join(' ')} UTC`;
 }
 
 function toRadians(degs: number | null | undefined): number | undefined {
