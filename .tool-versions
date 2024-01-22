@@ -1,4 +1,4 @@
-nodejs 18.19.0 # (constraint ^18)
-pnpm 8.13.0
-task 3.32.0
-act 0.2.55
+nodejs 18.19.0
+pnpm 8.14.1
+task 3.33.1
+act 0.2.57
