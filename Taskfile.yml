@@ -91,7 +91,7 @@ tasks:
     desc: Site - Serve
     deps: [ site-build ]
     cmds:
-      - pnpm dlx sirv-cli@0.4.6 --cors --port 8080 build/site
+      - caddy file-server --root build/site --listen 127.0.0.1:8080
 
   site-publish:
     desc: Site - Publish
