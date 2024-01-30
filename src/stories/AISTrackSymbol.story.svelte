@@ -1,7 +1,7 @@
 <script lang="ts">
     import type {Hst} from '@histoire/plugin-svelte';
     import {onMount} from 'svelte';
-    import L, {Map as LeafletMap} from 'leaflet';
+    import {Map as LeafletMap, Polyline, TileLayer} from 'leaflet';
     import {AISTrackSymbol} from '@arl/leaflet-tracksymbol2';
     import type {PositionReport} from '@arl/leaflet-tracksymbol2';
 
@@ -64,13 +64,20 @@
         if (!mapElement) {
             return;
         }
-        map = L.map(mapElement, {
+        map = new LeafletMap(mapElement, {
             center: center,
             zoom: 13,
         });
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        new TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         })
+            .addTo(map);
+
+        new Polyline([
+            [1.239041, 103.806741],
+            [1.229, 103.813],
+            [1.216015, 103.842335],
+        ])
             .addTo(map);
 
         ts1 = new AISTrackSymbol(positionReport1, {
@@ -105,6 +112,13 @@
         });
         ts2.bindTooltip("AISTrackSymbol2");
         ts2
+            .addTo(map);
+
+        new Polyline([
+            [1.235418, 103.831302],
+            [1.239, 103.854],
+            [1.254821, 103.867138],
+        ])
             .addTo(map);
     });
 </script>
