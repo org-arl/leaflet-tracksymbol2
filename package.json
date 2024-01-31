@@ -10,12 +10,15 @@
     "url": "https://github.com/org-arl/leaflet-tracksymbol2.git"
   },
   "exports": {
-    "import": "./dist/leaflet-tracksymbol2.es.js",
-    "require": "./dist/leaflet-tracksymbol2.umd.js"
+    ".": {
+      "import": "./dist/leaflet-tracksymbol2.es.js",
+      "require": "./dist/leaflet-tracksymbol2.umd.js",
+      "types": "./src/index.d.ts"
+    }
   },
-  "module": "dist/leaflet-tracksymbol2.es.js",
-  "main": "dist/leaflet-tracksymbol2.umd.js",
-  "types": "src/index.d.ts",
+  "module": "./dist/leaflet-tracksymbol2.es.js",
+  "main": "./dist/leaflet-tracksymbol2.umd.js",
+  "types": "./src/index.d.ts",
   "scripts": {
     "compile": "vite build",
     "check": "tsc --noEmit",
