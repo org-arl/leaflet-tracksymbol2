@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@arl/leaflet-tracksymbol2':
-    specifier: link:../leaflet-tracksymbol2
-    version: link:../leaflet-tracksymbol2
+    specifier: ^0.3.0
+    version: 0.3.0(leaflet@1.9.4)
   leaflet:
     specifier: ^1.9.4
     version: 1.9.4
@@ -57,6 +57,15 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.22
+
+  /@arl/leaflet-tracksymbol2@0.3.0(leaflet@1.9.4):
+    resolution: {integrity: sha512-K7KkysQF1TSvOAgwIGezYFDOH+KxJog0Ki/ogdqXtkDjfrghuIurzPj0NxnW/nNglSxtqPEdsN0f9O+S0pr1ig==}
+    peerDependencies:
+      leaflet: ^1.9.4
+    dependencies:
+      '@flatten-js/core': 1.4.8
+      leaflet: 1.9.4
+    dev: false
 
   /@codemirror/commands@6.3.3:
     resolution: {integrity: sha512-dO4hcF0fGT9tu1Pj1D2PvGvxjeGkbC6RGcZw6Qs74TH+Ed1gw98jmUgd2axWvIZEqTeTuFrg1lEB1KV6cK9h1A==}
@@ -320,6 +329,17 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@flatten-js/core@1.4.8:
+    resolution: {integrity: sha512-cLtiauNqj+zQNtH9T+U6PVvGFy9sFc+mUqMv0fWB7pY0XRCxY18ZLTGfmahE6JT3G+aLrt0i4QzhqkpB+ARI9w==}
+    engines: {node: '>=4.2.4'}
+    dependencies:
+      '@flatten-js/interval-tree': 1.1.2
+    dev: false
+
+  /@flatten-js/interval-tree@1.1.2:
+    resolution: {integrity: sha512-OwLoV9E/XM6b7bes2rSFnGNjyRy7vcoIHFTnmBR2WAaZTf0Fe4EX4GdA65vU1KgFAasti7iRSg2dZfYd1Zt00Q==}
+    dev: false
 
   /@histoire/app@0.17.9(vite@5.0.12):
     resolution: {integrity: sha512-JoSGbsoo1/JY5TtTiMBUSPllIEJLvC6jHIGruvwPG/cJ3niqa3EyEMOsOWtcu+xjtx1uETgL9Yj5RJMJjC+OBA==}
