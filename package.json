@@ -5,17 +5,11 @@
   "type": "module",
   "description": "Leaflet track symbol - Histoire",
   "scripts": {
-    "doDev": "vite",
     "doBuild": "vite build",
-    "doPreview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "watch:check": "svelte-check --tsconfig ./tsconfig.json",
-    "dev": "run-p watch:* doDev",
     "build": "run-s check doBuild",
-    "preview": "run-s build doPreview",
     "story:dev": "histoire dev",
-    "story:build": "HISTOIRE_BUILD=true histoire build",
-    "story:preview": "HISTOIRE_BUILD=true histoire preview"
+    "story:build": "HISTOIRE_BUILD=true histoire build"
   },
   "devDependencies": {
     "@histoire/plugin-svelte": "^0.17.9",
