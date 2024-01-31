@@ -1,3 +1,4 @@
+//@ts-strict-ignore
 import L from 'leaflet';
 import type {LatLngExpression} from 'leaflet';
 import {TrackSymbol} from './trackSymbol';

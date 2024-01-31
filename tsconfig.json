@@ -4,7 +4,21 @@
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "sourceMap": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "plugins": [
+      {
+        "name": "typescript-strict-plugin"
+      }
+    ]
   },
-  "include": ["vite.config.ts", "src/**/*.d.ts", "src/**/*.ts", "src/**/*.js"]
+  "include": [
+    "vite.config.ts",
+    "src/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.js"
+  ]
 }
