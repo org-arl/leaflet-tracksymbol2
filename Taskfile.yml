@@ -7,100 +7,32 @@ tasks:
       - rm -rf build dist
 
   install:
+    desc: Install dependencies
     cmds:
       - pnpm install
       - pnpm prune
-    sources:
-      - package.json
-    generates:
-      - pnpm-lock.yaml
+
+  build-lib:
+    desc: Build lib
+    dir: ../leaflet-tracksymbol2
+    cmds:
+      - eval `mise env` && task build
+
+  install-lib:
+    desc: Install lib
+    deps: [ build-lib ]
+    cmds:
+      - pnpm uninstall @arl/leaflet-tracksymbol2
+      - pnpm install ../leaflet-tracksymbol2
 
   build:
     desc: Build
     deps: [ install ]
     cmds:
       - pnpm build
-    sources:
-      - .eslintrc.js
-      - package.json
-      - pnpm-lock.yaml
-      - tsconfig.json
-      - vite.config.ts
-      - src/*
-      - src/ais/*
-    generates:
-      - dist/*
 
-  story-dev:
-    desc: Story - Dev
+  dev:
+    desc: Dev
     deps: [ install ]
     cmds:
-      - pnpm run story:dev
-
-  story-build:
-    desc: Story - Build
-    deps: [ install ]
-    cmds:
-      - rm -rf build/histoire
-      - pnpm run story:build
-    sources:
-      - .eslintrc.js
-      - histoire.config.ts
-      - package.json
-      - pnpm-lock.yaml
-      - tsconfig.json
-      - vite.config.ts
-      - src/*
-      - src/ais/*
-      - src/stories/*
-    generates:
-      - build/histoire/*
-
-  typedoc:
-    desc: Generate typedoc
-    deps: [ install ]
-    cmds:
-      - rm -rf build/typedoc
-      - pnpm run typedoc
-    sources:
-      - package.json
-      - pnpm-lock.yaml
-      - README.md
-      - screenshot.png
-      - tsconfig.json
-      - typedoc.json
-      - src/*
-      - src/ais/*
-    generates:
-      - build/typedoc/*
-
-  site-build:
-    desc: Site - Build
-    deps: [ story-build, typedoc ]
-    cmds:
-      - rm -rf build/site
-      - mkdir -p build/site/leaflet-tracksymbol2
-      - cp -r build/histoire/* build/site/leaflet-tracksymbol2/
-      - cp -r build/typedoc build/site/leaflet-tracksymbol2/
-      - cp -r examples build/site/leaflet-tracksymbol2/
-      - touch build/site/leaflet-tracksymbol2/.nojekyll
-    generates:
-      - build/site/*
-
-  site-serve:
-    desc: Site - Serve
-    deps: [ site-build ]
-    cmds:
-      - caddy file-server --root build/site --listen 127.0.0.1:8080
-
-  site-publish:
-    desc: Site - Publish
-    deps: [ site-build ]
-    cmds:
-      - gh-pages --dotfiles --dist build/site/leaflet-tracksymbol2
-
-  npm-publish:
-    desc: NPM - Publish
-    deps: [ build ]
-    cmds:
-      - pnpm publish --access public
+      - pnpm run dev

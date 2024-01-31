@@ -1,14 +1,14 @@
 {
+  "extends": "@tsconfig/svelte/tsconfig.json",
   "exclude": [
     "node_modules/*",
-    "dist"
+    "dist",
+    "build",
+    "histoire.config.ts"
   ],
   "compilerOptions": {
-    "moduleResolution": "node",
-    "target": "es2017",
-    "importsNotUsedAsValues": "error",
-    "preserveValueImports": true,
-    "sourceMap": true,
-    "esModuleInterop": true
+    "types": [
+      "svelte"
+    ],
   }
 }

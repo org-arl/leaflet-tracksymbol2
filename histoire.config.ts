@@ -1,6 +1,5 @@
-import {defineConfig} from 'histoire'
-import {HstSvelte} from '@histoire/plugin-svelte'
-import path from 'path';
+import {defineConfig} from 'histoire';
+import {HstSvelte} from '@histoire/plugin-svelte';
 
 export default defineConfig({
     outDir: 'build/histoire',
@@ -29,11 +28,6 @@ export default defineConfig({
         ],
     },
     vite: {
-        base: '/leaflet-tracksymbol2/',
-        resolve: {
-            alias: {
-                '@arl/leaflet-tracksymbol2': path.resolve(__dirname, '/src'),
-            },
-        },
+        base: import.meta.env.HISTOIRE_BUILD === 'true' ? '/leaflet-tracksymbol2/' : undefined,
     },
 });

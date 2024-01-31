@@ -1,66 +1,36 @@
 {
-  "name": "@arl/leaflet-tracksymbol2",
-  "version": "0.1.4",
+  "name": "@arl/leaflet-tracksymbol2-histoire",
+  "version": "0.0.0",
+  "private": true,
   "type": "module",
-  "description": "Leaflet track symbol",
-  "homepage": "https://org-arl.github.io/leaflet-tracksymbol2/",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/org-arl/leaflet-tracksymbol2.git"
-  },
-  "exports": {
-    "import": "./dist/leaflet-tracksymbol2.es.js",
-    "require": "./dist/leaflet-tracksymbol2.umd.js"
-  },
-  "module": "dist/leaflet-tracksymbol2.es.js",
-  "main": "dist/leaflet-tracksymbol2.umd.js",
-  "types": "src/index.d.ts",
+  "description": "Leaflet track symbol - Histoire",
   "scripts": {
-    "compile": "vite build",
-    "check": "tsc --noEmit",
-    "build": "run-s check compile",
-    "lint": "eslint -f unix \"src/**/*.{ts,tsx}\"",
-    "typedoc": "typedoc",
+    "doDev": "vite",
+    "doBuild": "vite build",
+    "doPreview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "watch:check": "svelte-check --tsconfig ./tsconfig.json",
+    "dev": "run-p watch:* doDev",
+    "build": "run-s check doBuild",
+    "preview": "run-s build doPreview",
     "story:dev": "histoire dev",
-    "story:build": "histoire build",
-    "story:preview": "histoire preview"
+    "story:build": "HISTOIRE_BUILD=true histoire build",
+    "story:preview": "HISTOIRE_BUILD=true histoire preview"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.9",
-    "@droppedcode/typedoc-plugin-copy-assets": "^1.0.11",
     "@histoire/plugin-svelte": "^0.17.9",
-    "@sveltejs/vite-plugin-svelte": "^2.5.3",
-    "@types/estree": "^1.0.5",
+    "@sveltejs/vite-plugin-svelte": "^3.0.2",
+    "@tsconfig/svelte": "^5.0.2",
     "@types/leaflet": "^1.9.8",
-    "@typescript-eslint/eslint-plugin": "^6.20.0",
-    "@typescript-eslint/parser": "^6.20.0",
-    "@vue/reactivity": "^3.3.11",
-    "@vue/runtime-core": "^3.3.11",
-    "eslint": "^8.56.0",
-    "eslint-plugin-tsdoc": "^0.2.17",
-    "gh-pages": "^6.1.1",
     "histoire": "^0.17.9",
-    "leaflet": "^1.9.4",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.70.0",
-    "svelte": "^4.2.9",
-    "svelte-preprocess": "^5.1.3",
-    "typedoc": "^0.25.7",
-    "typedoc-plugin-missing-exports": "^2.2.0",
-    "typescript": "^4.9.5",
-    "vite": "^4.5.2",
-    "vue": "^3.3.11",
-    "vue-router": "^4.2.5"
+    "svelte-check": "^3.6.3",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
   },
   "dependencies": {
-    "@flatten-js/core": "^1.4.8"
-  },
-  "peerDependencies": {
-    "leaflet": "^1.9.4"
-  },
-  "keywords": [
-    "leaflet",
-    "leaflet-plugin"
-  ]
+    "@arl/leaflet-tracksymbol2": "link:../leaflet-tracksymbol2",
+    "leaflet": "^1.9.4",
+    "svelte": "^4.2.9"
+  }
 }

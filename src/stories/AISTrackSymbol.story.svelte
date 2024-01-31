@@ -1,20 +1,20 @@
 <script lang="ts">
     import type {Hst} from '@histoire/plugin-svelte';
     import {onMount} from 'svelte';
-    import {Map as LeafletMap, Polyline, TileLayer} from 'leaflet';
+    import {type LatLngExpression, Map as LeafletMap, Polyline, TileLayer} from 'leaflet';
     import {AISTrackSymbol} from '@arl/leaflet-tracksymbol2';
     import type {PositionReport} from '@arl/leaflet-tracksymbol2';
 
     export let Hst: Hst;
 
-    const p1 = [1.229, 103.813];
-    const p2 = [1.239, 103.854];
+    const p1: LatLngExpression = [1.229, 103.813];
+    const p2: LatLngExpression = [1.239, 103.854];
 
     let mapElement: HTMLDivElement;
     let map: LeafletMap;
     let ts1: AISTrackSymbol;
     let ts2: AISTrackSymbol;
-    let center = [1.251, 103.826];
+    let center: LatLngExpression = [1.251, 103.826];
 
     let trueHeading1 = 320;
     let cog1 = 45;
@@ -122,20 +122,6 @@
             .addTo(map);
     });
 </script>
-
-<style global>
-    html,
-    body,
-    div#app,
-    div#app > div,
-    div#app > div > div,
-    div#map {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-</style>
 
 <Hst.Story group="layers">
     <div bind:this={mapElement} id="map">
