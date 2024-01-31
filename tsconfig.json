@@ -1,14 +1,10 @@
 {
-  "exclude": [
-    "node_modules/*",
-    "dist"
-  ],
   "compilerOptions": {
-    "moduleResolution": "node",
     "target": "es2017",
-    "importsNotUsedAsValues": "error",
-    "preserveValueImports": true,
-    "sourceMap": true,
-    "esModuleInterop": true
-  }
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["vite.config.ts", "src/**/*.d.ts", "src/**/*.ts", "src/**/*.js"]
 }

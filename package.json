@@ -20,41 +20,23 @@
   "main": "./dist/leaflet-tracksymbol2.umd.js",
   "types": "./src/index.d.ts",
   "scripts": {
-    "compile": "vite build",
+    "doBuild": "vite build",
     "check": "tsc --noEmit",
-    "build": "run-s check compile",
+    "build": "run-s check doBuild",
     "lint": "eslint -f unix \"src/**/*.{ts,tsx}\"",
-    "typedoc": "typedoc",
-    "story:dev": "histoire dev",
-    "story:build": "histoire build",
-    "story:preview": "histoire preview"
+    "typedoc": "typedoc"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.9",
     "@droppedcode/typedoc-plugin-copy-assets": "^1.0.11",
-    "@histoire/plugin-svelte": "^0.17.9",
-    "@sveltejs/vite-plugin-svelte": "^2.5.3",
-    "@types/estree": "^1.0.5",
     "@types/leaflet": "^1.9.8",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
-    "@typescript-eslint/parser": "^6.20.0",
-    "@vue/reactivity": "^3.3.11",
-    "@vue/runtime-core": "^3.3.11",
     "eslint": "^8.56.0",
     "eslint-plugin-tsdoc": "^0.2.17",
-    "gh-pages": "^6.1.1",
-    "histoire": "^0.17.9",
-    "leaflet": "^1.9.4",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.70.0",
-    "svelte": "^4.2.9",
-    "svelte-preprocess": "^5.1.3",
     "typedoc": "^0.25.7",
     "typedoc-plugin-missing-exports": "^2.2.0",
-    "typescript": "^4.9.5",
-    "vite": "^4.5.2",
-    "vue": "^3.3.11",
-    "vue-router": "^4.2.5"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
   },
   "dependencies": {
     "@flatten-js/core": "^1.4.8"

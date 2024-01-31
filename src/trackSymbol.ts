@@ -44,7 +44,7 @@ export class TrackSymbol
     private _course?: number;
     /** Speed (m/s). */
     private _speed?: number;
-     /** Shape options. */
+    /** Shape options. */
     private _shapeOptions: ShapeOptions;
 
     /** Current shape points. */
@@ -74,6 +74,10 @@ export class TrackSymbol
         this._heading = options.heading;
         this._course = options.course;
         this._speed = options.speed;
+        this._shapeOptions = options.shapeOptions || {
+            leaderTime: DEFAULT_LEADER_TIME,
+            defaultShapeSet: TrackSymbol.DEFAULT_SHAPE_SET,
+        };
         this._setShapeOptions(options.shapeOptions);
     }
 
@@ -115,11 +119,19 @@ export class TrackSymbol
         if (!this._map) {
             return;
         }
-        let viewPath = TrackSymbol._toSVGPath(this._currentShapePoints, true);
-        if (this._currentLeaderPoints !== undefined) {
-            viewPath += ' ' + TrackSymbol._toSVGPath(this._currentLeaderPoints, false);
+        const el = this.getElement();
+        if (el === undefined) {
+            return;
         }
-        this.getElement().setAttribute('d', viewPath);
+        const paths: string[] = [];
+        if (this._currentShapePoints !== undefined) {
+            paths.push(TrackSymbol._toSVGPath(this._currentShapePoints, true));
+        }
+        if (this._currentLeaderPoints !== undefined) {
+            paths.push(TrackSymbol._toSVGPath(this._currentLeaderPoints, false));
+        }
+        const viewPath = paths.join(' ');
+        el.setAttribute('d', viewPath);
     }
 
     // ----
@@ -213,7 +225,7 @@ export class TrackSymbol
      *
      * @returns The bounding box.
      */
-    public getBounds(): LatLngBounds {
+    public getBounds(): LatLngBounds | undefined {
         return this._currentLatLngBounds;
     }
 
@@ -288,7 +300,7 @@ export class TrackSymbol
      * @param value - Y distance (m).
      * @returns dLat
      */
-    private _getLatSizeOf(value): number {
+    private _getLatSizeOf(value: number): number {
         return (value / 40075017) * 360;
     }
 
@@ -298,7 +310,7 @@ export class TrackSymbol
      * @param value - X distance (m).
      * @returns dLng
      */
-    private _getLngSizeOf(value): number {
+    private _getLngSizeOf(value: number): number {
         return ((value / 40075017) * 360) / Math.cos((Math.PI / 180) * this._latLng.lat);
     }
 
@@ -318,7 +330,8 @@ export class TrackSymbol
      * @returns Points.
      */
     private _getLeaderShapePoints(): Point[] | undefined {
-        if ((this._course === undefined) || (this._speed === undefined)) {
+        if ((this._course === undefined) || (this._speed === undefined)
+            || (this._shapeOptions === undefined) || (this._shapeOptions.leaderTime === undefined)) {
             return undefined;
         }
         const angle = this._getViewAngleFromModel(this._course);
@@ -360,7 +373,7 @@ export class TrackSymbol
     private _getShapeSet(): ShapeSet {
         if ((this._shapeOptions.shapeSetEntries === undefined)
             || (this._shapeOptions.shapeSetEntries.length == 0)) {
-            return this._shapeOptions.defaultShapeSet;
+            return this._shapeOptions.defaultShapeSet ? this._shapeOptions.defaultShapeSet : TrackSymbol.DEFAULT_SHAPE_SET;
         }
         const zoomLevel = this._map.getZoom();
         const shapeSetEntriesFiltered = this._shapeOptions.shapeSetEntries
@@ -369,7 +382,7 @@ export class TrackSymbol
         if (shapeSetEntriesFiltered.length > 0) {
             return shapeSetEntriesFiltered[0].shapeSet;
         } else {
-            return this._shapeOptions.defaultShapeSet;
+            return this._shapeOptions.defaultShapeSet ? this._shapeOptions.defaultShapeSet : TrackSymbol.DEFAULT_SHAPE_SET;
         }
     }
 
@@ -428,7 +441,7 @@ export class TrackSymbol
                 ));
             }
             default:
-                break;
+                throw `unsupported units: ${units}`;
         }
     }
 

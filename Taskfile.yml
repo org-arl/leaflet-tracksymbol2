@@ -10,51 +10,12 @@ tasks:
     cmds:
       - pnpm install
       - pnpm prune
-    sources:
-      - package.json
-    generates:
-      - pnpm-lock.yaml
 
   build:
     desc: Build
     deps: [ install ]
     cmds:
       - pnpm build
-    sources:
-      - .eslintrc.js
-      - package.json
-      - pnpm-lock.yaml
-      - tsconfig.json
-      - vite.config.ts
-      - src/*
-      - src/ais/*
-    generates:
-      - dist/*
-
-  story-dev:
-    desc: Story - Dev
-    deps: [ install ]
-    cmds:
-      - pnpm run story:dev
-
-  story-build:
-    desc: Story - Build
-    deps: [ install ]
-    cmds:
-      - rm -rf build/histoire
-      - pnpm run story:build
-    sources:
-      - .eslintrc.js
-      - histoire.config.ts
-      - package.json
-      - pnpm-lock.yaml
-      - tsconfig.json
-      - vite.config.ts
-      - src/*
-      - src/ais/*
-      - src/stories/*
-    generates:
-      - build/histoire/*
 
   typedoc:
     desc: Generate typedoc
@@ -62,17 +23,6 @@ tasks:
     cmds:
       - rm -rf build/typedoc
       - pnpm run typedoc
-    sources:
-      - package.json
-      - pnpm-lock.yaml
-      - README.md
-      - screenshot.png
-      - tsconfig.json
-      - typedoc.json
-      - src/*
-      - src/ais/*
-    generates:
-      - build/typedoc/*
 
   site-build:
     desc: Site - Build

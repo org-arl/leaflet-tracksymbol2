@@ -148,12 +148,19 @@ export class AISTrackSymbol
         this._leaderTime = options.leaderTime || DEFAULT_LEADER_TIME;
         this._minZoomLevel = options.minZoomLevel || DEFAULT_MIN_ZOOM_LEVEL;
         this._size = options.size || DEFAULT_SIZE;
+        this._positionReport = positionReport;
         this.setPositionReport(positionReport);
         this.setShipStaticData(options.shipStaticData);
     }
 
+    /**
+     * Get ETA from Date.
+     *
+     * @param date - Date.
+     * @returns ETA
+     */
     public static etaFromDate(date: Date | null | undefined): ETA | undefined {
-        if (isNullOrUndefined(date)) {
+        if ((date === null) || (date === undefined)) {
             return undefined;
         }
         return {
@@ -173,17 +180,17 @@ export class AISTrackSymbol
     public setPositionReport(positionReport: PositionReport): this {
         this._positionReport = positionReport;
         this.setLatLng([positionReport.latitude, positionReport.longitude]);
-        if (!isNullOrUndefined(positionReport.trueHeading) && (positionReport.trueHeading < MAX_HEADING_EXCLUSIVE)) {
+        if ((positionReport.trueHeading !== null) && (positionReport.trueHeading !== undefined) && (positionReport.trueHeading < MAX_HEADING_EXCLUSIVE)) {
             this.setHeading(toRadians(positionReport.trueHeading));
         } else {
             this.setHeading(undefined);
         }
-        if (!isNullOrUndefined(positionReport.cog) && (positionReport.cog < MAX_COG_EXCLUSIVE)) {
+        if ((positionReport.cog !== null) && (positionReport.cog !== undefined) && (positionReport.cog < MAX_COG_EXCLUSIVE)) {
             this.setCourse(toRadians(positionReport.cog));
         } else {
             this.setCourse(undefined);
         }
-        if (!isNullOrUndefined(positionReport.sog) && (positionReport.sog < MAX_SOG_EXCLUSIVE)) {
+        if ((positionReport.sog !== null) && (positionReport.sog !== undefined) && (positionReport.sog < MAX_SOG_EXCLUSIVE)) {
             this.setSpeed(positionReport.sog / KNOTS_PER_METER_PER_SECOND);
         } else {
             this.setSpeed(undefined);
@@ -200,8 +207,7 @@ export class AISTrackSymbol
      */
     public setShipStaticData(shipStaticData?: ShipStaticData): this {
         this._shipStaticData = shipStaticData;
-        const shipType = !isNullOrUndefined(shipStaticData) && !isNullOrUndefined(shipStaticData.type)
-            ? getShipType(shipStaticData.type) : TYPES[0];
+        const shipType = getShipType((shipStaticData !== null) && (shipStaticData !== undefined) ? shipStaticData.type : undefined);
         this.setStyle({
             color: shipType.color,
             fill: true,
@@ -230,7 +236,8 @@ export class AISTrackSymbol
     }
 
     private static _getShapeSet(size: number, shipStaticData?: ShipStaticData): ShapeSet | null {
-        if (isNullOrUndefined(shipStaticData) || isNullOrUndefined(shipStaticData.dimension)
+        if ((shipStaticData === null) || (shipStaticData === undefined)
+            || (shipStaticData.dimension === null) || (shipStaticData.dimension === undefined)
             || !isDimensionValid(shipStaticData.dimension)) {
             return null;
         }
@@ -248,29 +255,27 @@ export class AISTrackSymbol
 
     private _getPopupContent(positionReport?: PositionReport, shipStaticData?: ShipStaticData): HTMLElement {
         let content = "<table>";
-        if (!isNullOrUndefined(shipStaticData)) {
+        if ((shipStaticData !== null) && (shipStaticData !== undefined)) {
             content += createTableRow("User ID", shipStaticData.userId);
             content += createTableRow("IMO Number", shipStaticData.imoNumber);
             content += createTableRow("Call sign", shipStaticData.callSign);
             content += createTableRow("Name", shipStaticData.name);
         }
-        if (!isNullOrUndefined(positionReport)) {
-            content += createTableRow("Location", `${positionReport.latitude.toFixed(5)}, ${positionReport.longitude.toFixed(5)}`);
+        if ((positionReport !== null) && (positionReport !== undefined)) {
+            content += createTableRow("Location", `${toFixed(positionReport.latitude, 5)}, ${toFixed(positionReport.longitude, 5)}`);
             content += createTableRow("SOG",
-                !isNullOrUndefined(positionReport.sog) && (positionReport.sog < MAX_SOG_EXCLUSIVE)
-                    ? positionReport.sog.toFixed(2) : undefined, "knots");
+                toFixed(positionReport.sog, 2, v => v < MAX_SOG_EXCLUSIVE), "knots");
             content += createTableRow("COG",
-                !isNullOrUndefined(positionReport.cog) && (positionReport.cog < MAX_COG_EXCLUSIVE)
-                    ? positionReport.cog.toFixed(1) : undefined, "°");
+                toFixed(positionReport.cog, 1), "°");
             content += createTableRow("Heading",
-                !isNullOrUndefined(positionReport.trueHeading) && (positionReport.trueHeading < MAX_HEADING_EXCLUSIVE)
-                    ? positionReport.trueHeading.toFixed(1) : undefined, "°");
+                toFixed(positionReport.trueHeading, 1), "°");
             content += createTableRow("Navigation status",
                 toNavigationStatusString(positionReport.navigationalStatus));
         }
-        if (!isNullOrUndefined(shipStaticData)) {
+        if ((shipStaticData !== null) && (shipStaticData !== undefined)) {
             content += createTableRow("Type", toTypeString(shipStaticData.type));
-            if (!isNullOrUndefined(shipStaticData.dimension) && isDimensionValid(shipStaticData.dimension)) {
+            if ((shipStaticData.dimension !== null) && (shipStaticData.dimension !== undefined)
+                && isDimensionValid(shipStaticData.dimension)) {
                 content += createTableRow("Ship length",
                     shipStaticData.dimension.A + shipStaticData.dimension.B, "m");
                 content += createTableRow("Ship width",
@@ -279,8 +284,7 @@ export class AISTrackSymbol
             content += createTableRow("Fix type", toFixTypeString(shipStaticData.fixType));
             content += createTableRow("ETA", toETAString(shipStaticData.eta));
             content += createTableRow("Maximum static draught",
-                !isNullOrUndefined(shipStaticData.maximumStaticDraught)
-                    ? shipStaticData.maximumStaticDraught.toFixed(1) : undefined, "m");
+                toFixed(shipStaticData.maximumStaticDraught, 1), "m");
             content += createTableRow("Destination", shipStaticData.destination);
             content += createTableRow("DTE", shipStaticData.dte);
         }
@@ -291,16 +295,26 @@ export class AISTrackSymbol
     }
 }
 
-function toTypeString(type: number): string | undefined {
-    if (isNullOrUndefined(type)) {
+function toFixed(v: number | null | undefined, fractionDigits?: number, isValid?: (v: number) => boolean): string | undefined {
+    if ((v === null) || (v === undefined)) {
+        return undefined;
+    }
+    if (isValid && !isValid(v)) {
+        return undefined;
+    }
+    return v.toFixed(fractionDigits);
+}
+
+function toTypeString(type: number | null | undefined): string | undefined {
+    if ((type === null) || (type === undefined)) {
         return undefined;
     }
     const shipType = getShipType(type);
     return shipType.name;
 }
 
-function toFixTypeString(fixType: number): string | undefined {
-    if (isNullOrUndefined(fixType)) {
+function toFixTypeString(fixType: number | null | undefined): string | undefined {
+    if ((fixType === null) || (fixType === undefined)) {
         return undefined;
     }
     switch (fixType) {
@@ -336,8 +350,8 @@ function toFixTypeString(fixType: number): string | undefined {
     }
 }
 
-function toNavigationStatusString(navigationStatus: number): string | undefined {
-    if (isNullOrUndefined(navigationStatus)) {
+function toNavigationStatusString(navigationStatus: number | null | undefined): string | undefined {
+    if ((navigationStatus === null) || (navigationStatus === undefined)) {
         return undefined;
     }
     switch (navigationStatus) {
@@ -378,8 +392,8 @@ function toNavigationStatusString(navigationStatus: number): string | undefined 
     }
 }
 
-function toETAString(eta: ETA): string | undefined {
-    if (isNullOrUndefined(eta)) {
+function toETAString(eta: ETA | null | undefined): string | undefined {
+    if ((eta === null) || (eta === undefined)) {
         return undefined;
     }
     const parts: string[] = [];
@@ -402,17 +416,17 @@ function toRadians(degs: number | null | undefined): number | undefined {
     return degs * Math.PI / 180;
 }
 
-function isNullOrUndefined(v): boolean {
+function isNullOrUndefined(v: any): boolean {
     return (v === null) || (v === undefined);
 }
 
-function isDimensionValid(dimension?: Dimension): boolean {
-    return !isNullOrUndefined(dimension)
+function isDimensionValid(dimension: Dimension | null | undefined): boolean {
+    return (dimension !== null) && (dimension !== undefined)
         && (dimension.A > 0) && (dimension.B > 0) && (dimension.C > 0) && (dimension.D > 0);
 }
 
-function createTableRow(name: string, value, unit?: string): string {
-    if (isNullOrUndefined(value)) {
+function createTableRow(name: string, value: any, unit?: string): string {
+    if ((value === null) || (value === undefined)) {
         return '';
     }
     const sValue = String(value);
@@ -427,7 +441,10 @@ function newShipType(name: string, color: string, fillColor: string): ShipType {
     };
 }
 
-function getShipType(type: number): ShipType {
+function getShipType(type: number | null | undefined): ShipType {
+    if ((type === null) || (type === undefined)) {
+        return TYPES[0];
+    }
     if ((type < 0) || (type > 99)) {
         return UNKNOWN_TYPE;
     }
