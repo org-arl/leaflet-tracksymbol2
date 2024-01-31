@@ -12,21 +12,16 @@ tasks:
       - pnpm install
       - pnpm prune
 
-  build-lib:
-    desc: Build lib
-    dir: ../leaflet-tracksymbol2
-    cmds:
-      - eval `mise env` && task build
-
   install-lib:
-    desc: Install lib
+    desc: Install local lib
     deps: [ build-lib ]
     cmds:
+      - eval `mise env` && task build
       - pnpm uninstall @arl/leaflet-tracksymbol2
       - pnpm install ../leaflet-tracksymbol2
 
-  build:
-    desc: Build
+  check:
+    desc: Check
     deps: [ install ]
     cmds:
       - pnpm build
@@ -35,4 +30,20 @@ tasks:
     desc: Dev
     deps: [ install ]
     cmds:
-      - pnpm run dev
+      - pnpm run story:dev
+
+  build:
+    desc: Build
+    deps: [ install ]
+    cmds:
+      - pnpm run story:build
+      - rm -rf build/site
+      - mkdir -p build/site
+      - cp -r build/histoire build/site/leaflet-tracksymbol2
+      - cp -r examples build/site/leaflet-tracksymbol2
+
+  preview:
+    desc: Preview
+    deps: [ build ]
+    cmds:
+      - caddy file-server --root build/site --listen 127.0.0.1:8080
