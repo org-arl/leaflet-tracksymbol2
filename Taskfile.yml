@@ -34,13 +34,19 @@ tasks:
 
   build:
     desc: Build
-    deps: [ install ]
+    deps: [ install, build-typedoc ]
     cmds:
       - pnpm run story:build
       - rm -rf build/site
       - mkdir -p build/site
       - cp -r build/histoire build/site/leaflet-tracksymbol2
       - cp -r examples build/site/leaflet-tracksymbol2
+      - cp -r ../leaflet-tracksymbol2/build/typedoc build/site/leaflet-tracksymbol2
+
+  build-typedoc:
+    dir: ../leaflet-tracksymbol2
+    cmds:
+      - eval `mise env` && rm -rf build/typedoc && pnpm run typedoc
 
   preview:
     desc: Preview
