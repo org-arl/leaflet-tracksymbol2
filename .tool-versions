@@ -1,5 +1,5 @@
-nodejs 18.20.2
-pnpm 8.15.6
-task 3.36.0
-act 0.2.61
+nodejs 20.13.1
+pnpm 9.1.1
+task 3.37.2
+act 0.2.62
 caddy 2.7.6
