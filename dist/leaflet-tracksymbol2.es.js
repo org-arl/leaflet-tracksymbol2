@@ -86,7 +86,7 @@ Object.defineProperty(i, "DP_TOL", {
     Ve(r);
   }
 });
-class v {
+class w {
   /**
    * Throw error ILLEGAL_PARAMETERS when cannot instantiate from given parameter
    * @returns {ReferenceError}
@@ -126,7 +126,7 @@ class v {
     return new Error("Operation is not supported");
   }
 }
-i.Errors = v;
+i.Errors = w;
 class he {
   constructor(t, e) {
     this.first = t, this.last = e || this.first;
@@ -210,7 +210,7 @@ class he {
     let e = t, n = t;
     do {
       if (e != t && e === n)
-        throw v.INFINITE_LOOP;
+        throw w.INFINITE_LOOP;
       e = e.next, n = n.next.next;
     } while (e != t);
   }
@@ -292,20 +292,20 @@ function Nn(r) {
     a + h < s && r.int_points1_sorted[a + h].face === t ? u = a + h : u = e;
     let f = vt(r.int_points1_sorted, u, t);
     n = null;
-    for (let m = u; m < u + f; m++) {
-      let S = r.int_points1_sorted[m];
-      if (S.face === t && r.int_points2[S.id].face === r.int_points2[o.id].face) {
-        n = S;
+    for (let x = u; x < u + f; x++) {
+      let E = r.int_points1_sorted[x];
+      if (E.face === t && r.int_points2[E.id].face === r.int_points2[o.id].face) {
+        n = E;
         break;
       }
     }
     if (n === null)
       continue;
-    let g = o.edge_after, x = n.edge_before;
-    if (!(g.bv === z && x.bv === z) || g !== x)
+    let g = o.edge_after, p = n.edge_before;
+    if (!(g.bv === z && p.bv === z) || g !== p)
       continue;
-    let I = r.int_points2[o.id], w = r.int_points2[n.id], E = I.edge_after, T = w.edge_before;
-    E.bv === z && T.bv === z && E === T || (I = r.int_points2[n.id], w = r.int_points2[o.id], E = I.edge_after, T = w.edge_before), E.bv === z && T.bv === z && E === T && g.setOverlap(E);
+    let S = r.int_points2[o.id], T = r.int_points2[n.id], v = S.edge_after, I = T.edge_before;
+    v.bv === z && I.bv === z && v === I || (S = r.int_points2[n.id], T = r.int_points2[o.id], v = S.edge_after, I = T.edge_before), v.bv === z && I.bv === z && v === I && g.setOverlap(v);
   }
 }
 function vt(r, t, e) {
@@ -413,53 +413,53 @@ function Ie(r, t) {
 function Fn(r, t, e, n, s, l) {
   let o, a, h, u = n.length, f = !1;
   for (let g = 0; g < u; g++) {
-    let x = n[g];
-    x.face !== o && (a = g, o = x.face);
-    let I = g, w = vt(n, g, o), E;
-    I + w < u && n[I + w].face === o ? E = I + w : E = a;
-    let T = vt(n, E, o);
+    let p = n[g];
+    p.face !== o && (a = g, o = p.face);
+    let S = g, T = vt(n, g, o), v;
+    S + T < u && n[S + T].face === o ? v = S + T : v = a;
+    let I = vt(n, v, o);
     h = null;
-    for (let _ = E; _ < E + T; _++) {
+    for (let _ = v; _ < v + I; _++) {
       let L = n[_];
-      if (L.face === o && s[L.id].face === s[x.id].face) {
+      if (L.face === o && s[L.id].face === s[p.id].face) {
         h = L;
         break;
       }
     }
     if (h === null)
       continue;
-    let m = x.edge_after, S = h.edge_before;
-    if (m.bv === b && S.bv != b) {
-      m.bv = S.bv;
+    let x = p.edge_after, E = h.edge_before;
+    if (x.bv === b && E.bv != b) {
+      x.bv = E.bv;
       continue;
     }
-    if (m.bv != b && S.bv === b) {
-      S.bv = m.bv;
+    if (x.bv != b && E.bv === b) {
+      E.bv = x.bv;
       continue;
     }
-    if (m.bv === b && S.bv === b && m != S || m.bv === Q && S.bv === W || m.bv === W && S.bv === Q) {
-      let _ = m.next;
-      for (; _ != S; )
+    if (x.bv === b && E.bv === b && x != E || x.bv === Q && E.bv === W || x.bv === W && E.bv === Q) {
+      let _ = x.next;
+      for (; _ != E; )
         _.bvStart = void 0, _.bvEnd = void 0, _.bv = void 0, _.setInclusion(t), _ = _.next;
     }
-    if (m.bv === b && S.bv === b && m != S) {
-      let _ = m.next, L;
-      for (; _ != S; ) {
+    if (x.bv === b && E.bv === b && x != E) {
+      let _ = x.next, L;
+      for (; _ != E; ) {
         if (_.bv != b) {
           if (L === void 0)
             L = _.bv;
           else if (_.bv != L)
-            throw v.UNRESOLVED_BOUNDARY_CONFLICT;
+            throw w.UNRESOLVED_BOUNDARY_CONFLICT;
         }
         _ = _.next;
       }
-      L != null && (m.bv = L, S.bv = L);
+      L != null && (x.bv = L, E.bv = L);
       continue;
     }
-    if (m.bv === Q && S.bv === W || m.bv === W && S.bv === Q) {
-      let _ = m;
-      for (; _ != S; ) {
-        if (_.bvStart === m.bv && _.bvEnd === S.bv) {
+    if (x.bv === Q && E.bv === W || x.bv === W && E.bv === Q) {
+      let _ = x;
+      for (; _ != E; ) {
+        if (_.bvStart === x.bv && _.bvEnd === E.bv) {
           let [L, Xt] = _.shape.distanceTo(t);
           if (L < 10 * i.DP_TOL) {
             Et(_, Xt.ps, e);
@@ -491,7 +491,7 @@ function Fn(r, t, e, n, s, l) {
       }
       if (f)
         break;
-      throw v.UNRESOLVED_BOUNDARY_CONFLICT;
+      throw w.UNRESOLVED_BOUNDARY_CONFLICT;
     }
   }
   return f;
@@ -505,13 +505,13 @@ function oe(r, t, e, n) {
       continue;
     let u = h, f = vt(e, h, s), g;
     u + f < e.length && e[u + f].face === o.face ? g = u + f : g = l, a = e[g];
-    let x = g, I = vt(e, x, s), w = o.edge_after, E = a.edge_before;
-    if (w.bv === Q && E.bv === Q && t === Wt || w.bv === W && E.bv === W && t === Ut || (w.bv === W || E.bv === W) && t === lt && !n || (w.bv === Q || E.bv === Q) && t === lt && n || w.bv === b && E.bv === b && w.overlap & Rn && n || w.bv === b && E.bv === b && w.overlap & Un) {
-      r.removeChain(s, w, E);
-      for (let T = u; T < u + f; T++)
-        e[T].edge_after = void 0;
-      for (let T = x; T < x + I; T++)
-        e[T].edge_before = void 0;
+    let p = g, S = vt(e, p, s), T = o.edge_after, v = a.edge_before;
+    if (T.bv === Q && v.bv === Q && t === Wt || T.bv === W && v.bv === W && t === Ut || (T.bv === W || v.bv === W) && t === lt && !n || (T.bv === Q || v.bv === Q) && t === lt && n || T.bv === b && v.bv === b && T.overlap & Rn && n || T.bv === b && v.bv === b && T.overlap & Un) {
+      r.removeChain(s, T, v);
+      for (let I = u; I < u + f; I++)
+        e[I].edge_after = void 0;
+      for (let I = p; I < p + S; I++)
+        e[I].edge_before = void 0;
     }
     h += f - 1;
   }
@@ -548,7 +548,7 @@ function ae(r, t, e) {
     try {
       he.testInfiniteLoop(s);
     } catch {
-      throw v.CANNOT_COMPLETE_BOOLEAN_OPERATION;
+      throw w.CANNOT_COMPLETE_BOOLEAN_OPERATION;
     }
     let o = r.addFace(s, l);
     for (let a of t)
@@ -742,8 +742,8 @@ class St {
 function It(r, t) {
   let e = [], [n, s, l] = r.standard, [o, a, h] = t.standard, u = n * a - s * o, f = l * a - s * h, g = n * h - l * o;
   if (!i.Utils.EQ_0(u)) {
-    let x, I;
-    s === 0 ? (x = l / n, I = g / u) : a === 0 ? (x = h / o, I = g / u) : n === 0 ? (x = f / u, I = l / s) : o === 0 ? (x = f / u, I = h / a) : (x = f / u, I = g / u), e.push(new i.Point(x, I));
+    let p, S;
+    s === 0 ? (p = l / n, S = g / u) : a === 0 ? (p = h / o, S = g / u) : n === 0 ? (p = f / u, S = l / s) : o === 0 ? (p = f / u, S = h / a) : (p = f / u, S = g / u), e.push(new i.Point(p, S));
   }
   return e;
 }
@@ -1195,49 +1195,50 @@ function Pt(r, t) {
   if (r.box.not_intersect(l))
     return i.OUTSIDE;
   let o = r.edges.search(l);
-  if (o.length == 0)
+  if (o.length === 0)
     return i.OUTSIDE;
-  for (let u of o)
-    if (u.shape.contains(t))
+  for (let f of o)
+    if (f.shape.contains(t))
       return i.BOUNDARY;
-  let a = [];
-  for (let u of o)
-    for (let f of n.intersect(u.shape)) {
-      if (f.equalTo(t))
+  let a = [...r.faces], h = [];
+  for (let f of o)
+    for (let g of n.intersect(f.shape)) {
+      if (g.equalTo(t))
         return i.BOUNDARY;
-      a.push({
-        pt: f,
-        edge: u
+      h.push({
+        pt: g,
+        edge: f,
+        face_index: a.indexOf(f.face)
       });
     }
-  a.sort((u, f) => qe(u.pt.x, f.pt.x) ? -1 : $e(u.pt.x, f.pt.x) ? 1 : 0);
-  let h = 0;
-  for (let u = 0; u < a.length; u++) {
-    let f = a[u];
-    if (f.pt.equalTo(f.edge.shape.start)) {
-      if (u > 0 && f.pt.equalTo(a[u - 1].pt) && f.edge.prev === a[u - 1].edge)
+  h.sort((f, g) => qe(f.pt.x, g.pt.x) ? -1 : $e(f.pt.x, g.pt.x) ? 1 : f.face_index < g.face_index ? -1 : f.face_index > g.face_index ? 1 : f.edge.arc_length < g.edge.arc_length ? -1 : f.edge.arc_length > g.edge.arc_length ? 1 : 0);
+  let u = 0;
+  for (let f = 0; f < h.length; f++) {
+    let g = h[f];
+    if (g.pt.equalTo(g.edge.shape.start)) {
+      if (f > 0 && g.pt.equalTo(h[f - 1].pt) && g.face_index === h[f - 1].face_index && g.edge.prev === h[f - 1].edge)
         continue;
-      let g = f.edge.prev;
-      for (; ee(g.length); )
-        g = g.prev;
-      let x = g.shape.tangentInEnd(), I = f.pt.translate(x), w = f.edge.shape.tangentInStart(), E = f.pt.translate(w), T = I.leftTo(s), m = E.leftTo(s);
-      (T && !m || !T && m) && h++;
-    } else if (f.pt.equalTo(f.edge.shape.end)) {
-      if (u > 0 && f.pt.equalTo(a[u - 1].pt) && f.edge.next === a[u - 1].edge)
+      let p = g.edge.prev;
+      for (; ee(p.length); )
+        p = p.prev;
+      let S = p.shape.tangentInEnd(), T = g.pt.translate(S), v = g.edge.shape.tangentInStart(), I = g.pt.translate(v), x = T.leftTo(s), E = I.leftTo(s);
+      (x && !E || !x && E) && u++;
+    } else if (g.pt.equalTo(g.edge.shape.end)) {
+      if (f > 0 && g.pt.equalTo(h[f - 1].pt) && g.face_index === h[f - 1].face_index && g.edge.next === h[f - 1].edge)
         continue;
-      let g = f.edge.next;
-      for (; ee(g.length); )
-        g = g.next;
-      let x = g.shape.tangentInStart(), I = f.pt.translate(x), w = f.edge.shape.tangentInEnd(), E = f.pt.translate(w), T = I.leftTo(s), m = E.leftTo(s);
-      (T && !m || !T && m) && h++;
-    } else if (f.edge.shape instanceof i.Segment)
-      h++;
+      let p = g.edge.next;
+      for (; ee(p.length); )
+        p = p.next;
+      let S = p.shape.tangentInStart(), T = g.pt.translate(S), v = g.edge.shape.tangentInEnd(), I = g.pt.translate(v), x = T.leftTo(s), E = I.leftTo(s);
+      (x && !E || !x && E) && u++;
+    } else if (g.edge.shape instanceof i.Segment)
+      u++;
     else {
-      let g = f.edge.shape.box;
-      ot(f.pt.y, g.ymin) || ot(f.pt.y, g.ymax) || h++;
+      let p = g.edge.shape.box;
+      ot(g.pt.y, p.ymin) || ot(g.pt.y, p.ymax) || u++;
     }
   }
-  return e = h % 2 == 1 ? qt : Fe, e;
+  return e = u % 2 === 1 ? qt : Fe, e;
 }
 function si(r, t) {
   return bt(r, t).equal();
@@ -1423,7 +1424,7 @@ let Lt = class dt {
     else if (t.length === 2 && typeof t[0] == "number" && typeof t[1] == "number")
       e = t[0], n = t[1];
     else
-      throw v.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     return this.multiply(new dt(1, 0, 0, 1, e, n));
   }
   /**
@@ -1552,13 +1553,13 @@ const _i = class fe {
   static comparable_less_than(t, e) {
     return t < e;
   }
-}, A = 0, p = 1;
+}, A = 0, m = 1;
 class ht {
-  constructor(t = void 0, e = void 0, n = null, s = null, l = null, o = p) {
+  constructor(t = void 0, e = void 0, n = null, s = null, l = null, o = m) {
     this.left = n, this.right = s, this.parent = l, this.color = o, this.item = { key: t, value: e }, t && t instanceof Array && t.length == 2 && !Number.isNaN(t[0]) && !Number.isNaN(t[1]) && (this.item.key = new _i(Math.min(t[0], t[1]), Math.max(t[0], t[1]))), this.max = this.item.key ? this.item.key.max : void 0;
   }
   isNil() {
-    return this.item.key === void 0 && this.item.value === void 0 && this.left === null && this.right === null && this.color === p;
+    return this.item.key === void 0 && this.item.value === void 0 && this.left === null && this.right === null && this.color === m;
   }
   _value_less_than(t) {
     return this.item.value && t.item.value && this.item.value.less_than ? this.item.value.less_than(t.item.value) : this.item.value < t.item.value;
@@ -1746,19 +1747,19 @@ class Rt {
   insert_fixup(t) {
     let e, n;
     for (e = t; e != this.root && e.parent.color == A; )
-      e.parent == e.parent.parent.left ? (n = e.parent.parent.right, n.color == A ? (e.parent.color = p, n.color = p, e.parent.parent.color = A, e = e.parent.parent) : (e == e.parent.right && (e = e.parent, this.rotate_left(e)), e.parent.color = p, e.parent.parent.color = A, this.rotate_right(e.parent.parent))) : (n = e.parent.parent.left, n.color == A ? (e.parent.color = p, n.color = p, e.parent.parent.color = A, e = e.parent.parent) : (e == e.parent.left && (e = e.parent, this.rotate_right(e)), e.parent.color = p, e.parent.parent.color = A, this.rotate_left(e.parent.parent)));
-    this.root.color = p;
+      e.parent == e.parent.parent.left ? (n = e.parent.parent.right, n.color == A ? (e.parent.color = m, n.color = m, e.parent.parent.color = A, e = e.parent.parent) : (e == e.parent.right && (e = e.parent, this.rotate_left(e)), e.parent.color = m, e.parent.parent.color = A, this.rotate_right(e.parent.parent))) : (n = e.parent.parent.left, n.color == A ? (e.parent.color = m, n.color = m, e.parent.parent.color = A, e = e.parent.parent) : (e == e.parent.left && (e = e.parent, this.rotate_right(e)), e.parent.color = m, e.parent.parent.color = A, this.rotate_left(e.parent.parent)));
+    this.root.color = m;
   }
   tree_delete(t) {
     let e, n;
     t.left == this.nil_node || t.right == this.nil_node ? e = t : e = this.tree_successor(t), e.left != this.nil_node ? n = e.left : n = e.right, n.parent = e.parent, e == this.root ? this.root = n : (e == e.parent.left ? e.parent.left = n : e.parent.right = n, e.parent.update_max()), this.recalc_max(n), e != t && (t.copy_data(e), t.update_max(), this.recalc_max(t)), /*fix_node != this.nil_node && */
-    e.color == p && this.delete_fixup(n);
+    e.color == m && this.delete_fixup(n);
   }
   delete_fixup(t) {
     let e = t, n;
-    for (; e != this.root && e.parent != null && e.color == p; )
-      e == e.parent.left ? (n = e.parent.right, n.color == A && (n.color = p, e.parent.color = A, this.rotate_left(e.parent), n = e.parent.right), n.left.color == p && n.right.color == p ? (n.color = A, e = e.parent) : (n.right.color == p && (n.color = A, n.left.color = p, this.rotate_right(n), n = e.parent.right), n.color = e.parent.color, e.parent.color = p, n.right.color = p, this.rotate_left(e.parent), e = this.root)) : (n = e.parent.left, n.color == A && (n.color = p, e.parent.color = A, this.rotate_right(e.parent), n = e.parent.left), n.left.color == p && n.right.color == p ? (n.color = A, e = e.parent) : (n.left.color == p && (n.color = A, n.right.color = p, this.rotate_left(n), n = e.parent.left), n.color = e.parent.color, e.parent.color = p, n.left.color = p, this.rotate_right(e.parent), e = this.root));
-    e.color = p;
+    for (; e != this.root && e.parent != null && e.color == m; )
+      e == e.parent.left ? (n = e.parent.right, n.color == A && (n.color = m, e.parent.color = A, this.rotate_left(e.parent), n = e.parent.right), n.left.color == m && n.right.color == m ? (n.color = A, e = e.parent) : (n.right.color == m && (n.color = A, n.left.color = m, this.rotate_right(n), n = e.parent.right), n.color = e.parent.color, e.parent.color = m, n.right.color = m, this.rotate_left(e.parent), e = this.root)) : (n = e.parent.left, n.color == A && (n.color = m, e.parent.color = A, this.rotate_right(e.parent), n = e.parent.left), n.left.color == m && n.right.color == m ? (n.color = A, e = e.parent) : (n.left.color == m && (n.color = A, n.right.color = m, this.rotate_left(n), n = e.parent.left), n.color = e.parent.color, e.parent.color = m, n.left.color = m, this.rotate_right(e.parent), e = this.root));
+    e.color = m;
   }
   tree_search(t, e) {
     if (!(t == null || t == this.nil_node))
@@ -1818,13 +1819,13 @@ class Rt {
   testRedBlackProperty() {
     let t = !0;
     return this.tree_walk(this.root, function(e) {
-      e.color == A && (e.left.color == p && e.right.color == p || (t = !1));
+      e.color == A && (e.left.color == m && e.right.color == m || (t = !1));
     }), t;
   }
   /* Throw error if not every path from root to bottom has same black height */
   testBlackHeightProperty(t) {
     let e = 0, n = 0, s = 0;
-    if (t.color == p && e++, t.left != this.nil_node ? n = this.testBlackHeightProperty(t.left) : n = 1, t.right != this.nil_node ? s = this.testBlackHeightProperty(t.right) : s = 1, n != s)
+    if (t.color == m && e++, t.left != this.nil_node ? n = this.testBlackHeightProperty(t.left) : n = 1, t.right != this.nil_node ? s = this.testBlackHeightProperty(t.right) : s = 1, n != s)
       throw new Error("Red-black height property violated");
     return e += n, e;
   }
@@ -1898,13 +1899,13 @@ class pi extends Set {
 i.PlanarSet = pi;
 class rt {
   get name() {
-    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
   get box() {
-    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
   clone() {
-    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
   /**
    * Returns new shape translated by given vector.
@@ -1938,7 +1939,7 @@ class rt {
     return this.transform(new Lt().scale(t, e));
   }
   transform(...t) {
-    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
   /**
    * This method returns an object that defines how data will be
@@ -1949,7 +1950,7 @@ class rt {
     return Object.assign({}, this, { name: this.name });
   }
   svg(t = {}) {
-    throw v.CANNOT_INVOKE_ABSTRACT_METHOD;
+    throw w.CANNOT_INVOKE_ABSTRACT_METHOD;
   }
 }
 let mi = class fn extends rt {
@@ -1976,7 +1977,7 @@ let mi = class fn extends rt {
         this.x = t[0], this.y = t[1];
         return;
       }
-      throw v.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2151,7 +2152,7 @@ let Ei = class extends rt {
           return;
         }
       }
-      throw v.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2219,7 +2220,7 @@ let Ei = class extends rt {
   normalize() {
     if (!i.Utils.EQ_0(this.length))
       return new i.Vector(this.x / this.length, this.y / this.length);
-    throw v.ZERO_DIVISION;
+    throw w.ZERO_DIVISION;
   }
   /**
    * Returns new vector rotated by given angle,
@@ -2232,7 +2233,7 @@ let Ei = class extends rt {
   rotate(t, e = new i.Point()) {
     if (e.x === 0 && e.y === 0)
       return this.transform(new Lt().rotate(t));
-    throw v.OPERATION_IS_NOT_SUPPORTED;
+    throw w.OPERATION_IS_NOT_SUPPORTED;
   }
   /**
    * Return new vector transformed by affine transformation matrix m
@@ -2336,7 +2337,7 @@ class zt extends rt {
         this.ps = new i.Point(t[0], t[1]), this.pe = new i.Point(t[2], t[3]);
         return;
       }
-      throw v.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2597,18 +2598,18 @@ let { vector: At } = i, wi = class hn extends rt {
         }
         if (e instanceof i.Point && n instanceof i.Vector) {
           if (i.Utils.EQ_0(n.x) && i.Utils.EQ_0(n.y))
-            throw v.ILLEGAL_PARAMETERS;
+            throw w.ILLEGAL_PARAMETERS;
           this.pt = e.clone(), this.norm = n.clone(), this.norm = this.norm.normalize(), this.norm.dot(At(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
           return;
         }
         if (e instanceof i.Vector && n instanceof i.Point) {
           if (i.Utils.EQ_0(e.x) && i.Utils.EQ_0(e.y))
-            throw v.ILLEGAL_PARAMETERS;
+            throw w.ILLEGAL_PARAMETERS;
           this.pt = n.clone(), this.norm = e.clone(), this.norm = this.norm.normalize(), this.norm.dot(At(this.pt.x, this.pt.y)) >= 0 && this.norm.invert();
           return;
         }
       }
-      throw v.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -2821,7 +2822,7 @@ let { vector: At } = i, wi = class hn extends rt {
   }
   static points2norm(t, e) {
     if (t.equalTo(e))
-      throw v.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     return new i.Vector(t, e).normalize().rotate90CCW();
   }
 };
@@ -2904,7 +2905,7 @@ let Si = class extends rt {
    */
   scale(t, e) {
     if (t !== e || !(this.pc.x === 0 && this.pc.y === 0))
-      throw v.OPERATION_IS_NOT_SUPPORTED;
+      throw w.OPERATION_IS_NOT_SUPPORTED;
     return new i.Circle(this.pc, this.r * t);
   }
   /**
@@ -3458,7 +3459,7 @@ class Ot extends rt {
    * @param {Point} [center=(0,0)] center
    */
   rotate(t, e = new i.Point()) {
-    throw v.OPERATION_IS_NOT_SUPPORTED;
+    throw w.OPERATION_IS_NOT_SUPPORTED;
   }
   /**
    * Return new box transformed using affine transformation matrix
@@ -3956,7 +3957,7 @@ class xe extends rt {
         this.norm = t[1].clone();
         return;
       }
-      throw v.ILLEGAL_PARAMETERS;
+      throw w.ILLEGAL_PARAMETERS;
     }
   }
   /**
@@ -4675,9 +4676,9 @@ class d {
       return [0, new i.Segment(n[0], n[0])];
     let s = new i.Line(t.ps, t.pe), l = new i.Circle(e.pc, e.r), [o, a] = d.point2line(l.center, s);
     if (i.Utils.GE(o, l.r) && a.end.on(t)) {
-      let [g, x] = d.point2circle(a.end, l);
-      if (x.end.on(e))
-        return [g, x];
+      let [g, p] = d.point2circle(a.end, l);
+      if (p.end.on(e))
+        return [g, p];
     }
     let h = [];
     h.push(d.point2arc(t.start, e)), h.push(d.point2arc(t.end, e));
@@ -4833,7 +4834,7 @@ class d {
     if (e.length === 0)
       return n;
     let a = e.map((f) => f.left.isNil() ? void 0 : f.left).filter((f) => f !== void 0), h = e.map((f) => f.right.isNil() ? void 0 : f.right).filter((f) => f !== void 0), u = [...a, ...h].filter((f) => {
-      let [g, x] = d.box2box_minmax(t.box, f.max);
+      let [g, p] = d.box2box_minmax(t.box, f.max);
       return i.Utils.LE(g, n);
     });
     return n = d.minmax_tree_process_level(t, u, n, s), n;
