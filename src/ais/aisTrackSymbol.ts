@@ -416,6 +416,7 @@ function toRadians(degs: number | null | undefined): number | undefined {
     return degs * Math.PI / 180;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isNullOrUndefined(v: any): boolean {
     return (v === null) || (v === undefined);
 }
@@ -425,6 +426,7 @@ function isDimensionValid(dimension: Dimension | null | undefined): boolean {
         && (dimension.A > 0) && (dimension.B > 0) && (dimension.C > 0) && (dimension.D > 0);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function createTableRow(name: string, value: any, unit?: string): string {
     if ((value === null) || (value === undefined)) {
         return '';

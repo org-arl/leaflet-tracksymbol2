@@ -441,7 +441,8 @@ export class TrackSymbol
                 ));
             }
             default:
-                throw `unsupported units: ${units}`;
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                throw new Error(`unsupported units: ${units}`);
         }
     }
 
