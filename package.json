@@ -31,7 +31,7 @@
   "devDependencies": {
     "@droppedcode/typedoc-plugin-copy-assets": "1.0.11",
     "@types/leaflet": "1.9.20",
-    "@typescript-eslint/eslint-plugin": "8.37.0",
+    "@typescript-eslint/eslint-plugin": "8.38.0",
     "eslint": "9.31.0",
     "eslint-formatter-unix": "8.40.0",
     "eslint-plugin-tsdoc": "0.4.0",
