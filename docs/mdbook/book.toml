@@ -1,0 +1,10 @@
+[book]
+authors = ["Nick Ng"]
+language = "en"
+multilingual = false
+title = "leaflet-tracksymbol2"
+
+[output.html]
+git-repository-url = "https://github.com/org-arl/leaflet-tracksymbol2"
+site-url = "/leaflet-tracksymbol2/"
+additional-css = ["custom.css"]
