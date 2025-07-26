@@ -11,12 +11,12 @@
   },
   "exports": {
     ".": {
-      "types": "./src/index.d.ts",
+      "types": "./dist/leaflet-tracksymbol2.d.ts",
       "import": "./dist/leaflet-tracksymbol2.es.js",
       "require": "./dist/leaflet-tracksymbol2.umd.js"
     }
   },
-  "types": "./src/index.d.ts",
+  "types": "./dist/leaflet-tracksymbol2.d.ts",
   "module": "./dist/leaflet-tracksymbol2.es.js",
   "main": "./dist/leaflet-tracksymbol2.umd.js",
   "scripts": {
@@ -41,7 +41,8 @@
     "typescript": "5.8.3",
     "typescript-strict-plugin": "2.4.4",
     "validate-package-exports": "0.13.0",
-    "vite": "7.0.6"
+    "vite": "7.0.6",
+    "vite-plugin-dts": "4.5.4"
   },
   "dependencies": {
     "@flatten-js/core": "1.6.2"
@@ -55,7 +56,6 @@
   ],
   "files": [
     "dist",
-    "src/index.d.ts",
     "screenshot.png"
   ]
 }
