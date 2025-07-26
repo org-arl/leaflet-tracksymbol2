@@ -1,4 +1,5 @@
-import L from 'leaflet';
+import {Map as LeafletMap, TileLayer} from 'leaflet';
+import {AISTrackSymbol, TrackSymbol} from '@arl/leaflet-tracksymbol2';
 
 function toRadians(degs: number | null | undefined): number | undefined {
     if ((degs === null) || (degs === undefined)) {
@@ -7,17 +8,17 @@ function toRadians(degs: number | null | undefined): number | undefined {
     return degs * Math.PI / 180;
 }
 
-const map = L.map('map', {
+const map = new LeafletMap('map', {
     center: [1.251, 103.826],
     zoom: 13,
 });
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+new TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 })
-    .addTo(map);
+   .addTo(map);
 
-/*
-const ts1 = new L.trackSymbol([1.229, 103.813], {
+const ts1 = new TrackSymbol([1.229, 103.813], {
     fill: true,
     fillColor: 'yellow',
     fillOpacity: 1,
@@ -29,7 +30,7 @@ ts1.bindTooltip("TrackSymbol1");
 ts1
     .addTo(map);
 
-const ts2 = new L.trackSymbol([1.239, 103.854], {
+const ts2 = new TrackSymbol([1.239, 103.854], {
     fill: true,
     fillColor: 'red',
     fillOpacity: 1,
@@ -43,11 +44,11 @@ const ts2 = new L.trackSymbol([1.239, 103.854], {
                     breadth: 60,
                     units: "meters",
                 },
-                withoutHeading: L.TrackSymbol.createShape(L.TrackSymbol.DEFAULT_NOHEADING_SHAPE_POINTS, 24),
+                withoutHeading: TrackSymbol.createShape(TrackSymbol.DEFAULT_NOHEADING_SHAPE_POINTS, 24),
             },
             minZoomLevel: 14,
         }],
-        defaultShapeSet: L.TrackSymbol.createShapeSet(24),
+        defaultShapeSet: TrackSymbol.createShapeSet(24),
     },
     heading: toRadians(120),
     course: toRadians(100),
@@ -57,7 +58,7 @@ ts2.bindTooltip("TrackSymbol2");
 ts2
     .addTo(map);
 
-const ats1 = new L.aisTrackSymbol({
+const ats1 = new AISTrackSymbol({
     latitude: 1.221,
     longitude: 103.82,
     trueHeading: 320,
@@ -91,7 +92,7 @@ ats1.bindTooltip("AISTrackSymbol1");
 ats1
     .addTo(map);
 
-const ats2 = new L.aisTrackSymbol({
+const ats2 = new AISTrackSymbol({
     latitude: 1.25,
     longitude: 103.86,
     trueHeading: 120,
@@ -101,4 +102,3 @@ const ats2 = new L.aisTrackSymbol({
 ats2.bindTooltip("AISTrackSymbol2");
 ats2
     .addTo(map);
-*/
