@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@arl/leaflet-tracksymbol2": "0.3.0",
+    "@arl/leaflet-tracksymbol2": "0.4.0",
     "@types/leaflet": "1.9.20",
     "leaflet": "1.9.4"
   }

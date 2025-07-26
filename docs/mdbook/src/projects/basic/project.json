@@ -7,8 +7,6 @@
   },
   "importMap": {
     "imports": {
-      "@arl/leaflet-tracksymbol2": "https://cdn.jsdelivr.net/npm/@arl/leaflet-tracksymbol2@0.3.0",
-      "@arl/leaflet-tracksymbol2/": "https://cdn.jsdelivr.net/npm/@arl/leaflet-tracksymbol2@0.3.0/",
       "@types/geojson": "https://cdn.jsdelivr.net/npm/@types/geojson@0.5.0",
       "@types/geojson/": "https://cdn.jsdelivr.net/npm/@types/geojson@0.5.0/",
       "geojson": "https://cdn.jsdelivr.net/npm/geojson@0.5.0",
