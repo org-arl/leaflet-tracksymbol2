@@ -2,16 +2,6 @@
 
 ## Example
 
-<script type="module">
-    import playgroundElements from 'https://cdn.jsdelivr.net/npm/playground-elements@0.18.1/+esm'
-</script>
+[Source](https://github.com/org-arl/leaflet-tracksymbol2/tree/master/examples/basic)
 
-<style>
-    playground-ide {
-        --playground-code-font-family: Roboto Mono, monospace;
-        --playground-preview-width: 50%;
-        height: 640px;
-    }
-</style>
-
-<playground-ide editable-file-system line-numbers resizable project-src="./projects/basic/project.json"></playground-ide>
+<iframe style="width: 100%; height: 640px; border: 0;" src="./projects/basic"></iframe>

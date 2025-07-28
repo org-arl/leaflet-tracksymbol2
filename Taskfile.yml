@@ -35,6 +35,7 @@ tasks:
       - mkdir -p build/gh-pages
       - task: site-build-mdbook
       - task: site-build-typedoc
+      - task: site-build-example-basic
 
   site-build-mdbook:
     desc: Site - mdbook
@@ -46,6 +47,11 @@ tasks:
     deps: [ install ]
     cmds:
       - pnpm run typedoc
+
+  site-build-example-basic:
+    cmds:
+      - cd examples/basic && mise exec -- task build
+      - cp -r examples/basic/dist build/gh-pages/projects/basic
 
   site-serve:
     desc: Site - Serve
