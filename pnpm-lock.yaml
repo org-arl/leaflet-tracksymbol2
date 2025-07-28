@@ -64,11 +64,29 @@ importers:
         specifier: 4.5.4
         version: 4.5.4(rollup@4.41.0)(typescript@5.8.3)(vite@7.0.6(yaml@2.8.0))
 
+  examples/basic:
+    dependencies:
+      '@arl/leaflet-tracksymbol2':
+        specifier: 0.4.0
+        version: 0.4.0(leaflet@1.9.4)
+      leaflet:
+        specifier: 1.9.4
+        version: 1.9.4
+    devDependencies:
+      '@types/leaflet':
+        specifier: 1.9.20
+        version: 1.9.20
+
 packages:
 
   '@aashutoshrathi/word-wrap@1.2.6':
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
+
+  '@arl/leaflet-tracksymbol2@0.4.0':
+    resolution: {integrity: sha512-y+jFtSEcS5oO7bnHDuYw8lpO9oJkUul1oxPhYwqsChuB2O5/UMLHA4goUN5+knEcCDaZ6vDSFxdGL0KP8XY1wA==}
+    peerDependencies:
+      leaflet: 1.9.4
 
   '@babel/helper-string-parser@7.27.1':
     resolution: {integrity: sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA==}
@@ -1998,6 +2016,11 @@ packages:
 snapshots:
 
   '@aashutoshrathi/word-wrap@1.2.6': {}
+
+  '@arl/leaflet-tracksymbol2@0.4.0(leaflet@1.9.4)':
+    dependencies:
+      '@flatten-js/core': 1.6.2
+      leaflet: 1.9.4
 
   '@babel/helper-string-parser@7.27.1': {}
 
