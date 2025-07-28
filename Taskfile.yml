@@ -17,6 +17,13 @@ tasks:
     cmds:
       - pnpm build
 
+  outdated:
+    aliases: [ dependencyUpdates ]
+    desc: Outdated
+    deps: [ install ]
+    cmds:
+      - pnpm outdated
+
   npm-publish:
     desc: NPM - Publish
     deps: [ build ]

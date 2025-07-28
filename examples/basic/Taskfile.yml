@@ -24,6 +24,7 @@ tasks:
       - pnpm run dev
 
   outdated:
+    aliases: [ dependencyUpdates ]
     desc: Outdated
     deps: [ install ]
     cmds:
