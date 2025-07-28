@@ -12,7 +12,9 @@
     "watch:tsc": "tsc -p tsconfig.node.json --watch"
   },
   "devDependencies": {
-    "@types/leaflet": "1.9.20"
+    "@types/leaflet": "1.9.20",
+    "npm-run-all2": "8.0.4",
+    "vite": "7.0.6"
   },
   "dependencies": {
     "@arl/leaflet-tracksymbol2": "0.4.0",
