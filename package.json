@@ -36,7 +36,7 @@
     "eslint-formatter-unix": "8.40.0",
     "eslint-plugin-tsdoc": "0.4.0",
     "npm-run-all2": "8.0.4",
-    "typedoc": "0.28.7",
+    "typedoc": "0.28.8",
     "typedoc-plugin-missing-exports": "4.0.0",
     "typescript": "5.8.3",
     "typescript-strict-plugin": "2.4.4",
