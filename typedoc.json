@@ -8,7 +8,7 @@
   "excludePrivate": true,
   "excludeProtected": false,
   "excludeNotDocumented": false,
-  "out": "build/typedoc",
+  "out": "build/gh-pages/typedoc",
   "validation": {
     "notExported": true,
     "invalidLink": true,

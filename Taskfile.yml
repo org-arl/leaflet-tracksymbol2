@@ -17,40 +17,44 @@ tasks:
     cmds:
       - pnpm build
 
-  typedoc:
-    desc: Generate typedoc
-    deps: [ install ]
-    cmds:
-      - rm -rf build/typedoc
-      - pnpm run typedoc
-
-  site-build:
-    desc: Site - Build
-    deps: [ story-build, typedoc ]
-    cmds:
-      - rm -rf build/site
-      - mkdir -p build/site/leaflet-tracksymbol2
-      - cp -r build/histoire/* build/site/leaflet-tracksymbol2/
-      - cp -r build/typedoc build/site/leaflet-tracksymbol2/
-      - cp -r examples build/site/leaflet-tracksymbol2/
-      - touch build/site/leaflet-tracksymbol2/.nojekyll
-    generates:
-      - build/site/*
-
-  site-serve:
-    desc: Site - Serve
-    deps: [ site-build ]
-    cmds:
-      - caddy file-server --root build/site --listen 127.0.0.1:8080
-
-  site-publish:
-    desc: Site - Publish
-    deps: [ site-build ]
-    cmds:
-      - gh-pages --dotfiles --dist build/site/leaflet-tracksymbol2
-
   npm-publish:
     desc: NPM - Publish
     deps: [ build ]
     cmds:
       - pnpm publish --access public
+
+  site-clean:
+    desc: Site - Clean
+    cmds:
+      - rm -rf build/gh-pages
+
+  site-build:
+    desc: Site - Build
+    cmds:
+      - task: site-clean
+      - mkdir -p build/gh-pages
+      - task: site-build-mdbook
+      - task: site-build-typedoc
+
+  site-build-mdbook:
+    desc: Site - mdbook
+    cmds:
+      - mdbook build --dest-dir $(pwd)/build/gh-pages docs/mdbook
+
+  site-build-typedoc:
+    desc: Site - typedoc
+    deps: [ install ]
+    cmds:
+      - pnpm run typedoc
+
+  site-serve:
+    desc: Site - Serve
+    deps: [ site-build ]
+    cmds:
+      - caddy file-server --root build/gh-pages --listen 127.0.0.1:8080
+
+  site-publish:
+    desc: Site - Publish
+    deps: [ site-build ]
+    cmds:
+      - gh-pages --dotfiles --dist build/gh-pages
