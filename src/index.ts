@@ -1,12 +1,12 @@
 //@ts-strict-ignore
-import L from 'leaflet';
-import type {LatLngExpression} from 'leaflet';
-import {TrackSymbol} from './trackSymbol';
-import type {ShapeSetEntry, ShapeOptions, TrackSymbolOptions} from './options';
-import type {Points, Shape, ShapeSet, Units} from './types';
-import {AISTrackSymbol} from './ais/aisTrackSymbol';
-import type {AISTrackSymbolOptions} from './ais/options';
-import type {AISMessage, Dimension, ETA, PositionReport, ShipStaticData} from './ais/types';
+import L, {type LatLngExpression} from 'leaflet';
+
+import {TrackSymbol} from './trackSymbol.js';
+import {type ShapeSetEntry, type ShapeOptions, type TrackSymbolOptions} from './options.js';
+import {type Points, type Shape, type ShapeSet, type Units} from './types.js';
+import {AISTrackSymbol} from './ais/aisTrackSymbol.js';
+import {type AISTrackSymbolOptions} from './ais/options.js';
+import {type AISMessage, type Dimension, type ETA, type PositionReport, type ShipStaticData} from './ais/types.js';
 
 export {
     Points,
@@ -29,12 +29,12 @@ export {
     ShipStaticData,
 };
 
-L['trackSymbol'] = function(latLng: LatLngExpression, options?: TrackSymbolOptions): TrackSymbol {
+L['trackSymbol'] = function (latLng: LatLngExpression, options?: TrackSymbolOptions): TrackSymbol {
     return new TrackSymbol(latLng, options);
 }
 L['TrackSymbol'] = TrackSymbol;
 
-L['aisTrackSymbol'] = function(positionReport: PositionReport, options?: AISTrackSymbolOptions): AISTrackSymbol {
+L['aisTrackSymbol'] = function (positionReport: PositionReport, options?: AISTrackSymbolOptions): AISTrackSymbol {
     return new AISTrackSymbol(positionReport, options);
 }
 L['AISTrackSymbol'] = AISTrackSymbol;

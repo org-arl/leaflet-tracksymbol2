@@ -1,5 +1,6 @@
-import type {PathOptions} from 'leaflet';
-import type {ShapeSet} from './types';
+import {type PathOptions} from 'leaflet';
+
+import {type ShapeSet} from './types.js';
 
 /**
  * Shape set entry.

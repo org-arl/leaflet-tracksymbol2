@@ -1,9 +1,9 @@
-import type {LatLngExpression} from 'leaflet';
-import L, {Bounds, LatLng, LatLngBounds, Path, Point, Util} from 'leaflet';
+import L, {Bounds, LatLng, LatLngBounds, type LatLngExpression, Path, Point, Util} from 'leaflet';
 import Flatten from '@flatten-js/core';
 import Matrix = Flatten.Matrix;
-import type {Points, Shape, ShapeSet, Units} from './types';
-import type {ShapeOptions, TrackSymbolOptions} from './options';
+
+import {type Points, type Shape, type ShapeSet, type Units} from './types.js';
+import {type ShapeOptions, type TrackSymbolOptions} from './options.js';
 
 const DEFAULT_SIZE = 24;
 const DEFAULT_LEADER_TIME = 60;

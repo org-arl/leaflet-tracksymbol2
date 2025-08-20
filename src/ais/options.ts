@@ -1,5 +1,5 @@
-import type {TrackSymbolOptions} from '../options';
-import type {ShipStaticData} from './types';
+import {type TrackSymbolOptions} from '../options.js';
+import {type ShipStaticData} from './types.js';
 
 /**
  * AIS track symbol options.

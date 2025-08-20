@@ -1,9 +1,10 @@
-import {TrackSymbol} from '../trackSymbol';
-import type {ShapeOptions} from '../options';
-import type {Points, ShapeSet} from '../types';
-import type {AISTrackSymbolOptions} from './options';
-import type {Dimension, ETA, PositionReport, ShipStaticData} from './types';
 import {DomUtil, Util} from 'leaflet';
+
+import {TrackSymbol} from '../trackSymbol.js';
+import {type ShapeOptions} from '../options.js';
+import {type Points, type ShapeSet} from '../types.js';
+import {type AISTrackSymbolOptions} from './options.js';
+import {type Dimension, type ETA, type PositionReport, type ShipStaticData} from './types.js';
 
 const DEFAULT_SIZE = 24;
 const DEFAULT_MIN_ZOOM_LEVEL = 14;
