@@ -4,6 +4,7 @@ import Matrix = Flatten.Matrix;
 
 import {type Points, type Shape, type ShapeSet, type Units} from './types.js';
 import {type ShapeOptions, type TrackSymbolOptions} from './options.js';
+import {toLatLng} from './utils.js';
 
 const DEFAULT_SIZE = 24;
 const DEFAULT_LEADER_TIME = 60;
@@ -70,7 +71,7 @@ export class TrackSymbol
             throw Error("latLng required");
         }
         options = options || {};
-        this._latLng = L.latLng(latLng);
+        this._latLng = toLatLng(latLng);
         this._heading = options.heading;
         this._course = options.course;
         this._speed = options.speed;
@@ -168,7 +169,7 @@ export class TrackSymbol
      */
     public setLatLng(latLng: LatLngExpression): this {
         const oldLatLng = this._latLng;
-        this._latLng = L.latLng(latLng);
+        this._latLng = toLatLng(latLng);
         this.fire('move', {
             oldLatLng: oldLatLng,
             latlng: this._latLng,
