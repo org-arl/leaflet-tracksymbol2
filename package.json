@@ -1,6 +1,6 @@
 {
   "name": "@arl/leaflet-tracksymbol2",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "description": "Leaflet track symbol",
   "homepage": "https://org-arl.github.io/leaflet-tracksymbol2/",
