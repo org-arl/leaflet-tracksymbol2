@@ -1,4 +1,4 @@
-import L, {Bounds, LatLng, LatLngBounds, type LatLngExpression, Path, Point, Util} from 'leaflet';
+import {Bounds, LatLng, LatLngBounds, type LatLngExpression, Path, Point, Util} from 'leaflet';
 import Flatten from '@flatten-js/core';
 import Matrix = Flatten.Matrix;
 
