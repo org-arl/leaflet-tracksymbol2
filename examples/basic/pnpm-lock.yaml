@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@arl/leaflet-tracksymbol2':
-        specifier: 0.4.0
-        version: 0.4.0(leaflet@1.9.4)
+        specifier: 0.5.0
+        version: 0.5.0(leaflet@1.9.4)
       leaflet:
         specifier: 1.9.4
         version: 1.9.4
@@ -27,8 +27,8 @@ importers:
 
 packages:
 
-  '@arl/leaflet-tracksymbol2@0.4.0':
-    resolution: {integrity: sha512-y+jFtSEcS5oO7bnHDuYw8lpO9oJkUul1oxPhYwqsChuB2O5/UMLHA4goUN5+knEcCDaZ6vDSFxdGL0KP8XY1wA==}
+  '@arl/leaflet-tracksymbol2@0.5.0':
+    resolution: {integrity: sha512-pg1tTiYaLE/VC8BM9zoYIpF6nQ3gsIwh+ebySFEnbd6UfZBoJ3D/3jCvob8cPqBmEo0/vKypspt1/Ibbts2tjg==}
     peerDependencies:
       leaflet: 1.9.4
 
@@ -464,7 +464,7 @@ packages:
 
 snapshots:
 
-  '@arl/leaflet-tracksymbol2@0.4.0(leaflet@1.9.4)':
+  '@arl/leaflet-tracksymbol2@0.5.0(leaflet@1.9.4)':
     dependencies:
       '@flatten-js/core': 1.6.2
       leaflet: 1.9.4
