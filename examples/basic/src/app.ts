@@ -1,4 +1,4 @@
-import {Map as LeafletMap, TileLayer} from 'leaflet';
+import {LeafletMap, TileLayer} from 'leaflet';
 import {AISTrackSymbol, TrackSymbol} from '@arl/leaflet-tracksymbol2';
 
 import 'leaflet/dist/leaflet.css';

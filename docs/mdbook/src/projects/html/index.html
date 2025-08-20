@@ -5,15 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@2.0.0-alpha.1/dist/leaflet.css"/>
     <link rel="stylesheet" href="./app.css"/>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/@arl/leaflet-tracksymbol2@0.5.0/dist/leaflet-tracksymbol2.umd.js"></script>
-
+    <script type="importmap">
+        {
+            "imports": {
+                "leaflet": "https://unpkg.com/leaflet@2.0.0-alpha.1/dist/leaflet.js",
+                "@arl/leaflet-tracksymbol2": "https://unpkg.com/@arl/leaflet-tracksymbol2@0.5.0/dist/leaflet-tracksymbol2.es.js"
+            }
+        }
+    </script>
 </head>
 <body>
     <div id="map"></div>
-    <script src="./app.js"></script>
+    <script type="module" src="./app.js"></script>
 </body>
 </html>

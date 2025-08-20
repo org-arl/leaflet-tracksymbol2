@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@arl/leaflet-tracksymbol2':
         specifier: 0.5.0
-        version: 0.5.0(leaflet@1.9.4)
+        version: 0.5.0(leaflet@2.0.0-alpha.1)
       leaflet:
-        specifier: 1.9.4
-        version: 1.9.4
+        specifier: 2.0.0-alpha.1
+        version: 2.0.0-alpha.1
     devDependencies:
       '@types/leaflet':
         specifier: 1.9.20
@@ -342,8 +342,8 @@ packages:
     resolution: {integrity: sha512-lR4MXjGNgkJc7tkQ97kb2nuEMnNCyU//XYVH0MKTGcXEiSudQ5MKGKen3C5QubYy0vmq+JGitUg92uuywGEwIA==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  leaflet@1.9.4:
-    resolution: {integrity: sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==}
+  leaflet@2.0.0-alpha.1:
+    resolution: {integrity: sha512-2EJU27z/wljOgQCyybRkfrm5Xc3uy6huKehh0UAPsrAdwnSMxaplsqCl9cXPAuDm6D7uL6PCznYMDVIsaAdSdA==}
 
   memorystream@0.3.1:
     resolution: {integrity: sha512-S3UwM3yj5mtUSEfP41UZmt/0SCoVYUcU1rkXv+BQ5Ig8ndL4sPoJNBUJERafdPb5jjHJGuMgytgKvKIf58XNBw==}
@@ -464,10 +464,10 @@ packages:
 
 snapshots:
 
-  '@arl/leaflet-tracksymbol2@0.5.0(leaflet@1.9.4)':
+  '@arl/leaflet-tracksymbol2@0.5.0(leaflet@2.0.0-alpha.1)':
     dependencies:
       '@flatten-js/core': 1.6.2
-      leaflet: 1.9.4
+      leaflet: 2.0.0-alpha.1
 
   '@esbuild/aix-ppc64@0.25.8':
     optional: true
@@ -671,7 +671,7 @@ snapshots:
 
   json-parse-even-better-errors@4.0.0: {}
 
-  leaflet@1.9.4: {}
+  leaflet@2.0.0-alpha.1: {}
 
   memorystream@0.3.1: {}
 
