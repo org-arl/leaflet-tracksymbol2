@@ -9,6 +9,7 @@ overrides:
   brace-expansion@>=1.0.0 <=1.1.11: '>=1.1.12'
   brace-expansion@>=2.0.0 <=2.0.1: '>=2.0.2'
   cross-spawn@>=7.0.0 <7.0.5: '>=7.0.5'
+  js-yaml@>=4.0.0 <4.1.1: '>=4.1.1'
 
 importers:
 
@@ -1343,8 +1344,8 @@ packages:
   jju@1.4.0:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
 
-  js-yaml@4.1.0:
-    resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
+  js-yaml@4.1.1:
+    resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
     hasBin: true
 
   jsbn@1.1.0:
@@ -2316,7 +2317,7 @@ snapshots:
       globals: 14.0.0
       ignore: 5.3.1
       import-fresh: 3.3.0
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       minimatch: 3.1.2
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -3529,7 +3530,7 @@ snapshots:
 
   jju@1.4.0: {}
 
-  js-yaml@4.1.0:
+  js-yaml@4.1.1:
     dependencies:
       argparse: 2.0.1
 
